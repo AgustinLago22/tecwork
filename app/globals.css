@@ -11,13 +11,13 @@
   --card-foreground: #1e293b; /* Dark professional text */
   --popover: #ffffff;
   --popover-foreground: #1e293b;
-  --primary: #0f172a; /* Deep navy for trust and professionalism */
+  --primary: #732F17; /* Deep navy for trust and professionalism */
   --primary-foreground: #ffffff;
   --secondary: #64748b; /* Sophisticated gray */
   --secondary-foreground: #ffffff;
   --muted: #f8fafc; /* Very subtle background */
   --muted-foreground: #64748b;
-  --accent: #2563eb; /* Professional blue for CTAs */
+  --accent: #D99962; /* Professional blue for CTAs */
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;

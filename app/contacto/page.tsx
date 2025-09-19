@@ -129,7 +129,7 @@ export default function ContactoPage() {
 
             <div className="relative z-10">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
-                ✨ Hablemos de tu proyecto
+                 Hablemos de tu proyecto
               </Badge>
 
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
@@ -180,7 +180,7 @@ export default function ContactoPage() {
                   <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <p className="font-medium">Ubicación</p>
-                    <p className="text-muted-foreground text-sm">Madrid, España</p>
+                    <p className="text-muted-foreground text-sm">Corrientes, Argentina</p>
                   </div>
                 </div>
 

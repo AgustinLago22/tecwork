@@ -76,7 +76,7 @@ export default function NosotrosPage() {
 
             <div className="relative z-10">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
-                ✨ Conoce nuestro propósito
+                Conoce nuestro propósito
               </Badge>
 
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
@@ -127,7 +127,7 @@ export default function NosotrosPage() {
                   <h2 className="text-2xl font-bold text-card-foreground handwritten">Nuestra Visión</h2>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Ser la plataforma líder en España que transforma la educación tecnológica universitaria, creando un
+                  Ser la plataforma líder en Corrientes que transforme la educación tecnológica universitaria, creando un
                   ecosistema donde estudiantes, universidades y empresas colaboran para impulsar la innovación y el
                   crecimiento profesional.
                 </p>

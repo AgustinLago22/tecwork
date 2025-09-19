@@ -16,7 +16,7 @@ export default function CasosPage() {
 
             <div className="relative z-10">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
-                ✨ Casos de éxito
+                Casos de éxito
               </Badge>
 
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">

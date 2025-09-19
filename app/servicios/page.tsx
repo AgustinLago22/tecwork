@@ -72,7 +72,9 @@ export default function ServiciosPage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <Badge variant="secondary">Nuestros Servicios</Badge>
+          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
+                           Nuestros servicios
+                        </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-balance">
             Soluciones tecnológicas con <span className="text-primary">talento universitario</span>
           </h1>

@@ -2,77 +2,102 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   const navItems = [
     { href: "/", label: "Inicio" },
     { href: "/servicios", label: "Servicios" },
     { href: "/casos", label: "Casos" },
-    { href: "/nosotros", label: "Nosotros" },
+    { href: "/about", label: "Nosotros" },
     { href: "/contacto", label: "Contacto" },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
+    <header className="border-b-2 border-dashed border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4">
+        <nav className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-mono font-bold text-sm">T</span>
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">T</span>
             </div>
-            <span className="font-bold text-xl">Tecwork</span>
+            <span className="text-xl font-bold text-foreground">Tecwork</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className={`text-foreground hover:text-primary transition-colors ${
+                  pathname === item.href ? "text-primary font-medium" : ""
+                }`}
               >
                 {item.label}
               </Link>
             ))}
-            <Button asChild>
-              <Link href="/sumate">Súmate</Link>
-            </Button>
+            <div className="flex items-center space-x-3">
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/login">Login</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/register">Register</Link>
+              </Button>
+              <Button asChild variant="default" size="sm">
+                <Link href="/sumate">Súmate</Link>
+              </Button>
+            </div>
           </div>
 
-          {/* Mobile menu button */}
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
+          {/* Mobile Menu Button */}
+          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </nav>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden border-t py-4">
-            <div className="flex flex-col space-y-4">
+          <div className="md:hidden mt-4 pb-4 border-t border-dashed border-border pt-4">
+            <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className={`text-foreground hover:text-primary transition-colors ${
+                    pathname === item.href ? "text-primary font-medium" : ""
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <Button asChild className="w-fit">
-                <Link href="/sumate" onClick={() => setIsOpen(false)}>
-                  Súmate
-                </Link>
-              </Button>
+              <div className="flex flex-col space-y-2 pt-2 border-t border-dashed border-border">
+                <Button asChild variant="ghost" size="sm" className="w-fit">
+                  <Link href="/login" onClick={() => setIsOpen(false)}>
+                    Login
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="sm" className="w-fit bg-transparent">
+                  <Link href="/(register" onClick={() => setIsOpen(false)}>
+                    Register
+                  </Link>
+                </Button>
+                <Button asChild variant="default" size="sm" className="w-fit">
+                  <Link href="/sumate" onClick={() => setIsOpen(false)}>
+                    Súmate
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </div>
-    </nav>
+    </header>
   )
 }

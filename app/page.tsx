@@ -1,103 +1,234 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Rocket, Users, Code, BookOpen, ArrowRight, Star } from "lucide-react"
+import Link from "next/link"
 
-export default function Home() {
+export default function TecworkLanding() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="bg-background paper-texture">
+      {/* Hero Section con estilo notepad */}
+      <section id="inicio" className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center relative">
+            {/* Spiral holes decoration */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="relative z-10">
+              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
+                ✨ Potenciando la comunidad IT universitaria
+              </Badge>
+
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
+                Experiencia real para{" "}
+                <span className="text-primary handwritten relative">
+                  estudiantes de tecnología
+                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" fill="none">
+                    <path
+                      d="M5 8c50-3 100-3 150 0s100 3 140-2"
+                      stroke="#f97316"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </h1>
+
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
+                Conectamos estudiantes con proyectos reales. Desarrolla habilidades, construye tu portafolio y prepárate
+                para el mundo laboral con nuestra consultora universitaria.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground group">
+                  <Link href="/sumate">
+                    <Rocket className="mr-2 h-5 w-5" />
+                    Súmate como estudiante
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent"
+                >
+                  <Link href="/contacto">
+                    <Code className="mr-2 h-5 w-5" />
+                    Solicita un proyecto
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Features Section con cards estilo sticky notes */}
+      <section id="servicios" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">¿Cómo funciona Tecwork?</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Un proceso simple que conecta talento universitario con oportunidades reales
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-card-foreground">Únete a la comunidad</h3>
+                <p className="text-muted-foreground">
+                  Regístrate como estudiante y forma parte de nuestra red de futuros profesionales IT
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Code className="h-8 w-8 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-card-foreground">Proyectos reales</h3>
+                <p className="text-muted-foreground">
+                  Trabaja en proyectos de empresas reales con mentores experimentados
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-card-foreground">Construye tu futuro</h3>
+                <p className="text-muted-foreground">
+                  Desarrolla tu portafolio y habilidades mientras ganas experiencia práctica
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section con estilo cuaderno rayado */}
+      <section className="py-16 notepad-lines">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-primary handwritten">150+</div>
+              <p className="text-muted-foreground">Estudiantes activos</p>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-accent handwritten">50+</div>
+              <p className="text-muted-foreground">Proyectos completados</p>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-primary handwritten">25+</div>
+              <p className="text-muted-foreground">Empresas colaboradoras</p>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-accent handwritten">95%</div>
+              <p className="text-muted-foreground">Tasa de satisfacción</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials con estilo post-it */}
+      <section id="casos" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">
+              Lo que dicen nuestros estudiantes
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <Card className="bg-yellow-100 border-yellow-200 transform rotate-1 hover:rotate-0 transition-transform">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-700 mb-4 handwritten">
+                  "Gracias a Tecwork conseguí mi primer trabajo como desarrollador. La experiencia fue increíble."
+                </p>
+                <p className="font-semibold text-gray-800">- María González</p>
+                <p className="text-xs text-gray-600">Ing. Informática, UPM</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-green-100 border-green-200 transform -rotate-1 hover:rotate-0 transition-transform">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-green-400 text-green-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-700 mb-4 handwritten">
+                  "Los proyectos reales me dieron la confianza que necesitaba para enfrentar entrevistas técnicas."
+                </p>
+                <p className="font-semibold text-gray-800">- Carlos Ruiz</p>
+                <p className="text-xs text-gray-600">Ing. Software, UCM</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-blue-100 border-blue-200 transform rotate-2 hover:rotate-0 transition-transform">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-blue-400 text-blue-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-700 mb-4 handwritten">
+                  "La comunidad es increíble. Aprendí tanto de mis compañeros como de los mentores."
+                </p>
+                <p className="font-semibold text-gray-800">- Ana López</p>
+                <p className="text-xs text-gray-600">Ing. Telecomunicaciones, UPC</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary/5 border-t-2 border-dashed border-primary/20">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 handwritten">
+              ¿Listo para dar el siguiente paso?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Únete a cientos de estudiantes que ya están construyendo su futuro profesional
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Link href="/sumate">
+                  <Users className="mr-2 h-5 w-5" />
+                  Súmate como estudiante
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent"
+              >
+                <Link href="/contacto">
+                  <Code className="mr-2 h-5 w-5" />
+                  Solicita un proyecto
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }

@@ -43,12 +43,6 @@ export function Navigation() {
               </Link>
             ))}
             <div className="flex items-center space-x-3">
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button asChild variant="outline" size="sm">
-                <Link href="/register">Register</Link>
-              </Button>
               <Button asChild variant="default" size="sm">
                 <Link href="/sumate">Súmate</Link>
               </Button>
@@ -78,16 +72,6 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="flex flex-col space-y-2 pt-2 border-t border-dashed border-border">
-                <Button asChild variant="ghost" size="sm" className="w-fit">
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="sm" className="w-fit bg-transparent">
-                  <Link href="/register" onClick={() => setIsOpen(false)}>
-                    Register
-                  </Link>
-                </Button>
                 <Button asChild variant="default" size="sm" className="w-fit">
                   <Link href="/sumate" onClick={() => setIsOpen(false)}>
                     Súmate

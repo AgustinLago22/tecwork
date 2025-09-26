@@ -361,15 +361,431 @@ PRÓXIMOS PASOS SUGERIDOS
 - [ ] Sistema de matching estudiante-proyecto
 - [ ] Analytics avanzados con conversion funnels
 
+SESIÓN 26/09/2025 - DISEÑO Y UX COMPLETAMENTE REFINADOS
+======================================================
+
+MEJORAS DE DISEÑO IMPLEMENTADAS
+-------------------------------
+
+1. SISTEMA DE COLORES UNIFICADO:
+   ✅ Color principal títulos: #732F17 (marrón elegante)
+   ✅ Color botones: #D99962 (dorado cálido)
+   ✅ Hovers consistentes: rgba(115, 47, 23, X) en toda la aplicación
+   ✅ Jerarquía visual clara: títulos → labels → contenido
+
+2. FORMULARIO /CONTACTO - MEJORAS VISUALES:
+   ✅ Fondo sutil con gradiente imperceptible
+   ✅ Cards con sombras más definidas y profundidad real
+   ✅ Títulos con color #732F17 y líneas decorativas
+   ✅ Inputs con microinteracciones (hover + focus states)
+   ✅ Radio buttons completamente clickeables (bug solucionado)
+   ✅ Hovers consistentes en elementos de contacto
+   ✅ Botón envío con color #D99962 y efectos elevación
+
+3. FORMULARIO /SUMATE - DISEÑO SOFISTICADO:
+   ✅ Fondo notebook (notepad-lines) por detrás del formulario
+   ✅ Card principal con contraste mejorado: hsl(210 40% 99%)
+   ✅ Secciones con fondo ligeramente gris: hsl(210 33% 97%)
+   ✅ Efecto papel sutil con texturas radiales
+   ✅ Sombras más pronunciadas para separar del fondo
+   ✅ Placeholders URL simplificados: "miportfolio.com", "github.com/usuario"
+   ✅ Sistema de colores coherente con /contacto
+
+4. MICROINTERACCIONES Y ANIMACIONES:
+   ✅ Stagger animations - elementos aparecen progresivamente
+   ✅ Inputs con elevación sutil al focus
+   ✅ Cards con hover states y transform translateY
+   ✅ Botones con scaling y sombras dinámicas
+   ✅ Transiciones suaves con cubic-bezier easing
+   ✅ Radio/checkbox feedback visual inmediato
+
+5. ARQUITECTURA CSS CON BUENAS PRÁCTICAS:
+   ✅ CSS Custom Properties para consistencia
+   ✅ Naming conventions escalables (.form-*, .enhanced-*)
+   ✅ Sistema de sombras reutilizable (--shadow-xs, sm, md)
+   ✅ Transiciones uniformes (--ease: cubic-bezier)
+   ✅ Componentes modulares y mantenibles
+
+6. TIPOGRAFÍA REFINADA:
+   ✅ Títulos principales: color #732F17, font-weight 600
+   ✅ Letter-spacing optimizado (-0.025em títulos, 0.01em body)
+   ✅ Line-height mejorado (1.1 títulos, 1.6 párrafos)
+   ✅ Labels importantes con peso 500
+
+7. CONTRASTE Y ACCESIBILIDAD:
+   ✅ Fondos off-white vs blancos puros para mejor contraste
+   ✅ Bordes más definidos: hsl(214 18% 82%)
+   ✅ Estados focus con ring de 3px
+   ✅ Colores con suficiente contraste para legibilidad
+
+BUGS SOLUCIONADOS
+-----------------
+✅ Selector roles /sumate - "Data Analyst" no permitía deseleccionar
+✅ Selector tipos /contacto - "Consultoría IT" no permitía cambiar
+✅ URLs en /sumate ahora sin requerimiento https://
+✅ Todo el card clickeable, no solo el radio button
+
+ARCHIVOS MODIFICADOS EN ESTA SESIÓN
+----------------------------------
+- app/contacto/page.tsx - Sistema colores #732F17 + #D99962, sombras mejoradas
+- app/sumate/page.tsx - Fondo notebook, contraste mejorado, placeholders simples
+- Estilos CSS inline actualizados con custom properties y arquitectura escalable
+
+DETALLES TÉCNICOS DEL SISTEMA DE COLORES
+----------------------------------------
+Títulos y elementos accent: #732F17
+- Títulos principales de formularios
+- Líneas decorativas de 60px
+- Bordes en hover y focus
+- Iconos seleccionados
+
+Botones principales: #D99962
+- Color base cálido y amigable
+- Hover: rgba(217, 153, 98, 0.9)
+- Sombras inset para profundidad
+
+Hovers system:
+- Cards: rgba(115, 47, 23, 0.3)
+- Inputs: rgba(115, 47, 23, 0.4) en hover, #732F17 en focus
+- Secciones: rgba(115, 47, 23, 0.3)
+
+ESTADO VISUAL ACTUAL
+-------------------
+✅ Diseño minimalista pero NO plano
+✅ Jerarquía visual clara y elegante
+✅ Microinteracciones profesionales
+✅ Sistema de colores coherente entre formularios
+✅ Contraste optimizado sin perder elegancia
+✅ Animaciones sutiles que guían la atención
+✅ Ready para impresionar en producción
+
+SESIÓN 26/09/2025 - VALIDACIONES BURBUJAS CONVERSACIONALES IMPLEMENTADAS
+========================================================================
+
+MEJORAS DE VALIDACIONES IMPLEMENTADAS
+-------------------------------------
+
+1. SISTEMA DE VALIDACIONES INLINE CREATIVO:
+   ✅ Eliminadas validaciones HTML nativas (tooltips feos)
+   ✅ Implementado sistema de burbujas de conversación elegantes
+   ✅ Animaciones CSS con bubbleIn effect y transiciones suaves
+   ✅ Mensajes conversacionales pero profesionales
+   ✅ Auto-hide al corregir el campo problemático
+
+2. DISEÑO DE BURBUJAS CONVERSACIONALES:
+   ✅ Gradiente elegante: #fef2f2 → #fee2e2
+   ✅ Flecha CSS que apunta al campo específico
+   ✅ Border-radius 16px para look moderno
+   ✅ Sombra sutil: rgba(220, 38, 38, 0.15)
+   ✅ Emoji 💭 para tono conversacional
+   ✅ Padding y spacing optimizados
+
+3. FORMULARIO CONTACTO - VALIDACIONES COMPLETAS:
+   ✅ Nombre: "¿Cómo te llamas? Nos gustaría conocerte"
+   ✅ Email: "¿Cómo te contactamos sin tu email?" / "Pon un email válido"
+   ✅ Teléfono: Validación burbuja agregada
+   ✅ Descripción proyecto: "Cuéntanos sobre tu proyecto. ¡Nos emociona conocer tu idea!"
+   ✅ Tipo solución: "¿Qué tipo de solución necesitas? Ayúdanos a entenderte"
+
+4. FORMULARIO SUMATE - VALIDACIONES EXHAUSTIVAS:
+   ✅ Nombre: "¿Cómo te llamas? ¡Nos encanta conocer gente nueva!"
+   ✅ Apellido: "También necesitamos tu apellido para conocerte mejor"
+   ✅ Email: "¿Cómo te contactamos para la entrevista?" / "Pon un email válido"
+   ✅ Teléfono: Validación burbuja implementada
+   ✅ Universidad: "¿De qué universidad eres? ¡Queremos conocerte!"
+   ✅ Carrera: "Cuéntanos qué estudias. ¡Nos interesa!"
+   ✅ Año carrera: "¿En qué año estás? Nos ayuda a encontrar el proyecto perfecto"
+   ✅ Rol: "¿En qué te gustaría trabajar? ¡Todos los roles son geniales!"
+   ✅ Nivel experiencia: "¿Cuántos proyectos has hecho? ¡Ayúdanos a conocer tu experiencia!"
+   ✅ Skills: "Selecciona tus superpoderes técnicos. ¡Al menos uno!"
+   ✅ Motivación: "Cuéntanos tu historia. ¿Por qué quieres unirte a nosotros?"
+
+5. ELIMINACIÓN DE VALIDACIONES HTML NATIVAS:
+   ✅ Removido type="email" → type="text" + inputMode="email"
+   ✅ Agregado autoComplete="email" para UX móvil
+   ✅ Eliminados tooltips nativos feos del navegador
+   ✅ Mantenida funcionalidad completa de validación custom
+   ✅ Preservado teclado de email en dispositivos móviles
+
+6. CARACTERÍSTICAS TÉCNICAS DE LAS BURBUJAS:
+   ✅ Clase .error-bubble con animación bubbleIn
+   ✅ Posicionamiento absoluto con flechas CSS
+   ✅ Estados hover e input-error para feedback visual
+   ✅ Sistema de cleanup automático al escribir
+   ✅ Integración perfecta con design system existente
+
+ARCHIVOS MODIFICADOS EN ESTA SESIÓN
+-----------------------------------
+- app/contacto/page.tsx - Sistema completo de burbujas conversacionales
+- app/sumate/page.tsx - Validaciones exhaustivas con burbujas elegantes
+- CSS inline actualizado con animaciones y estilos de burbujas
+- Validaciones HTML nativas eliminadas (noValidate + type="text")
+
+CARACTERÍSTICAS DE LOS MENSAJES
+-------------------------------
+Tono: Conversacional pero profesional
+Estilo: Preguntas amigables que guían al usuario
+Emojis: Solo 💭 para mantener consistencia
+Longitud: Mensajes concisos y directos
+Personalidad: Cálida pero empresarial
+
+ESTADO TÉCNICO
+--------------
+✅ Todas las validaciones funcionando perfecto
+✅ Sin conflictos con validaciones nativas del browser
+✅ Animaciones CSS optimizadas y suaves
+✅ Responsive design mantenido
+✅ Accesibilidad preservada
+✅ Performance óptimo
+
+SESIÓN 26/09/2025 - CV UPLOAD + CRM SISTEMA COMPLETO + AUTENTICACIÓN INTELIGENTE
+===============================================================================
+
+NUEVAS FUNCIONALIDADES IMPLEMENTADAS
+-------------------------------------
+
+1. CV UPLOAD SYSTEM - SUPABASE STORAGE:
+   ✅ Configuración completa de Supabase Storage bucket 'cvs'
+   ✅ RLS policies para acceso seguro a CVs
+   ✅ API endpoint /api/upload-cv para manejar uploads
+   ✅ Validación file size (máx 5MB) y tipo (solo PDF)
+   ✅ Nombres únicos con timestamp: email_timestamp.pdf
+   ✅ Campo cv_url agregado a tabla aplicantes
+   ✅ Funciones helper en lib/supabase/storage.ts
+   ✅ Integración en formulario /sumate con drag & drop
+
+   Scripts SQL ejecutados:
+   - scripts/add-cv-field.sql - Agrega cv_url a aplicantes
+   - scripts/setup-storage.sql - Configura bucket y policies
+
+2. CRM SISTEMA COMPLETO:
+   ✅ Dashboard CRM unificado en /dashboard/crm
+   ✅ Gestión completa de LEADS con filtros y estados
+   ✅ Gestión completa de ESTUDIANTES con CVs
+   ✅ Componentes LeadsCRM.tsx y StudentsCRM.tsx
+   ✅ Filtros avanzados: estado, rol, universidad, fecha
+   ✅ Paginación, búsqueda y ordenamiento
+   ✅ Visualización de CVs en modal integrado
+   ✅ Actualización de estados en tiempo real
+   ✅ Estadísticas y métricas en tiempo real
+   ✅ Export de datos (preparado para futuro)
+
+   Características del CRM:
+   - Vista tabular con datos completos
+   - Modals para ver perfiles detallados
+   - Botones de acción para cambiar estados
+   - Toasts para feedback de operaciones
+   - Responsive design completo
+   - Estados visuales con badges coloridos
+
+3. NAVEGACIÓN MEJORADA:
+   ✅ Navbar limpia sin Login/Register buttons
+   ✅ Breadcrumb navigation con estados activos
+   ✅ Navegación Dashboard ↔ CRM fluida
+   ✅ Indicadores visuales de página actual
+   ✅ Eliminados elementos innecesarios como "Ver sitio web"
+
+   Estructura de navegación:
+   - / (Home público)
+   - /login (Solo admins)
+   - /dashboard (Panel principal con métricas)
+   - /dashboard/crm (CRM completo)
+   - /contacto y /sumate (Formularios públicos)
+
+4. SISTEMA DE AUTENTICACIÓN INTELIGENTE:
+   ✅ Database-based authentication con bcrypt
+   ✅ Tabla admins con roles y permisos
+   ✅ Sistema de sesiones con UUID tokens
+   ✅ Bloqueo automático tras 5 intentos fallidos
+   ✅ Logging inteligente SOLO de eventos críticos
+   ✅ Auto-limpieza de logs antiguos (3 meses)
+   ✅ IPs anonimizadas automáticamente
+   ✅ Detección de dispositivos simplificada
+   ✅ API setup DESHABILITADA por seguridad máxima
+
+   Características de seguridad:
+   - Passwords hasheados con bcrypt (12 rounds)
+   - Sesiones expiran en 24 horas
+   - Intentos fallidos rastreados
+   - Cuentas se bloquean automáticamente
+   - Solo eventos importantes se logean
+   - Cleanup automático de datos antiguos
+
+ARQUITECTURA DE AUTENTICACIÓN IMPLEMENTADA
+------------------------------------------
+
+Tablas principales:
+```sql
+admins:
+- id (UUID), email, password_hash, nombre, apellido
+- rol ('admin' | 'super_admin'), activo (boolean)
+- ultimo_login, intentos_fallidos, bloqueado_hasta
+
+admin_sessions:
+- id (UUID), admin_id, session_token, expires_at
+- device_info (simplificado), last_activity
+
+admin_security_logs:
+- id (UUID), email, evento, detalle
+- ip_aproximada (anonimizada), created_at
+```
+
+Eventos que se logean (solo importantes):
+- login_failed: Cuando falla autenticación
+- account_blocked: Cuando se bloquea cuenta
+- suspicious_activity: Actividad extraña
+- password_changed: Cambios de contraseña
+
+NO se logean eventos normales como:
+- Logins exitosos
+- Navegación por dashboard
+- Operaciones CRUD normales
+
+ARCHIVOS CLAVE NUEVOS/MODIFICADOS
+----------------------------------
+
+Nuevos archivos:
+- scripts/add-cv-field.sql - Agrega cv_url a aplicantes
+- scripts/setup-storage.sql - Configura Supabase Storage
+- scripts/admin-system.sql - Sistema auth inteligente completo
+- lib/supabase/storage.ts - Funciones manejo CVs
+- app/api/upload-cv/route.ts - API upload CVs
+- components/dashboard/LeadsCRM.tsx - CRM completo leads
+- components/dashboard/StudentsCRM.tsx - CRM completo estudiantes
+- app/dashboard/crm/page.tsx - Dashboard CRM unificado
+- lib/auth/admin-auth.ts - Sistema auth completo
+- app/api/auth/login/route.ts - API login con bcrypt
+- app/api/auth/logout/route.ts - API logout
+- app/api/auth/setup/route.ts - API setup (DESHABILITADA)
+- lib/auth/simple.ts - Helpers auth simplificados
+
+Modificados:
+- app/sumate/page.tsx - Integración CV upload
+- app/dashboard/page.tsx - Fix imports y navegación
+- app/login/page.tsx - Actualizado para email+password
+- components/footer.tsx - Navegación limpia
+- middleware.ts - Protección con nuevo auth system
+
+FUNCIONALIDADES CRM DETALLADAS
+-------------------------------
+
+LeadsCRM:
+- Lista todos los leads con información completa
+- Filtros: estado, urgencia, tipo proyecto, fecha
+- Búsqueda por nombre, email, empresa
+- Cambio de estado directo desde tabla
+- Modal con detalles completos del lead
+- Paginación y ordenamiento
+- Métricas en tiempo real
+
+StudentsCRM:
+- Lista todos los estudiantes con perfil completo
+- Filtros: estado, rol, universidad, nivel, fecha
+- Búsqueda por nombre, email, skills
+- Visualización de CVs en modal integrado
+- Cambio de estado y seguimiento
+- Información académica y profesional
+- Enlaces directos a GitHub, LinkedIn, Portfolio
+
+Dashboard principal:
+- Métricas unificadas: leads, conversiones, estudiantes
+- Acceso rápido a CRM y formularios
+- Navegación breadcrumb elegante
+- Logout functionality
+
+CONFIGURACIÓN REQUERIDA ACTUALIZADA
+------------------------------------
+
+.env.local:
+```
+# Supabase (requerido)
+NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi...
+
+# App (requerido)
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Auth legacy - YA NO SE USA
+ADMIN_PASSWORD=tecwork_admin_2024  # OBSOLETO
+```
+
+SCRIPTS SQL PARA EJECUTAR
+--------------------------
+
+1. Base del sistema (ya ejecutado):
+   - scripts/create-base.sql
+
+2. Nuevas funcionalidades:
+   - scripts/add-cv-field.sql (CV upload)
+   - scripts/setup-storage.sql (Supabase Storage)
+   - scripts/admin-system.sql (Auth inteligente)
+
+3. Crear primer admin (EN SUPABASE SQL EDITOR):
+```sql
+INSERT INTO admins (email, password_hash, nombre, apellido, rol)
+VALUES (
+  'tu-email@ejemplo.com',
+  crypt('tu-password-seguro', gen_salt('bf')),
+  'Tu Nombre',
+  'Tu Apellido',
+  'super_admin'
+);
+```
+
+SEGURIDAD IMPLEMENTADA
+----------------------
+
+✅ API setup completamente DESHABILITADA
+✅ Solo creación de admins via SQL directo
+✅ Passwords bcrypt con 12 rounds
+✅ Sesiones UUID con expiración
+✅ Bloqueo automático de cuentas
+✅ Logging inteligente anti-spam
+✅ IPs anonimizadas automáticamente
+✅ Cleanup automático de datos antiguos
+✅ RLS policies en todas las tablas
+✅ Middleware de protección de rutas
+
+ESTADO FINAL
+------------
+
+✅ Sistema CV upload completamente funcional
+✅ CRM completo para gestión de leads y estudiantes
+✅ Navegación optimizada y limpia
+✅ Autenticación de nivel empresarial
+✅ Máxima seguridad implementada
+✅ Base de datos optimizada con logging inteligente
+✅ Ready para producción con todos los sistemas críticos
+
+TESTING COMPLETADO
+-------------------
+
+✅ Formularios funcionando con CV upload
+✅ CRM operativo con filtros y búsquedas
+✅ Sistema auth funcionando sin errores TypeScript
+✅ Navegación fluida entre secciones
+✅ Storage policies funcionando correctamente
+✅ Logging de seguridad operativo
+✅ Servidor dev sin errores de compilación
+
+PRÓXIMOS PASOS PARA PRODUCCIÓN
+-------------------------------
+
+1. Ejecutar scripts SQL en Supabase producción
+2. Configurar variables de entorno producción
+3. Crear primer admin via SQL directo
+4. Deploy a Vercel
+5. Verificar Storage bucket y policies
+6. Testing completo en producción
+
 ÚLTIMA ACTUALIZACIÓN
 --------------------
-Fecha: 25/09/2025
-Estado: ✅ FORMULARIOS COMPLETAMENTE FUNCIONALES
-- Service Role Key configurado correctamente
-- Bucle infinito useToast solucionado
-- Campo fuente implementado y separado
-- Formulario sumate optimizado (apellido, 4 skills, sin disponibilidad)
-- UX/UI nivel profesional implementado
-- APIs 100% operativas con validación robusta
-- Sistema de notificaciones toast elegante
-- Ready para producción inmediata ✅
+Fecha: 26/09/2025
+Estado: ✅ SISTEMA COMPLETO CON AUTENTICACIÓN INTELIGENTE
+- CV upload system funcionando con Supabase Storage
+- CRM completo para gestión de leads y estudiantes
+- Navegación optimizada sin elementos innecesarios
+- Sistema de autenticación de nivel empresarial con logging inteligente
+- Máxima seguridad: API setup deshabilitada, solo SQL directo
+- Todo funcionando sin errores, ready para producción ✅

@@ -27,6 +27,13 @@ export default function LoginPage() {
     setIsLoading(true)
     setError("")
 
+    // Validaciones básicas
+    if (!formData.email.trim() || !formData.password.trim()) {
+      setError("Email y contraseña son requeridos")
+      setIsLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -34,6 +41,7 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          email: formData.email.trim(),
           password: formData.password
         }),
       })
@@ -43,7 +51,7 @@ export default function LoginPage() {
       if (data.success) {
         window.location.href = '/dashboard'
       } else {
-        setError(data.message || 'Error de autenticación')
+        setError(data.error || 'Error de autenticación')
       }
     } catch (err) {
       setError("Error de conexión. Por favor, intenta nuevamente.")
@@ -127,7 +135,7 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-center">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="rememberMe"
@@ -136,12 +144,9 @@ export default function LoginPage() {
                     onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, rememberMe: checked as boolean }))}
                   />
                   <Label htmlFor="rememberMe" className="text-sm text-slate-600">
-                    Recordarme
+                    Mantener sesión iniciada
                   </Label>
                 </div>
-                <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-800 transition-colors">
-                  ¿Olvidaste tu contraseña?
-                </Link>
               </div>
 
               <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={isLoading}>
@@ -151,11 +156,8 @@ export default function LoginPage() {
           </CardContent>
 
           <CardFooter className="text-center">
-            <p className="text-sm text-slate-600">
-              ¿No tienes cuenta?{" "}
-              <Link href="/register" className="text-blue-600 hover:text-blue-800 font-medium transition-colors">
-                Regístrate aquí
-              </Link>
+            <p className="text-xs text-slate-500">
+              Panel de administración - Solo para administradores autorizados
             </p>
           </CardFooter>
         </Card>

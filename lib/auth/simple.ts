@@ -1,33 +1,45 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { verifySession } from './admin-auth'
 
 export async function checkAuth() {
-  const cookieStore = await cookies()
-  const isLoggedIn = cookieStore.get('admin-session')?.value === 'true'
-
-  if (!isLoggedIn) {
+  const authenticated = await isAuthenticated()
+  if (!authenticated) {
     redirect('/login')
   }
-
   return true
 }
 
-export async function isAuthenticated() {
-  const cookieStore = await cookies()
-  return cookieStore.get('admin-session')?.value === 'true'
+export async function isAuthenticated(): Promise<boolean> {
+  try {
+    const cookieStore = cookies()
+    const sessionToken = cookieStore.get('admin_session')?.value
+
+    if (!sessionToken) {
+      return false
+    }
+
+    const sessionResult = await verifySession(sessionToken)
+    return sessionResult.valid
+  } catch (error) {
+    console.error('Error checking authentication:', error)
+    return false
+  }
 }
 
-export async function setAuthCookie() {
-  const cookieStore = await cookies()
-  cookieStore.set('admin-session', 'true', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 60 * 60 * 24 * 7 // 7 días
-  })
-}
+export async function getCurrentAdmin() {
+  try {
+    const cookieStore = cookies()
+    const sessionToken = cookieStore.get('admin_session')?.value
 
-export async function clearAuthCookie() {
-  const cookieStore = await cookies()
-  cookieStore.delete('admin-session')
+    if (!sessionToken) {
+      return null
+    }
+
+    const sessionResult = await verifySession(sessionToken)
+    return sessionResult.valid ? sessionResult.admin : null
+  } catch (error) {
+    console.error('Error getting current admin:', error)
+    return null
+  }
 }

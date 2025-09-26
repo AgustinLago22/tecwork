@@ -12,7 +12,8 @@ import {
   User,
   Building,
   GraduationCap,
-  Star
+  Star,
+  BarChart3
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -84,15 +85,21 @@ export default async function DashboardPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
+            <div className="flex items-center gap-2 text-sm mb-2">
+              <span className="bg-primary/10 text-primary px-2 py-1 rounded-md font-medium flex items-center gap-1">
+                <BarChart3 className="h-3 w-3" />
+                Dashboard
+              </span>
+              <span className="text-muted-foreground">•</span>
+              <Link href="/dashboard/crm" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                <Users className="h-3 w-3" />
+                CRM
+              </Link>
+            </div>
             <h1 className="text-3xl font-bold text-slate-900">Dashboard TecWork</h1>
             <p className="text-slate-600">Panel de administración y métricas</p>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/">
-              <Button variant="ghost" size="sm">
-                Ver Sitio Web
-              </Button>
-            </Link>
             <form action="/api/auth/logout" method="POST">
               <Button variant="outline" size="sm" type="submit">
                 <LogOut className="h-4 w-4 mr-2" />
@@ -232,35 +239,6 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        {/* Enlaces rápidos */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Enlaces Rápidos</CardTitle>
-            <CardDescription>Acciones comunes de administración</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button asChild variant="outline">
-                <Link href="/contacto">
-                  <Building className="h-4 w-4 mr-2" />
-                  Ver Formulario de Leads
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/sumate">
-                  <GraduationCap className="h-4 w-4 mr-2" />
-                  Ver Formulario de Estudiantes
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/">
-                  <TrendingUp className="h-4 w-4 mr-2" />
-                  Ir al Sitio Web
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )

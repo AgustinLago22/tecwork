@@ -26,6 +26,7 @@ export interface Aplicante {
   github_url?: string
   linkedin_url?: string
   portfolio_url?: string
+  cv_url?: string
   habilidades?: string
   motivacion?: string
   universidad_id?: number
@@ -96,7 +97,14 @@ export interface VistaAplicante {
   nombre: string
   apellido?: string
   email: string
+  telefono?: string
   año_cursado?: number
+  habilidades?: string
+  github_url?: string
+  linkedin_url?: string
+  portfolio_url?: string
+  cv_url?: string
+  motivacion?: string
   codigo_universidad?: string
   universidad?: string
   carrera?: string

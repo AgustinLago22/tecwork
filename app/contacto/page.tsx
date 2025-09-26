@@ -27,6 +27,225 @@ import {
   Building,
 } from "lucide-react"
 
+// Estilos minimalistas con sutiles mejoras de contraste
+const enhancedStyles = `
+  :root {
+    /* Solo variables esenciales */
+    --color-primary: 24 95% 53%;
+    --neutral-50: 0 0% 98%;
+    --neutral-100: 210 40% 96%;
+    --neutral-200: 214 32% 91%;
+    --neutral-300: 213 27% 84%;
+
+    /* Sombras sutiles */
+    --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+
+    /* Transición suave */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fondo minimalista con muy sutil textura */
+  .enhanced-background {
+    background:
+      radial-gradient(600px circle at 50% 200px, hsl(var(--neutral-50)), transparent),
+      linear-gradient(to bottom, hsl(0 0% 100%), hsl(var(--neutral-50)));
+  }
+
+  /* Cards con sombras más definidas y hover con color accent */
+  .enhanced-card {
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(var(--neutral-200));
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--ease);
+  }
+
+  .enhanced-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: rgba(115, 47, 23, 0.3);
+  }
+
+  /* Inputs con hover y focus usando color accent */
+  .enhanced-input {
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(var(--neutral-200));
+    transition: all 0.3s var(--ease);
+  }
+
+  .enhanced-input:hover {
+    border-color: rgba(115, 47, 23, 0.4);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .enhanced-input:focus {
+    border-color: #732F17;
+    box-shadow: 0 0 0 3px rgba(115, 47, 23, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Botón con mejor presencia */
+  .enhanced-button {
+    background: #D99962;
+    box-shadow: var(--shadow-sm), inset 0 1px 0 hsl(0 0% 100% / 0.2);
+    transition: all 0.3s var(--ease);
+    border: 0;
+  }
+
+  .enhanced-button:hover {
+    background: rgba(217, 153, 98, 0.9);
+    box-shadow: var(--shadow-md), inset 0 1px 0 hsl(0 0% 100% / 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Animaciones suaves */
+  .stagger-animation {
+    animation: slideInUp 0.6s var(--ease) forwards;
+    animation-delay: calc(var(--index) * 0.15s);
+    opacity: 0;
+  }
+
+  /* Tipografía */
+  .refined-typography-heading {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .refined-typography-body {
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  /* Hover muy sutil */
+  .hover-subtle:hover {
+    background: hsl(var(--neutral-50)) !important;
+    transition: all 0.3s var(--ease);
+  }
+
+  /* Radio cards con color accent */
+  .enhanced-radio-card {
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(var(--neutral-200));
+    transition: all 0.3s var(--ease);
+  }
+
+  .enhanced-radio-card:hover {
+    border-color: rgba(115, 47, 23, 0.4);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .enhanced-radio-card.selected {
+    background: rgba(115, 47, 23, 0.03);
+    border-color: #732F17;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Títulos del formulario con color accent */
+  .form-section-title {
+    color: #732F17 !important;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(115, 47, 23, 0.2) !important;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  /* Efecto decorativo sutil en títulos */
+  .form-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: #732F17;
+    border-radius: 1px;
+  }
+
+  /* Título principal del formulario */
+  .form-main-title {
+    color: #732F17 !important;
+  }
+
+  /* Labels importantes */
+  .form-label-enhanced {
+    color: hsl(25 20% 25%) !important;
+    font-weight: 500;
+  }
+
+  /* Burbujas de conversación para errores */
+  .error-bubble {
+    position: relative;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fecaca;
+    border-radius: 16px;
+    padding: 10px 14px;
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: #dc2626;
+    animation: bubbleIn 0.3s ease-out;
+    box-shadow: 0 3px 12px rgba(220, 38, 38, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .error-bubble::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fecaca;
+  }
+
+  .error-bubble::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 21px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fef2f2;
+  }
+
+  @keyframes bubbleIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Input con error - borde más sutil para las burbujas */
+  .input-error {
+    border-color: #fca5a5 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+  }
+`;
+
 export default function ContactoPage() {
   const { toast } = useToast()
   const [formData, setFormData] = useState({
@@ -42,6 +261,7 @@ export default function ContactoPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const tiposNecesidad = [
     {
@@ -86,43 +306,42 @@ export default function ContactoPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Validaciones del lado cliente
+    // Limpiar errores previos
+    setErrors({})
+
+    // Validaciones del lado cliente con mensajes inline
+    const newErrors: Record<string, string> = {}
+
     if (!formData.nombre.trim()) {
-      toast({
-        variant: "destructive",
-        title: "Campo obligatorio",
-        description: "El nombre es obligatorio"
-      })
-      setIsSubmitting(false)
-      return
+      newErrors.nombre = "¿Cómo te llamas? Nos gustaría conocerte"
     }
 
     if (!formData.email.trim()) {
-      toast({
-        variant: "destructive",
-        title: "Campo obligatorio",
-        description: "El email es obligatorio"
-      })
-      setIsSubmitting(false)
-      return
+      newErrors.email = "¿Cómo te contactamos sin tu email?"
+    } else {
+      // Validación de formato de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = "Pon un email válido"
+      }
     }
 
     if (!formData.mensaje.trim()) {
-      toast({
-        variant: "destructive",
-        title: "Campo obligatorio",
-        description: "Debes describir tu proyecto"
-      })
-      setIsSubmitting(false)
-      return
+      newErrors.mensaje = "Cuéntanos sobre tu proyecto. ¡Nos emociona conocer tu idea!"
     }
 
     if (!formData.tipoNecesidad) {
-      toast({
-        variant: "destructive",
-        title: "Campo obligatorio",
-        description: "Selecciona el tipo de solución que necesitas"
-      })
+      newErrors.tipoNecesidad = "¿Qué tipo de solución necesitas? Ayúdanos a entenderte"
+    }
+
+    // Validaciones opcionales con formato
+    if (formData.telefono.trim() && !/^[\d\s\+\-\(\)]+$/.test(formData.telefono.trim())) {
+      newErrors.telefono = "Revisa el formato del teléfono"
+    }
+
+    // Si hay errores, mostrarlos y detener el envío
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
       setIsSubmitting(false)
       return
     }
@@ -152,21 +371,21 @@ export default function ContactoPage() {
       if (response.ok && data.success) {
         setIsSubmitted(true)
         toast({
-          title: "¡Consulta enviada!",
-          description: "Hemos recibido tu mensaje. Te responderemos en menos de 24 horas."
+          title: "Consulta enviada correctamente",
+          description: "Hemos recibido tu mensaje. Te contactaremos en las próximas 24 horas"
         })
       } else {
         toast({
           variant: "destructive",
-          title: "Error al enviar",
-          description: data.error || 'Hubo un error al enviar tu consulta. Por favor, intenta nuevamente.'
+          title: "Error al enviar la consulta",
+          description: data.error || 'Ocurrió un error temporal. Por favor, intenta nuevamente'
         })
       }
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error de conexión",
-        description: 'Por favor, verifica tu conexión e intenta nuevamente.'
+        description: 'Verifica tu conexión a internet e intenta nuevamente'
       })
     } finally {
       setIsSubmitting(false)
@@ -199,7 +418,9 @@ export default function ContactoPage() {
   }
 
   return (
-    <div className="bg-background paper-texture">
+    <div className="enhanced-background paper-texture">
+      {/* Inyectamos los estilos CSS */}
+      <style jsx>{enhancedStyles}</style>
       {/* Hero Section */}
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
@@ -207,12 +428,12 @@ export default function ContactoPage() {
             {/* Spiral holes decoration */}
             <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
 
-            <div className="relative z-10">
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
+            <div className="relative z-10 stagger-animation" style={{"--index": 0} as React.CSSProperties}>
+              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm enhanced-card">
                  Hablemos de tu proyecto
               </Badge>
 
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
+              <h1 className="text-4xl md:text-6xl refined-typography-heading text-foreground mb-6 text-balance">
                 Contacta con{" "}
                 <span className="text-primary handwritten relative">
                   nosotros
@@ -222,7 +443,7 @@ export default function ContactoPage() {
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
+              <p className="text-lg md:text-xl refined-typography-body text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
                 Cuéntanos tu idea y te ayudaremos a hacerla realidad con nuestro equipo de estudiantes y mentores
                 expertos.
               </p>
@@ -234,40 +455,40 @@ export default function ContactoPage() {
       <div className="container mx-auto px-4 py-20">
         <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
           {/* Información de Contacto */}
-          <div className="lg:col-span-1">
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
+          <div className="lg:col-span-1 stagger-animation" style={{"--index": 1} as React.CSSProperties}>
+            <Card className="enhanced-card sketch-border">
               <CardHeader>
-                <CardTitle className="handwritten text-xl">Información de Contacto</CardTitle>
+                <CardTitle className="handwritten text-xl refined-typography-heading">Información de Contacto</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
                   <Mail className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium">Email</p>
+                    <p className="font-medium refined-typography-body">Email</p>
                     <p className="text-muted-foreground text-sm">hola@tecwork.es</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
                   <Phone className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium">Teléfono</p>
+                    <p className="font-medium refined-typography-body">Teléfono</p>
                     <p className="text-muted-foreground text-sm">+34 600 123 456</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
                   <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium">Ubicación</p>
+                    <p className="font-medium refined-typography-body">Ubicación</p>
                     <p className="text-muted-foreground text-sm">Corrientes, Argentina</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
                   <Clock className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium">Horario</p>
+                    <p className="font-medium refined-typography-body">Horario</p>
                     <p className="text-muted-foreground text-sm">Lun - Vie: 9:00 - 18:00</p>
                   </div>
                 </div>
@@ -275,9 +496,9 @@ export default function ContactoPage() {
             </Card>
 
             {/* Proceso */}
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1 mt-8">
+            <Card className="enhanced-card sketch-border mt-8 stagger-animation" style={{"--index": 2} as React.CSSProperties}>
               <CardHeader>
-                <CardTitle className="handwritten text-xl">¿Cómo funciona?</CardTitle>
+                <CardTitle className="handwritten text-xl refined-typography-heading">¿Cómo funciona?</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -326,55 +547,92 @@ export default function ContactoPage() {
           </div>
 
           {/* Formulario */}
-          <div className="lg:col-span-2">
-            <Card className="sketch-border bg-card">
+          <div className="lg:col-span-2 stagger-animation" style={{"--index": 3} as React.CSSProperties}>
+            <Card className="enhanced-card sketch-border">
               <CardHeader>
-                <CardTitle className="text-2xl handwritten">Cuéntanos tu proyecto</CardTitle>
-                <p className="text-muted-foreground">Completa el formulario y te contactaremos en menos de 24 horas</p>
+                <CardTitle className="text-2xl handwritten form-main-title">Cuéntanos tu proyecto</CardTitle>
+                <p className="refined-typography-body text-muted-foreground">Completa el formulario y te contactaremos en menos de 24 horas</p>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   {/* Información de Contacto */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground border-b border-dashed border-border pb-2">
+                    <h3 className="text-lg form-section-title">
                       Información de Contacto
                     </h3>
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="nombre">Nombre completo *</Label>
+                        <Label htmlFor="nombre" className="refined-typography-body font-medium">Nombre completo *</Label>
                         <Input
                           id="nombre"
+                          className={`enhanced-input ${errors.nombre ? 'input-error' : ''}`}
                           value={formData.nombre}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, nombre: e.target.value }))}
-                          required
+                          onChange={(e) => {
+                            setFormData((prev) => ({ ...prev, nombre: e.target.value }))
+                            if (errors.nombre) {
+                              setErrors((prev) => ({ ...prev, nombre: '' }))
+                            }
+                          }}
                         />
+                        {errors.nombre && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.nombre}
+                          </div>
+                        )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="email" className="refined-typography-body font-medium">Email *</Label>
                         <Input
                           id="email"
-                          type="email"
+                          type="text"
+                          inputMode="email"
+                          autoComplete="email"
+                          className={`enhanced-input ${errors.email ? 'input-error' : ''}`}
                           value={formData.email}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-                          required
+                          onChange={(e) => {
+                            setFormData((prev) => ({ ...prev, email: e.target.value }))
+                            if (errors.email) {
+                              setErrors((prev) => ({ ...prev, email: '' }))
+                            }
+                          }}
                         />
+                        {errors.email && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.email}
+                          </div>
+                        )}
                       </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="telefono">Teléfono</Label>
+                        <Label htmlFor="telefono" className="refined-typography-body font-medium">Teléfono</Label>
                         <Input
                           id="telefono"
+                          className={`enhanced-input ${errors.telefono ? 'input-error' : ''}`}
                           value={formData.telefono}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, telefono: e.target.value }))}
+                          onChange={(e) => {
+                            setFormData((prev) => ({ ...prev, telefono: e.target.value }))
+                            if (errors.telefono) {
+                              setErrors((prev) => ({ ...prev, telefono: '' }))
+                            }
+                          }}
                         />
+                        {errors.telefono && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.telefono}
+                          </div>
+                        )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="empresa">Empresa</Label>
+                        <Label htmlFor="empresa" className="refined-typography-body font-medium">Empresa</Label>
                         <Input
                           id="empresa"
+                          className="enhanced-input"
                           value={formData.empresa}
                           onChange={(e) => setFormData((prev) => ({ ...prev, empresa: e.target.value }))}
                         />
@@ -385,15 +643,20 @@ export default function ContactoPage() {
 
                   {/* Tipo de Necesidad */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground border-b border-dashed border-border pb-2">
+                    <h3 className="text-lg form-section-title">
                       Tipo de Proyecto
                     </h3>
 
                     <div className="space-y-3">
-                      <Label>¿Qué tipo de solución necesitas? *</Label>
+                      <Label className="refined-typography-body font-medium">¿Qué tipo de solución necesitas? *</Label>
                       <RadioGroup
                         value={formData.tipoNecesidad}
-                        onValueChange={(value) => setFormData((prev) => ({ ...prev, tipoNecesidad: value }))}
+                        onValueChange={(value) => {
+                          setFormData((prev) => ({ ...prev, tipoNecesidad: value }))
+                          if (errors.tipoNecesidad) {
+                            setErrors((prev) => ({ ...prev, tipoNecesidad: '' }))
+                          }
+                        }}
                         className="grid md:grid-cols-2 gap-3"
                       >
                         {tiposNecesidad.map((tipo) => {
@@ -402,10 +665,10 @@ export default function ContactoPage() {
                             <Label
                               key={tipo.id}
                               htmlFor={tipo.id}
-                              className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-all duration-200 group ${
+                              className={`enhanced-radio-card flex items-center space-x-3 p-4 rounded-lg cursor-pointer group ${
                                 formData.tipoNecesidad === tipo.id
-                                  ? 'border-primary bg-primary/5 shadow-md transform -rotate-1'
-                                  : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm hover:scale-[1.02]'
+                                  ? 'selected transform -rotate-1'
+                                  : ''
                               }`}
                             >
                               <RadioGroupItem value={tipo.id} id={tipo.id} />
@@ -432,22 +695,28 @@ export default function ContactoPage() {
                           )
                         })}
                       </RadioGroup>
+                      {errors.tipoNecesidad && (
+                        <div className="error-bubble">
+                          <span className="text-base">💭</span>
+                          {errors.tipoNecesidad}
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Detalles del Proyecto */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground border-b border-dashed border-border pb-2">
+                    <h3 className="text-lg form-section-title">
                       Detalles del Proyecto
                     </h3>
 
                     <div className="space-y-2">
-                      <Label htmlFor="timeline">¿Cuándo lo necesitas?</Label>
+                      <Label htmlFor="timeline" className="refined-typography-body font-medium">¿Cuándo lo necesitas?</Label>
                       <Select
                         value={formData.timeline}
                         onValueChange={(value) => setFormData((prev) => ({ ...prev, timeline: value }))}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="enhanced-input">
                           <SelectValue placeholder="Selecciona un plazo" />
                         </SelectTrigger>
                         <SelectContent>
@@ -460,24 +729,35 @@ export default function ContactoPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="mensaje">Describe tu proyecto *</Label>
+                      <Label htmlFor="mensaje" className="refined-typography-body font-medium">Describe tu proyecto *</Label>
                       <Textarea
                         id="mensaje"
+                        className={`enhanced-input ${errors.mensaje ? 'input-error' : ''}`}
                         placeholder="Cuéntanos más detalles sobre tu proyecto, objetivos, funcionalidades específicas, etc."
                         value={formData.mensaje}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, mensaje: e.target.value }))}
+                        onChange={(e) => {
+                          setFormData((prev) => ({ ...prev, mensaje: e.target.value }))
+                          if (errors.mensaje) {
+                            setErrors((prev) => ({ ...prev, mensaje: '' }))
+                          }
+                        }}
                         rows={5}
-                        required
                       />
+                      {errors.mensaje && (
+                        <div className="error-bubble">
+                          <span className="text-base">💭</span>
+                          {errors.mensaje}
+                        </div>
+                      )}
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="comoConociste">¿Cómo nos conociste?</Label>
+                      <Label htmlFor="comoConociste" className="refined-typography-body font-medium">¿Cómo nos conociste?</Label>
                       <Select
                         value={formData.comoConociste}
                         onValueChange={(value) => setFormData((prev) => ({ ...prev, comoConociste: value }))}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="enhanced-input">
                           <SelectValue placeholder="Selecciona la fuente" />
                         </SelectTrigger>
                         <SelectContent>
@@ -498,7 +778,7 @@ export default function ContactoPage() {
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 hover:shadow-lg transition-all duration-200 group"
+                      className="enhanced-button text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed refined-typography-body font-medium group border-0"
                     >
                       {isSubmitting ? (
                         <>

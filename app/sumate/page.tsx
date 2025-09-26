@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -29,14 +30,14 @@ import {
 export default function SumatePage() {
   const [formData, setFormData] = useState({
     nombre: "",
+    apellido: "",
     email: "",
     telefono: "",
     universidad: "",
     carrera: "",
     año: "",
     rol: "",
-    disponibilidad: "",
-    horasSemanales: "",
+    nivel: "",
     skills: [] as string[],
     experiencia: "",
     portfolio: "",
@@ -46,8 +47,34 @@ export default function SumatePage() {
     proyectoInteres: "",
   })
 
+  const universidades = [
+    { id: 'unne', name: 'Universidad Nacional del Nordeste (UNNE)' },
+    { id: 'uba', name: 'Universidad de Buenos Aires (UBA)' },
+    { id: 'utn', name: 'Universidad Tecnológica Nacional (UTN)' },
+    { id: 'unc', name: 'Universidad Nacional de Córdoba (UNC)' },
+    { id: 'unlp', name: 'Universidad Nacional de La Plata (UNLP)' },
+    { id: 'uca', name: 'Universidad Católica Argentina (UCA)' },
+    { id: 'udesa', name: 'Universidad de San Andrés' },
+    { id: 'itba', name: 'Instituto Tecnológico de Buenos Aires (ITBA)' },
+  ]
+
+  const carreras = [
+    { id: 'sistemas', name: 'Ingeniería en Sistemas de Información' },
+    { id: 'informatica', name: 'Ingeniería Informática' },
+    { id: 'licenciatura-sistemas', name: 'Licenciatura en Sistemas' },
+    { id: 'ingenieria-software', name: 'Ingeniería de Software' },
+    { id: 'tecnicatura-programacion', name: 'Tecnicatura en Programación' },
+    { id: 'analista-sistemas', name: 'Analista de Sistemas' },
+    { id: 'ingenieria-computacion', name: 'Ingeniería en Computación' },
+    { id: 'licenciatura-informatica', name: 'Licenciatura en Informática' },
+    { id: 'data-science', name: 'Data Science' },
+    { id: 'ciberseguridad', name: 'Ciberseguridad' },
+    { id: 'ux-ui', name: 'Diseño UX/UI' },
+  ]
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const { toast } = useToast()
 
   const roles = [
     { id: "frontend", label: "Frontend Developer", icon: Code, description: "React, Vue, Angular, HTML/CSS" },
@@ -86,22 +113,172 @@ export default function SumatePage() {
   ]
 
   const handleSkillChange = (skill: string, checked: boolean) => {
-    if (checked) {
-      setFormData((prev) => ({ ...prev, skills: [...prev.skills, skill] }))
-    } else {
-      setFormData((prev) => ({ ...prev, skills: prev.skills.filter((s) => s !== skill) }))
-    }
+    setFormData((prev) => {
+      const currentSkills = prev.skills
+
+      if (checked) {
+        // Solo agregar si no está ya en la lista y no excede el límite de 4
+        if (!currentSkills.includes(skill) && currentSkills.length < 4) {
+          return { ...prev, skills: [...currentSkills, skill] }
+        }
+      } else {
+        // Solo remover si está en la lista
+        if (currentSkills.includes(skill)) {
+          return { ...prev, skills: currentSkills.filter((s) => s !== skill) }
+        }
+      }
+
+      // No hay cambios, devolver el estado anterior
+      return prev
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simular envío del formulario
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // Validaciones del lado cliente
+    if (!formData.nombre.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "El nombre es obligatorio"
+      })
+      setIsSubmitting(false)
+      return
+    }
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    if (!formData.apellido.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "El apellido es obligatorio"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.email.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "El email es obligatorio"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.universidad) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona tu universidad"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.carrera) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona tu carrera"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.año) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona tu año de carrera"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.rol) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona el rol en el que te gustaría participar"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (formData.skills.length === 0) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona al menos 1 habilidad técnica"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.motivacion.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Explica por qué quieres unirte a Tecwork"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/applicants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre.trim(),
+          apellido: formData.apellido.trim(),
+          email: formData.email.trim(),
+          telefono: formData.telefono?.trim() || null,
+          universidad: formData.universidad,
+          carrera: formData.carrera,
+          año: formData.año,
+          rol: formData.rol,
+          skills: formData.skills,
+          nivel: formData.nivel || 'junior',
+          github: formData.github?.trim() || null,
+          linkedin: formData.linkedin?.trim() || null,
+          portfolio: formData.portfolio?.trim() || null,
+          experiencia: formData.experiencia?.trim() || null,
+          motivacion: formData.motivacion.trim(),
+          proyectoInteres: formData.proyectoInteres?.trim() || null,
+          consent: true
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true)
+        toast({
+          title: "¡Postulación enviada!",
+          description: "Hemos recibido tu postulación. Te contactaremos pronto para coordinar una entrevista."
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error al enviar",
+          description: data.error || 'Hubo un error al enviar tu postulación. Por favor, intenta nuevamente.'
+        })
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error de conexión",
+        description: 'Por favor, verifica tu conexión e intenta nuevamente.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -226,7 +403,7 @@ export default function SumatePage() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="nombre">Nombre completo *</Label>
+                        <Label htmlFor="nombre">Nombre *</Label>
                         <Input
                           id="nombre"
                           value={formData.nombre}
@@ -234,6 +411,18 @@ export default function SumatePage() {
                           required
                         />
                       </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="apellido">Apellido *</Label>
+                        <Input
+                          id="apellido"
+                          value={formData.apellido}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, apellido: e.target.value }))}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="email">Email *</Label>
                         <Input
@@ -244,9 +433,6 @@ export default function SumatePage() {
                           required
                         />
                       </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="telefono">Teléfono</Label>
                         <Input
@@ -255,26 +441,45 @@ export default function SumatePage() {
                           onChange={(e) => setFormData((prev) => ({ ...prev, telefono: e.target.value }))}
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="universidad">Universidad *</Label>
-                        <Input
-                          id="universidad"
-                          value={formData.universidad}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, universidad: e.target.value }))}
-                          required
-                        />
-                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="universidad">Universidad *</Label>
+                      <Select
+                        value={formData.universidad}
+                        onValueChange={(value) => setFormData((prev) => ({ ...prev, universidad: value }))}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona tu universidad" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {universidades.map((uni) => (
+                            <SelectItem key={uni.id} value={uni.id}>
+                              {uni.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="carrera">Carrera *</Label>
-                        <Input
-                          id="carrera"
+                        <Select
                           value={formData.carrera}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, carrera: e.target.value }))}
-                          required
-                        />
+                          onValueChange={(value) => setFormData((prev) => ({ ...prev, carrera: value }))}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecciona tu carrera" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {carreras.map((carrera) => (
+                              <SelectItem key={carrera.id} value={carrera.id}>
+                                {carrera.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="año">Año de carrera *</Label>
@@ -315,24 +520,56 @@ export default function SumatePage() {
                         {roles.map((rol) => {
                           const IconComponent = rol.icon
                           return (
-                            <div
+                            <Label
                               key={rol.id}
-                              className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted/50"
+                              htmlFor={rol.id}
+                              className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-all duration-200 group ${
+                                formData.rol === rol.id
+                                  ? 'border-primary bg-primary/5 shadow-md transform rotate-1'
+                                  : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm hover:scale-[1.02]'
+                              }`}
                             >
                               <RadioGroupItem value={rol.id} id={rol.id} />
                               <div className="flex items-center space-x-3 flex-1">
-                                <IconComponent className="h-5 w-5 text-primary" />
+                                <div className={`p-2 rounded-full transition-colors ${
+                                  formData.rol === rol.id
+                                    ? 'bg-primary/10'
+                                    : 'bg-muted group-hover:bg-primary/5'
+                                }`}>
+                                  <IconComponent className={`h-5 w-5 transition-colors ${
+                                    formData.rol === rol.id
+                                      ? 'text-primary'
+                                      : 'text-muted-foreground group-hover:text-primary'
+                                  }`} />
+                                </div>
                                 <div>
-                                  <Label htmlFor={rol.id} className="font-medium cursor-pointer">
+                                  <span className="font-medium cursor-pointer group-hover:text-foreground">
                                     {rol.label}
-                                  </Label>
-                                  <p className="text-xs text-muted-foreground">{rol.description}</p>
+                                  </span>
+                                  <p className="text-xs text-muted-foreground group-hover:text-muted-foreground">{rol.description}</p>
                                 </div>
                               </div>
-                            </div>
+                            </Label>
                           )
                         })}
                       </RadioGroup>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Label htmlFor="nivel">Nivel de experiencia *</Label>
+                      <Select
+                        value={formData.nivel}
+                        onValueChange={(value) => setFormData((prev) => ({ ...prev, nivel: value }))}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona tu nivel de experiencia" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">Entre 1 a 2 Proyectos</SelectItem>
+                          <SelectItem value="2">+3 Proyectos</SelectItem>
+                          <SelectItem value="3">+5 Proyectos</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
@@ -343,77 +580,49 @@ export default function SumatePage() {
                     </h3>
 
                     <div className="space-y-4">
-                      <Label>Selecciona tus habilidades (máximo 8)</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        {skillsOptions.map((skill) => (
-                          <div key={skill} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={skill}
-                              checked={formData.skills.includes(skill)}
-                              onCheckedChange={(checked) => handleSkillChange(skill, checked as boolean)}
-                              disabled={formData.skills.length >= 8 && !formData.skills.includes(skill)}
-                            />
-                            <Label htmlFor={skill} className="text-sm cursor-pointer">
-                              {skill}
-                            </Label>
-                          </div>
-                        ))}
+                      <Label>Selecciona tus 4 habilidades técnicas principales *</Label>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {skillsOptions.map((skill) => {
+                          const isSelected = formData.skills.includes(skill)
+                          const isDisabled = formData.skills.length >= 4 && !isSelected
+                          return (
+                            <div
+                              key={skill}
+                              className={`flex items-center space-x-3 p-3 rounded-lg border transition-all duration-200 ${
+                                isSelected
+                                  ? 'border-primary bg-primary/5 shadow-sm transform rotate-1'
+                                  : isDisabled
+                                  ? 'border-border bg-muted/30 opacity-50'
+                                  : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm cursor-pointer'
+                              }`}
+                            >
+                              <Checkbox
+                                id={skill}
+                                checked={isSelected}
+                                onCheckedChange={(checked) => {
+                                  if (!isDisabled) {
+                                    handleSkillChange(skill, checked as boolean)
+                                  }
+                                }}
+                                disabled={isDisabled}
+                              />
+                              <Label
+                                htmlFor={skill}
+                                className={`text-sm font-medium flex-1 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                              >
+                                {skill}
+                              </Label>
+                            </div>
+                          )
+                        })}
                       </div>
-                      <p className="text-xs text-muted-foreground">Seleccionadas: {formData.skills.length}/8</p>
+                      <p className={`text-xs ${formData.skills.length === 4 ? 'text-green-600' : 'text-muted-foreground'}`}>
+                        Seleccionadas: {formData.skills.length}/4
+                        {formData.skills.length === 4 && ' ✓ Completado'}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Disponibilidad */}
-                  <div className="space-y-6">
-                    <h3 className="text-lg font-semibold text-foreground border-b border-dashed border-border pb-2">
-                      Disponibilidad
-                    </h3>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label>¿Cuándo puedes empezar? *</Label>
-                        <RadioGroup
-                          value={formData.disponibilidad}
-                          onValueChange={(value) => setFormData((prev) => ({ ...prev, disponibilidad: value }))}
-                        >
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="inmediato" id="inmediato" />
-                            <Label htmlFor="inmediato">Inmediatamente</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="1-2-semanas" id="1-2-semanas" />
-                            <Label htmlFor="1-2-semanas">En 1-2 semanas</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="1-mes" id="1-mes" />
-                            <Label htmlFor="1-mes">En 1 mes</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="proximo-semestre" id="proximo-semestre" />
-                            <Label htmlFor="proximo-semestre">Próximo semestre</Label>
-                          </div>
-                        </RadioGroup>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="horasSemanales">Horas disponibles por semana *</Label>
-                        <Select
-                          value={formData.horasSemanales}
-                          onValueChange={(value) => setFormData((prev) => ({ ...prev, horasSemanales: value }))}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecciona las horas" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="5-10">5-10 horas</SelectItem>
-                            <SelectItem value="10-15">10-15 horas</SelectItem>
-                            <SelectItem value="15-20">15-20 horas</SelectItem>
-                            <SelectItem value="20+">Más de 20 horas</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
 
                   {/* Links y Portfolio */}
                   <div className="space-y-6">
@@ -426,8 +635,8 @@ export default function SumatePage() {
                         <Label htmlFor="portfolio">Portfolio/Website</Label>
                         <Input
                           id="portfolio"
-                          type="url"
-                          placeholder="https://tu-portfolio.com"
+                          type="text"
+                          placeholder="tu-portfolio.com o https://tu-portfolio.com"
                           value={formData.portfolio}
                           onChange={(e) => setFormData((prev) => ({ ...prev, portfolio: e.target.value }))}
                         />
@@ -436,8 +645,8 @@ export default function SumatePage() {
                         <Label htmlFor="github">GitHub</Label>
                         <Input
                           id="github"
-                          type="url"
-                          placeholder="https://github.com/tu-usuario"
+                          type="text"
+                          placeholder="github.com/tu-usuario o tu-usuario"
                           value={formData.github}
                           onChange={(e) => setFormData((prev) => ({ ...prev, github: e.target.value }))}
                         />
@@ -448,8 +657,8 @@ export default function SumatePage() {
                       <Label htmlFor="linkedin">LinkedIn</Label>
                       <Input
                         id="linkedin"
-                        type="url"
-                        placeholder="https://linkedin.com/in/tu-perfil"
+                        type="text"
+                        placeholder="linkedin.com/in/tu-perfil o tu-perfil"
                         value={formData.linkedin}
                         onChange={(e) => setFormData((prev) => ({ ...prev, linkedin: e.target.value }))}
                       />
@@ -502,7 +711,7 @@ export default function SumatePage() {
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 hover:shadow-lg transition-all duration-200 group"
                     >
                       {isSubmitting ? (
                         <>
@@ -512,7 +721,7 @@ export default function SumatePage() {
                       ) : (
                         <>
                           Enviar postulación
-                          <ArrowRight className="ml-2 h-4 w-4" />
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                         </>
                       )}
                     </Button>

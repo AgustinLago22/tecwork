@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -27,14 +28,13 @@ import {
 } from "lucide-react"
 
 export default function ContactoPage() {
+  const { toast } = useToast()
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
     telefono: "",
     empresa: "",
-    cargo: "",
     tipoNecesidad: "",
-    presupuesto: "",
     timeline: "",
     mensaje: "",
     comoConociste: "",
@@ -86,11 +86,91 @@ export default function ContactoPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simular envío del formulario
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // Validaciones del lado cliente
+    if (!formData.nombre.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "El nombre es obligatorio"
+      })
+      setIsSubmitting(false)
+      return
+    }
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    if (!formData.email.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "El email es obligatorio"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.mensaje.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Debes describir tu proyecto"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!formData.tipoNecesidad) {
+      toast({
+        variant: "destructive",
+        title: "Campo obligatorio",
+        description: "Selecciona el tipo de solución que necesitas"
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre.trim(),
+          email: formData.email.trim(),
+          telefono: formData.telefono?.trim() || null,
+          empresa: formData.empresa?.trim() || null,
+          necesidad: formData.mensaje.trim(),
+          mensaje: formData.mensaje.trim(),
+          comoConociste: formData.comoConociste || null,
+          tipoNecesidad: formData.tipoNecesidad,
+          urgencia: formData.timeline || 'baja',
+          consent: true
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true)
+        toast({
+          title: "¡Consulta enviada!",
+          description: "Hemos recibido tu mensaje. Te responderemos en menos de 24 horas."
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error al enviar",
+          description: data.error || 'Hubo un error al enviar tu consulta. Por favor, intenta nuevamente.'
+        })
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error de conexión",
+        description: 'Por favor, verifica tu conexión e intenta nuevamente.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -301,14 +381,6 @@ export default function ContactoPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="cargo">Cargo/Posición</Label>
-                      <Input
-                        id="cargo"
-                        value={formData.cargo}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, cargo: e.target.value }))}
-                      />
-                    </div>
                   </div>
 
                   {/* Tipo de Necesidad */}
@@ -327,21 +399,36 @@ export default function ContactoPage() {
                         {tiposNecesidad.map((tipo) => {
                           const IconComponent = tipo.icon
                           return (
-                            <div
+                            <Label
                               key={tipo.id}
-                              className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-muted/50"
+                              htmlFor={tipo.id}
+                              className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-all duration-200 group ${
+                                formData.tipoNecesidad === tipo.id
+                                  ? 'border-primary bg-primary/5 shadow-md transform -rotate-1'
+                                  : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm hover:scale-[1.02]'
+                              }`}
                             >
                               <RadioGroupItem value={tipo.id} id={tipo.id} />
                               <div className="flex items-center space-x-3 flex-1">
-                                <IconComponent className="h-4 w-4 text-primary" />
+                                <div className={`p-2 rounded-full transition-colors ${
+                                  formData.tipoNecesidad === tipo.id
+                                    ? 'bg-primary/10'
+                                    : 'bg-muted group-hover:bg-primary/5'
+                                }`}>
+                                  <IconComponent className={`h-5 w-5 transition-colors ${
+                                    formData.tipoNecesidad === tipo.id
+                                      ? 'text-primary'
+                                      : 'text-muted-foreground group-hover:text-primary'
+                                  }`} />
+                                </div>
                                 <div>
-                                  <Label htmlFor={tipo.id} className="font-medium cursor-pointer text-sm">
+                                  <span className="font-medium text-sm group-hover:text-foreground">
                                     {tipo.label}
-                                  </Label>
-                                  <p className="text-xs text-muted-foreground">{tipo.description}</p>
+                                  </span>
+                                  <p className="text-xs text-muted-foreground group-hover:text-muted-foreground">{tipo.description}</p>
                                 </div>
                               </div>
-                            </div>
+                            </Label>
                           )
                         })}
                       </RadioGroup>
@@ -354,43 +441,22 @@ export default function ContactoPage() {
                       Detalles del Proyecto
                     </h3>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="presupuesto">Presupuesto estimado</Label>
-                        <Select
-                          value={formData.presupuesto}
-                          onValueChange={(value) => setFormData((prev) => ({ ...prev, presupuesto: value }))}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecciona un rango" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="500-1000">500€ - 1.000€</SelectItem>
-                            <SelectItem value="1000-2500">1.000€ - 2.500€</SelectItem>
-                            <SelectItem value="2500-5000">2.500€ - 5.000€</SelectItem>
-                            <SelectItem value="5000+">Más de 5.000€</SelectItem>
-                            <SelectItem value="no-definido">No definido</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="timeline">¿Cuándo lo necesitas?</Label>
-                        <Select
-                          value={formData.timeline}
-                          onValueChange={(value) => setFormData((prev) => ({ ...prev, timeline: value }))}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecciona un plazo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="urgente">Lo antes posible</SelectItem>
-                            <SelectItem value="1-mes">En 1 mes</SelectItem>
-                            <SelectItem value="2-3-meses">En 2-3 meses</SelectItem>
-                            <SelectItem value="flexible">Flexible</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="timeline">¿Cuándo lo necesitas?</Label>
+                      <Select
+                        value={formData.timeline}
+                        onValueChange={(value) => setFormData((prev) => ({ ...prev, timeline: value }))}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona un plazo" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="4">Lo antes posible</SelectItem>
+                          <SelectItem value="3">En 1 mes</SelectItem>
+                          <SelectItem value="2s">En 2-3 meses</SelectItem>
+                          <SelectItem value="1">Flexible</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div className="space-y-2">
@@ -406,21 +472,22 @@ export default function ContactoPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="comoConociste">¿Cómo conociste Tecwork?</Label>
+                      <Label htmlFor="comoConociste">¿Cómo nos conociste?</Label>
                       <Select
                         value={formData.comoConociste}
                         onValueChange={(value) => setFormData((prev) => ({ ...prev, comoConociste: value }))}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Selecciona una opción" />
+                          <SelectValue placeholder="Selecciona la fuente" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="google">Búsqueda en Google</SelectItem>
-                          <SelectItem value="redes-sociales">Redes sociales</SelectItem>
-                          <SelectItem value="recomendacion">Recomendación</SelectItem>
-                          <SelectItem value="universidad">Universidad</SelectItem>
-                          <SelectItem value="evento">Evento/Conferencia</SelectItem>
-                          <SelectItem value="otro">Otro</SelectItem>
+                          <SelectItem value="Google">Búsqueda en Google</SelectItem>
+                          <SelectItem value="Redes Sociales">Redes sociales</SelectItem>
+                          <SelectItem value="Recomendación">Recomendación de conocido</SelectItem>
+                          <SelectItem value="Universidad">A través de la universidad</SelectItem>
+                          <SelectItem value="Evento">Evento/Conferencia</SelectItem>
+                          <SelectItem value="LinkedIn">LinkedIn</SelectItem>
+                          <SelectItem value="Otro">Otro</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -431,7 +498,7 @@ export default function ContactoPage() {
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 hover:shadow-lg transition-all duration-200 group"
                     >
                       {isSubmitting ? (
                         <>
@@ -441,7 +508,7 @@ export default function ContactoPage() {
                       ) : (
                         <>
                           Enviar consulta
-                          <ArrowRight className="ml-2 h-4 w-4" />
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                         </>
                       )}
                     </Button>

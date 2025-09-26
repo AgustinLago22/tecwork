@@ -84,7 +84,7 @@ export function Navigation() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="sm" className="w-fit bg-transparent">
-                  <Link href="/(register" onClick={() => setIsOpen(false)}>
+                  <Link href="/register" onClick={() => setIsOpen(false)}>
                     Register
                   </Link>
                 </Button>

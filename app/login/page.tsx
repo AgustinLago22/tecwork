@@ -27,13 +27,26 @@ export default function LoginPage() {
     setIsLoading(true)
     setError("")
 
-    // Simular autenticación
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      // Aquí iría la lógica de autenticación real
-      console.log("Login attempt:", formData)
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: formData.password
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        window.location.href = '/dashboard'
+      } else {
+        setError(data.message || 'Error de autenticación')
+      }
     } catch (err) {
-      setError("Credenciales inválidas. Por favor, intenta nuevamente.")
+      setError("Error de conexión. Por favor, intenta nuevamente.")
     } finally {
       setIsLoading(false)
     }

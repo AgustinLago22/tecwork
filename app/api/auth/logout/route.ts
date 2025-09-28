@@ -4,7 +4,7 @@ import { logout } from '@/lib/auth/admin-auth'
 
 export async function POST() {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const sessionCookie = cookieStore.get('admin_session')
 
     // Cerrar sesión en la base de datos

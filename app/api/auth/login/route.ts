@@ -21,8 +21,8 @@ function getClientIP(request: NextRequest): string {
     return cfIP.trim()
   }
 
-  // Fallback a IP del socket (desarrollo local)
-  return request.ip || '127.0.0.1'
+  // Fallback para desarrollo local
+  return '127.0.0.1'
 }
 
 export async function POST(request: NextRequest) {
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Crear cookie de sesión
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
 
     const response = NextResponse.json({
       success: true,

@@ -14,9 +14,9 @@ export async function GET() {
       )
     }
 
-    // Usar vista optimizada de tu BD
+    // Usar tabla principal de leads
     const { data: leads, error } = await supabaseAdmin
-      .from('vista_leads')
+      .from('leads')
       .select('*')
       .order('created_at', { ascending: false })
 
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
       consentimiento: true
     }
 
-    // Intentar con cliente regular primero, ya que la política permite insertar con consentimiento
+    // Usar supabase con validaciones de seguridad en el código
     const { data: lead, error } = await supabase
       .from('leads')
       .insert([leadData])

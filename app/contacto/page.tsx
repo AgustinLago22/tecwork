@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -370,10 +371,6 @@ export default function ContactoPage() {
 
       if (response.ok && data.success) {
         setIsSubmitted(true)
-        toast({
-          title: "Consulta enviada correctamente",
-          description: "Hemos recibido tu mensaje. Te contactaremos en las próximas 24 horas"
-        })
       } else {
         toast({
           variant: "destructive",
@@ -408,7 +405,7 @@ export default function ContactoPage() {
               </p>
               <p className="text-green-600 text-sm mb-6">Te responderemos en un plazo máximo de 24 horas.</p>
               <Button asChild className="bg-primary hover:bg-primary/90">
-                <a href="/">Volver al inicio</a>
+                <Link href="/">Volver al inicio</Link>
               </Button>
             </CardContent>
           </Card>

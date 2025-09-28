@@ -23,15 +23,15 @@ import StudentsCRM from '@/components/dashboard/StudentsCRM'
 
 async function getCRMData() {
   try {
-    // Obtener leads desde vista optimizada
+    // Obtener leads desde la tabla principal
     const { data: leads, error: leadsError } = await supabaseAdmin
-      .from('vista_leads')
+      .from('leads')
       .select('*')
       .order('created_at', { ascending: false })
 
-    // Obtener aplicantes desde vista optimizada
+    // Obtener aplicantes desde la tabla principal
     const { data: applicants, error: applicantsError } = await supabaseAdmin
-      .from('vista_aplicantes')
+      .from('aplicantes')
       .select('*')
       .order('created_at', { ascending: false })
 

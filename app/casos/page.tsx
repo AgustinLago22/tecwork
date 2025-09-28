@@ -190,9 +190,9 @@ export default function CasosPage() {
                 {/* Testimonial */}
                 <div className="bg-yellow-100 border-yellow-200 p-6 rounded-lg transform rotate-1">
                   <blockquote className="text-gray-700 handwritten text-lg mb-4">
-                    "El equipo de Tecwork superó nuestras expectativas. No solo entregaron una solución técnica
+                    &quot;El equipo de Tecwork superó nuestras expectativas. No solo entregaron una solución técnica
                     excelente, sino que también aportaron ideas innovadoras que no habíamos considerado. Ahora tenemos
-                    visibilidad completa de nuestro negocio en tiempo real."
+                    visibilidad completa de nuestro negocio en tiempo real.&quot;
                   </blockquote>
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">

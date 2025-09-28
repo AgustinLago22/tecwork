@@ -14,9 +14,9 @@ export async function GET() {
       )
     }
 
-    // Usar vista optimizada de tu BD
+    // Usar tabla principal de aplicantes
     const { data: applicants, error } = await supabaseAdmin
-      .from('vista_aplicantes')
+      .from('aplicantes')
       .select('*')
       .order('created_at', { ascending: false })
 

@@ -12,7 +12,7 @@ export async function checkAuth() {
 
 export async function isAuthenticated(): Promise<boolean> {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const sessionToken = cookieStore.get('admin_session')?.value
 
     if (!sessionToken) {
@@ -29,7 +29,7 @@ export async function isAuthenticated(): Promise<boolean> {
 
 export async function getCurrentAdmin() {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const sessionToken = cookieStore.get('admin_session')?.value
 
     if (!sessionToken) {

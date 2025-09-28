@@ -156,7 +156,7 @@ export default function TecworkLanding() {
                   ))}
                 </div>
                 <p className="text-sm text-gray-700 mb-4 handwritten">
-                  "Gracias a Tecwork conseguí mi primer trabajo como desarrollador. La experiencia fue increíble."
+                  &quot;Gracias a Tecwork conseguí mi primer trabajo como desarrollador. La experiencia fue increíble.&quot;
                 </p>
                 <p className="font-semibold text-gray-800">- María González</p>
                 <p className="text-xs text-gray-600">Ing. Informática, UPM</p>
@@ -171,7 +171,7 @@ export default function TecworkLanding() {
                   ))}
                 </div>
                 <p className="text-sm text-gray-700 mb-4 handwritten">
-                  "Los proyectos reales me dieron la confianza que necesitaba para enfrentar entrevistas técnicas."
+                  &quot;Los proyectos reales me dieron la confianza que necesitaba para enfrentar entrevistas técnicas.&quot;
                 </p>
                 <p className="font-semibold text-gray-800">- Carlos Ruiz</p>
                 <p className="text-xs text-gray-600">Ing. Software, UCM</p>
@@ -186,7 +186,7 @@ export default function TecworkLanding() {
                   ))}
                 </div>
                 <p className="text-sm text-gray-700 mb-4 handwritten">
-                  "La comunidad es increíble. Aprendí tanto de mis compañeros como de los mentores."
+                  &quot;La comunidad es increíble. Aprendí tanto de mis compañeros como de los mentores.&quot;
                 </p>
                 <p className="font-semibold text-gray-800">- Ana López</p>
                 <p className="text-xs text-gray-600">Ing. Telecomunicaciones, UPC</p>

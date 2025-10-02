@@ -26,7 +26,7 @@ export function Footer() {
               <Link href="/casos" className="block text-sm text-muted-foreground hover:text-foreground">
                 Casos
               </Link>
-              <Link href="/nosotros" className="block text-sm text-muted-foreground hover:text-foreground">
+              <Link href="/about" className="block text-sm text-muted-foreground hover:text-foreground">
                 Nosotros
               </Link>
             </div>

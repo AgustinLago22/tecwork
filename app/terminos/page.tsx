@@ -1,5 +1,3 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FileText, Users, AlertTriangle, Scale, Mail, Phone } from "lucide-react"
@@ -7,8 +5,6 @@ import { FileText, Users, AlertTriangle, Scale, Mail, Phone } from "lucide-react
 export default function TerminosPage() {
   return (
     <div className="min-h-screen">
-      <Navigation />
-
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center space-y-6">
@@ -248,8 +244,6 @@ export default function TerminosPage() {
           </Card>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

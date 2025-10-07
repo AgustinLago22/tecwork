@@ -59,7 +59,16 @@ export async function POST(request: NextRequest) {
     // Crear cookie de sesión
     const cookieStore = await cookies()
 
-    const response = NextResponse.json({
+    // Configurar cookie segura
+    cookieStore.set('admin_session', authResult.session!.session_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60, // 24 horas en segundos
+      path: '/'
+    })
+
+    return NextResponse.json({
       success: true,
       message: 'Login exitoso',
       admin: {
@@ -70,17 +79,6 @@ export async function POST(request: NextRequest) {
         rol: authResult.admin!.rol
       }
     })
-
-    // Configurar cookie segura
-    response.cookies.set('admin_session', authResult.session!.session_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60, // 24 horas en segundos
-      path: '/'
-    })
-
-    return response
 
   } catch (error) {
     console.error('Login API error:', error)

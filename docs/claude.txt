@@ -82,6 +82,9 @@ SESIÓN 07/10/2025 - ÚLTIMOS CAMBIOS
 
 ✅ FIXES CRÍTICOS
 - Logout corregido: redirige a "/" (app/api/auth/logout/route.ts)
+- Login corregido: cookie session fix para Next.js 15 (app/api/auth/login/route.ts)
+  * Cambio de response.cookies.set() a cookieStore.set()
+  * Ahora la cookie se setea correctamente y el redirect a /dashboard funciona
 - /casos removido del navbar
 - Master/Doctorado removidos de /sumate (solo 1º-5º año)
 - Botón /servicios: "Solicitar cotización" → "Planifica tu proyecto"
@@ -111,7 +114,7 @@ Nuevos:
 
 Modificados:
 - app/about/page.tsx, app/sumate/page.tsx, app/servicios/page.tsx
-- app/api/leads/route.ts, app/api/applicants/route.ts, app/api/auth/logout/route.ts
+- app/api/leads/route.ts, app/api/applicants/route.ts, app/api/auth/logout/route.ts, app/api/auth/login/route.ts
 - app/dashboard/crm/page.tsx
 - components/dashboard/LeadsCRM.tsx, components/dashboard/StudentsCRM.tsx
 - components/navigation.tsx

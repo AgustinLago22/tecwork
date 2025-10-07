@@ -90,8 +90,7 @@ export default function NosotrosPage() {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-                Una consultora tecnológica que conecta el talento universitario con oportunidades reales, creando valor
-                para estudiantes y empresas.
+                Una plataforma que fomenta el desarrollo de negocios pequeños y la educación práctica de estudiantes de tecnología, creando oportunidades reales de crecimiento para ambos.
               </p>
             </div>
           </div>
@@ -111,9 +110,8 @@ export default function NosotrosPage() {
                   <h2 className="text-2xl font-bold text-card-foreground handwritten">Nuestra Misión</h2>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Democratizar el acceso a experiencia profesional real para estudiantes de tecnología, mientras
-                  proporcionamos a las empresas soluciones innovadoras y de calidad a través de un modelo colaborativo
-                  único que beneficia a todos los involucrados.
+                  Aportar valor a estudiantes de tecnología en su proceso de capacitación, mientras fomentamos la
+                  digitalización de negocios pequeños y medianos, creando un ecosistema donde ambos crecen juntos.
                 </p>
               </CardContent>
             </Card>
@@ -127,9 +125,9 @@ export default function NosotrosPage() {
                   <h2 className="text-2xl font-bold text-card-foreground handwritten">Nuestra Visión</h2>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Ser la plataforma líder en Corrientes que transforme la educación tecnológica universitaria, creando un
-                  ecosistema donde estudiantes, universidades y empresas colaboran para impulsar la innovación y el
-                  crecimiento profesional.
+                  Ser la plataforma líder en Corrientes que transforma la educación tecnológica, impulsando la
+                  digitalización de negocios locales y desarrollando el profesionalismo de estudiantes a través de
+                  proyectos reales.
                 </p>
               </CardContent>
             </Card>
@@ -209,57 +207,94 @@ export default function NosotrosPage() {
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">Nuestro Impacto</h2>
-            <p className="text-muted-foreground text-lg">Números que reflejan nuestro compromiso con la excelencia</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">Empezando a crecer</h2>
+            <p className="text-muted-foreground text-lg">Una startup con grandes ambiciones</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-primary handwritten">150+</div>
-              <p className="text-muted-foreground">Estudiantes formados</p>
+              <div className="text-4xl font-bold text-primary handwritten">15+</div>
+              <p className="text-muted-foreground">Estudiantes en la red</p>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-accent handwritten">50+</div>
-              <p className="text-muted-foreground">Proyectos entregados</p>
+              <div className="text-4xl font-bold text-accent handwritten">5+</div>
+              <p className="text-muted-foreground">Proyectos en desarrollo</p>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-primary handwritten">25+</div>
-              <p className="text-muted-foreground">Empresas satisfechas</p>
+              <div className="text-4xl font-bold text-primary handwritten">UNNE</div>
+              <p className="text-muted-foreground">Universidad aliada</p>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-accent handwritten">95%</div>
-              <p className="text-muted-foreground">Tasa de empleabilidad</p>
+              <div className="text-4xl font-bold text-accent handwritten">2025</div>
+              <p className="text-muted-foreground">Año de fundación</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Equipo Fundador */}
+      {/* Nuestra Historia */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">Nuestro Equipo</h2>
-            <p className="text-muted-foreground text-lg">Las personas detrás de Tecwork</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">Nuestra Historia</h2>
+            <p className="text-muted-foreground text-lg">De estudiantes, para estudiantes y negocios</p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
-              <CardContent className="p-8 text-center">
-                <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-primary-foreground font-bold text-2xl">TW</span>
+              <CardContent className="p-8">
+                <div className="flex items-center justify-center mb-8">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <GraduationCap className="h-10 w-10 text-white" />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-card-foreground mb-4">Equipo Fundador</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                  Tecwork fue fundada por un equipo de profesionales apasionados por la educación y la tecnología, con
-                  más de 10 años de experiencia combinada en desarrollo de software, gestión de proyectos y formación
-                  universitaria.
-                </p>
-                <p className="text-muted-foreground">
-                  Nuestro objetivo es crear un puente real entre la academia y la industria, proporcionando
-                  oportunidades significativas para el crecimiento profesional.
-                </p>
+
+                <div className="space-y-6 text-center">
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    <span className="font-semibold text-foreground">TecWork</span> fue fundada por un grupo de estudiantes universitarios
+                    apasionados por la educación y la tecnología, que vieron una oportunidad única: crear un puente real
+                    entre el aprendizaje académico y la práctica profesional.
+                  </p>
+
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    Nuestro incentivo es <span className="font-semibold text-foreground">aportar valor a los estudiantes</span> que
+                    se van capacitando, mientras fomentamos la <span className="font-semibold text-foreground">digitalización de
+                    negocios pequeños y medianos</span> que necesitan soluciones tecnológicas pero no pueden acceder a consultoras
+                    tradicionales.
+                  </p>
+
+                  <div className="pt-4 border-t border-border">
+                    <p className="text-muted-foreground italic">
+                      &ldquo;Creemos que el mejor aprendizaje se da resolviendo problemas reales, y que los negocios locales
+                      merecen acceso a talento tecnológico de calidad.&rdquo;
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
+
+            {/* Doble propuesta de valor */}
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <Card className="sketch-border bg-blue-50/50 border-blue-200">
+                <CardContent className="p-6 text-center">
+                  <GraduationCap className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+                  <h4 className="font-semibold text-foreground mb-2">Para Estudiantes</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Experiencia real, mentoría profesional y construcción de portafolio desde la universidad
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="sketch-border bg-orange-50/50 border-orange-200">
+                <CardContent className="p-6 text-center">
+                  <Building className="h-8 w-8 text-orange-600 mx-auto mb-3" />
+                  <h4 className="font-semibold text-foreground mb-2">Para Negocios</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Digitalización accesible, soluciones personalizadas y apoyo en la transformación tecnológica
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

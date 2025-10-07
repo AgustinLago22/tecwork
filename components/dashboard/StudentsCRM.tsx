@@ -57,6 +57,7 @@ export default function StudentsCRM({ initialStudents }: StudentsCRMProps) {
   const [experienceFilter, setExperienceFilter] = useState('all')
   const [selectedStudent, setSelectedStudent] = useState<VistaAplicante | null>(null)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isLoading, setIsLoading] = useState(initialStudents.length === 0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const studentsPerPage = 10
@@ -72,6 +73,32 @@ export default function StudentsCRM({ initialStudents }: StudentsCRMProps) {
     { id: 6, name: 'No Califica', color: 'bg-red-100 text-red-800' },
     { id: 7, name: 'Inactivo Temporal', color: 'bg-gray-100 text-gray-800' },
   ]
+
+  // Cargar datos si no vienen del servidor (lazy loading)
+  useEffect(() => {
+    if (initialStudents.length === 0) {
+      const fetchStudents = async () => {
+        try {
+          const response = await fetch('/api/applicants')
+          if (response.ok) {
+            const data = await response.json()
+            setStudents(data.applicants || [])
+            setFilteredStudents(data.applicants || [])
+          }
+        } catch (error) {
+          console.error('Error fetching students:', error)
+          toast({
+            title: 'Error',
+            description: 'No se pudieron cargar los estudiantes',
+            variant: 'destructive'
+          })
+        } finally {
+          setIsLoading(false)
+        }
+      }
+      fetchStudents()
+    }
+  }, [initialStudents, toast])
 
   // Obtener universidades únicas
   const universities = [...new Set(students.map(s => s.universidad).filter(Boolean))]
@@ -184,6 +211,17 @@ export default function StudentsCRM({ initialStudents }: StudentsCRMProps) {
   const parseSkills = (skills: string | undefined) => {
     if (!skills) return []
     return skills.split(',').map(skill => skill.trim()).filter(Boolean)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Cargando estudiantes...</p>
+        </div>
+      </div>
+    )
   }
 
   return (

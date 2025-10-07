@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase, supabaseAdmin } from '@/lib/supabase/client'
 import { isAuthenticated } from '@/lib/auth/simple'
 import { Aplicante } from '@/lib/types/database'
+import { sanitizeString, sanitizeEmail, sanitizePhone, sanitizeUrl, sanitizeTextArea, validateNumberInRange } from '@/lib/utils/sanitize'
 
 export async function GET() {
   try {
@@ -42,8 +43,27 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Validaciones básicas
-    if (!body.nombre || !body.email) {
+    // Validaciones y sanitización
+    let sanitizedEmail: string | null
+    let sanitizedPhone: string | null
+    let sanitizedGithub: string | null = null
+    let sanitizedLinkedin: string | null = null
+    let sanitizedPortfolio: string | null = null
+
+    try {
+      sanitizedEmail = sanitizeEmail(body.email)
+      sanitizedPhone = body.telefono ? sanitizePhone(body.telefono) : null
+      if (body.github) sanitizedGithub = sanitizeUrl(body.github)
+      if (body.linkedin) sanitizedLinkedin = sanitizeUrl(body.linkedin)
+      if (body.portfolioWeb) sanitizedPortfolio = sanitizeUrl(body.portfolioWeb)
+    } catch (error: unknown) {
+      return NextResponse.json(
+        { success: false, error: error instanceof Error ? error.message : 'Datos inválidos' },
+        { status: 400 }
+      )
+    }
+
+    if (!body.nombre || !sanitizedEmail) {
       return NextResponse.json(
         { success: false, error: 'Nombre y email son obligatorios' },
         { status: 400 }
@@ -85,27 +105,39 @@ export async function POST(request: NextRequest) {
       'lead': 3
     }
 
-    // Procesar año cursado
-    let añoCursado = null
+    // Procesar año cursado con validación
+    let añoCursado = 1
     if (body.año && body.año !== 'master' && body.año !== 'doctorado') {
-      añoCursado = parseInt(body.año)
-      if (añoCursado < 1 || añoCursado > 7) {
+      try {
+        añoCursado = validateNumberInRange(body.año, 1, 7)
+      } catch {
         añoCursado = 1
       }
     }
 
+    // Sanitizar skills
+    let skillsText = null
+    if (Array.isArray(body.skills)) {
+      skillsText = body.skills
+        .map((skill: string) => sanitizeString(skill, 50))
+        .filter(Boolean)
+        .join(', ')
+    } else if (body.skills) {
+      skillsText = sanitizeString(body.skills, 500)
+    }
+
     const aplicanteData = {
-      nombre: body.nombre.trim(),
-      apellido: body.apellido?.trim() || '',
-      email: body.email.trim(),
-      telefono: body.telefono?.trim() || null,
-      año_cursado: añoCursado || 1,
-      github_url: body.github?.trim() || null,
-      linkedin_url: body.linkedin?.trim() || null,
-      portfolio_url: body.portfolioWeb?.trim() || null,
-      cv_url: body.cvUrl?.trim() || null,
-      habilidades: Array.isArray(body.skills) ? body.skills.join(', ') : (body.skills || null),
-      motivacion: body.motivacion?.trim() || null,
+      nombre: sanitizeString(body.nombre, 100),
+      apellido: sanitizeString(body.apellido, 100),
+      email: sanitizedEmail,
+      telefono: sanitizedPhone,
+      año_cursado: añoCursado,
+      github_url: sanitizedGithub,
+      linkedin_url: sanitizedLinkedin,
+      portfolio_url: sanitizedPortfolio,
+      cv_url: sanitizeString(body.cvUrl, 500),
+      habilidades: skillsText,
+      motivacion: sanitizeTextArea(body.motivacion, 2000),
       universidad_id: universityMap[body.universidad] || 1,
       carrera_id: carreraMap[body.carrera] || 1,
       nivel_experiencia_id: nivelMap[body.nivel] || 1,

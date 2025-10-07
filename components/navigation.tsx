@@ -13,7 +13,6 @@ export function Navigation() {
   const navItems = [
     { href: "/", label: "Inicio" },
     { href: "/servicios", label: "Servicios" },
-    { href: "/casos", label: "Casos" },
     { href: "/about", label: "Nosotros" },
     { href: "/contacto", label: "Contacto" },
   ]

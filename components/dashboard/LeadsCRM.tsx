@@ -48,6 +48,7 @@ export default function LeadsCRM({ initialLeads }: LeadsCRMProps) {
   const [filteredLeads, setFilteredLeads] = useState<VistaLead[]>(initialLeads)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [isLoading, setIsLoading] = useState(initialLeads.length === 0)
   const [urgencyFilter, setUrgencyFilter] = useState('all')
   const [selectedLead, setSelectedLead] = useState<VistaLead | null>(null)
   const [isUpdating, setIsUpdating] = useState(false)
@@ -70,6 +71,32 @@ export default function LeadsCRM({ initialLeads }: LeadsCRMProps) {
     { id: 3, name: 'Alta', color: 'bg-orange-100 text-orange-800' },
     { id: 4, name: 'Urgente', color: 'bg-red-100 text-red-800' },
   ]
+
+  // Cargar datos si no vienen del servidor (lazy loading)
+  useEffect(() => {
+    if (initialLeads.length === 0) {
+      const fetchLeads = async () => {
+        try {
+          const response = await fetch('/api/leads')
+          if (response.ok) {
+            const data = await response.json()
+            setLeads(data.leads || [])
+            setFilteredLeads(data.leads || [])
+          }
+        } catch (error) {
+          console.error('Error fetching leads:', error)
+          toast({
+            title: 'Error',
+            description: 'No se pudieron cargar los leads',
+            variant: 'destructive'
+          })
+        } finally {
+          setIsLoading(false)
+        }
+      }
+      fetchLeads()
+    }
+  }, [initialLeads, toast])
 
   // Filtros en tiempo real
   useEffect(() => {
@@ -146,6 +173,17 @@ export default function LeadsCRM({ initialLeads }: LeadsCRMProps) {
   const getUrgencyBadgeClass = (urgency: string) => {
     const level = urgencyLevels.find(u => u.name === urgency)
     return level?.color || 'bg-gray-100 text-gray-800'
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Cargando leads...</p>
+        </div>
+      </div>
+    )
   }
 
   return (

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase, supabaseAdmin } from '@/lib/supabase/client'
 import { isAuthenticated } from '@/lib/auth/simple'
 import { Lead } from '@/lib/types/database'
+import { sanitizeString, sanitizeEmail, sanitizePhone, sanitizeTextArea } from '@/lib/utils/sanitize'
 
 export async function GET() {
   try {
@@ -42,8 +43,21 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Validaciones básicas
-    if (!body.nombre || !body.email) {
+    // Validaciones y sanitización
+    let sanitizedEmail: string | null
+    let sanitizedPhone: string | null
+
+    try {
+      sanitizedEmail = sanitizeEmail(body.email)
+      sanitizedPhone = body.telefono ? sanitizePhone(body.telefono) : null
+    } catch (error: unknown) {
+      return NextResponse.json(
+        { success: false, error: error instanceof Error ? error.message : 'Datos inválidos' },
+        { status: 400 }
+      )
+    }
+
+    if (!body.nombre || !sanitizedEmail) {
       return NextResponse.json(
         { success: false, error: 'Nombre y email son obligatorios' },
         { status: 400 }
@@ -78,13 +92,13 @@ export async function POST(request: NextRequest) {
     }
 
     const leadData = {
-      nombre: body.nombre.trim(),
-      email: body.email.trim(),
-      telefono: body.telefono?.trim() || null,
-      empresa: body.empresa?.trim() || null,
-      necesidad: body.necesidad?.trim() || 'Consulta general',
-      mensaje: body.mensaje?.trim() || null,
-      fuente: body.comoConociste || null,
+      nombre: sanitizeString(body.nombre, 100),
+      email: sanitizedEmail,
+      telefono: sanitizedPhone,
+      empresa: sanitizeString(body.empresa, 200),
+      necesidad: sanitizeTextArea(body.necesidad, 1000) || 'Consulta general',
+      mensaje: sanitizeTextArea(body.mensaje, 2000),
+      fuente: sanitizeString(body.comoConociste, 100),
       urgencia_id: urgencia_id,
       estado_id: 1, // Pendiente
       tipo_proyecto_id: tipo_proyecto_id,

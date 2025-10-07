@@ -12,11 +12,8 @@ export async function POST() {
       await logout(sessionCookie.value)
     }
 
-    // Eliminar cookie
-    const response = NextResponse.json({
-      success: true,
-      message: 'Logout exitoso'
-    })
+    // Eliminar cookie y redirigir a inicio
+    const response = NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'))
 
     response.cookies.set('admin_session', '', {
       httpOnly: true,

@@ -179,7 +179,7 @@ export default function ServiciosPage() {
           <p className="text-xl text-muted-foreground">Cuéntanos sobre tu idea y te ayudaremos a hacerla realidad</p>
           <Button size="lg" asChild>
             <Link href="/contacto">
-              Solicitar cotización
+              Planifica tu proyecto
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

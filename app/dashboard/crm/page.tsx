@@ -18,61 +18,46 @@ import {
   Star,
 } from 'lucide-react'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import LeadsCRM from '@/components/dashboard/LeadsCRM'
 import StudentsCRM from '@/components/dashboard/StudentsCRM'
 
-async function getCRMData() {
+// Solo cargar estadísticas básicas - los datos completos se cargan bajo demanda
+async function getCRMStats() {
   try {
-    // Obtener leads desde la tabla principal
-    const { data: leads, error: leadsError } = await supabaseAdmin
-      .from('leads')
-      .select('*')
-      .order('created_at', { ascending: false })
+    // Queries optimizadas solo para contar - mucho más rápido que SELECT *
+    const [
+      { count: leadsCount },
+      { count: leadsNewCount },
+      { count: studentsCount },
+      { count: studentsNewCount }
+    ] = await Promise.all([
+      supabaseAdmin.from('leads').select('*', { count: 'exact', head: true }),
+      supabaseAdmin.from('leads').select('*', { count: 'exact', head: true }).eq('estado', 'Pendiente'),
+      supabaseAdmin.from('aplicantes').select('*', { count: 'exact', head: true }),
+      supabaseAdmin.from('aplicantes').select('*', { count: 'exact', head: true }).eq('estado', 'Aplicacion Recibida')
+    ])
 
-    // Obtener aplicantes desde la tabla principal
-    const { data: applicants, error: applicantsError } = await supabaseAdmin
-      .from('aplicantes')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (leadsError || applicantsError) {
-      console.error('Error fetching CRM data:', leadsError || applicantsError)
-      return { leads: [], applicants: [] }
+    return {
+      leadsTotal: leadsCount || 0,
+      leadsNew: leadsNewCount || 0,
+      studentsTotal: studentsCount || 0,
+      studentsNew: studentsNewCount || 0
     }
-
-    return { leads: leads || [], applicants: applicants || [] }
   } catch (error) {
-    console.error('CRM data error:', error)
-    return { leads: [], applicants: [] }
+    console.error('CRM stats error:', error)
+    return {
+      leadsTotal: 0,
+      leadsNew: 0,
+      studentsTotal: 0,
+      studentsNew: 0
+    }
   }
 }
 
 export default async function CRMPage() {
   await checkAuth()
-  const { leads, applicants } = await getCRMData()
-
-  // Estadísticas avanzadas
-  const leadsStats = {
-    total: leads.length,
-    pendientes: leads.filter(l => l.estado === 'Pendiente').length,
-    enEspera: leads.filter(l => l.estado === 'En Espera').length,
-    terminados: leads.filter(l => l.estado === 'Terminado').length,
-    cancelados: leads.filter(l => l.estado === 'Cancelado').length,
-    urgentes: leads.filter(l => l.urgencia === 'Urgente').length,
-  }
-
-  const studentsStats = {
-    total: applicants.length,
-    nuevos: applicants.filter(a => a.estado === 'Aplicacion Recibida').length,
-    enRevision: applicants.filter(a => a.estado === 'En Revision').length,
-    entrevistas: applicants.filter(a => a.estado === 'Entrevista Pendiente').length,
-    aprobados: applicants.filter(a => a.estado === 'Aprobado - Disponible').length,
-    activos: applicants.filter(a => a.estado === 'En Proyecto Activo').length,
-    conCV: applicants.filter(a => a.cv_url).length,
-  }
-
-  const conversionRate = leadsStats.total > 0 ? ((leadsStats.terminados / leadsStats.total) * 100).toFixed(1) : '0'
-  const approvalRate = studentsStats.total > 0 ? (((studentsStats.aprobados + studentsStats.activos) / studentsStats.total) * 100).toFixed(1) : '0'
+  const stats = await getCRMStats()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
@@ -104,7 +89,7 @@ export default async function CRMPage() {
           </div>
         </div>
 
-        {/* Estadísticas Generales */}
+        {/* Estadísticas Rápidas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -112,15 +97,10 @@ export default async function CRMPage() {
               <Building className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{leadsStats.total}</div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Badge variant="outline" className="text-xs">
-                  {leadsStats.pendientes} pendientes
-                </Badge>
-                <Badge variant="secondary" className="text-xs">
-                  {leadsStats.urgentes} urgentes
-                </Badge>
-              </div>
+              <div className="text-2xl font-bold">{stats.leadsTotal}</div>
+              <p className="text-xs text-muted-foreground">
+                {stats.leadsNew} pendientes de contactar
+              </p>
             </CardContent>
           </Card>
 
@@ -130,126 +110,36 @@ export default async function CRMPage() {
               <GraduationCap className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{studentsStats.total}</div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Badge variant="outline" className="text-xs">
-                  {studentsStats.nuevos} nuevos
-                </Badge>
-                <Badge variant="secondary" className="text-xs">
-                  {studentsStats.conCV} con CV
-                </Badge>
-              </div>
+              <div className="text-2xl font-bold">{stats.studentsTotal}</div>
+              <p className="text-xs text-muted-foreground">
+                {stats.studentsNew} aplicaciones nuevas
+              </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tasa Conversión</CardTitle>
+              <CardTitle className="text-sm font-medium">Leads Nuevos</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{conversionRate}%</div>
+              <div className="text-2xl font-bold">{stats.leadsNew}</div>
               <p className="text-xs text-muted-foreground">
-                {leadsStats.terminados} de {leadsStats.total} leads cerrados exitosamente
+                Requieren atención inmediata
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tasa Aprobación</CardTitle>
+              <CardTitle className="text-sm font-medium">Estudiantes Nuevos</CardTitle>
               <CheckCircle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{approvalRate}%</div>
+              <div className="text-2xl font-bold">{stats.studentsNew}</div>
               <p className="text-xs text-muted-foreground">
-                {studentsStats.aprobados + studentsStats.activos} estudiantes aprobados/activos
+                Pendientes de revisión
               </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Estadísticas Detalladas */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Building className="h-5 w-5" />
-                Estado de Leads
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    Pendientes
-                  </span>
-                  <Badge variant="outline">{leadsStats.pendientes}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    En Espera
-                  </span>
-                  <Badge variant="outline">{leadsStats.enEspera}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    Terminados
-                  </span>
-                  <Badge variant="outline">{leadsStats.terminados}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    Cancelados
-                  </span>
-                  <Badge variant="outline">{leadsStats.cancelados}</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <GraduationCap className="h-5 w-5" />
-                Estado de Estudiantes
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    Aplicaciones Nuevas
-                  </span>
-                  <Badge variant="outline">{studentsStats.nuevos}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    En Revisión
-                  </span>
-                  <Badge variant="outline">{studentsStats.enRevision}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
-                    Entrevistas Pendientes
-                  </span>
-                  <Badge variant="outline">{studentsStats.entrevistas}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    Aprobados/Activos
-                  </span>
-                  <Badge variant="outline">{studentsStats.aprobados + studentsStats.activos}</Badge>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>
@@ -267,20 +157,24 @@ export default async function CRMPage() {
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="leads" className="flex items-center gap-2">
                   <Building className="h-4 w-4" />
-                  Leads ({leadsStats.total})
+                  Leads ({stats.leadsTotal})
                 </TabsTrigger>
                 <TabsTrigger value="students" className="flex items-center gap-2">
                   <GraduationCap className="h-4 w-4" />
-                  Estudiantes ({studentsStats.total})
+                  Estudiantes ({stats.studentsTotal})
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="leads" className="mt-6">
-                <LeadsCRM initialLeads={leads} />
+                <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+                  <LeadsCRM initialLeads={[]} />
+                </Suspense>
               </TabsContent>
 
               <TabsContent value="students" className="mt-6">
-                <StudentsCRM initialStudents={applicants} />
+                <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+                  <StudentsCRM initialStudents={[]} />
+                </Suspense>
               </TabsContent>
             </Tabs>
           </CardContent>

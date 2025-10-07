@@ -804,8 +804,6 @@ export default function SumatePage() {
                             <SelectItem value="3">3º año</SelectItem>
                             <SelectItem value="4">4º año</SelectItem>
                             <SelectItem value="5">5º año</SelectItem>
-                            <SelectItem value="master">Máster</SelectItem>
-                            <SelectItem value="doctorado">Doctorado</SelectItem>
                           </SelectContent>
                         </Select>
                         {errors.año && (

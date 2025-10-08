@@ -263,12 +263,7 @@ export default function NosotrosPage() {
                     tradicionales.
                   </p>
 
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-muted-foreground italic">
-                      &ldquo;Creemos que el mejor aprendizaje se da resolviendo problemas reales, y que los negocios locales
-                      merecen acceso a talento tecnológico de calidad.&rdquo;
-                    </p>
-                  </div>
+                 
                 </div>
               </CardContent>
             </Card>

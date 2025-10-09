@@ -915,14 +915,14 @@ export default function SumatePage() {
 
                     <div className="space-y-4">
                       <Label className="form-label-enhanced">Selecciona tus 4 habilidades técnicas principales *</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
                         {skillsOptions.map((skill) => {
                           const isSelected = formData.skills.includes(skill)
                           const isDisabled = formData.skills.length >= 4 && !isSelected
                           return (
                             <div
                               key={skill}
-                              className={`flex items-center space-x-3 p-3 rounded-lg border transition-all duration-200 ${
+                              className={`flex items-center gap-2 p-2 md:p-3 rounded-lg border transition-all duration-200 min-w-0 ${
                                 isSelected
                                   ? 'border-primary bg-primary/5 shadow-sm transform rotate-1'
                                   : isDisabled
@@ -939,10 +939,11 @@ export default function SumatePage() {
                                   }
                                 }}
                                 disabled={isDisabled}
+                                className="shrink-0"
                               />
                               <Label
                                 htmlFor={skill}
-                                className={`text-sm font-medium flex-1 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                                className={`text-xs md:text-sm font-medium flex-1 leading-tight break-words min-w-0 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                               >
                                 {skill}
                               </Label>
@@ -978,7 +979,7 @@ export default function SumatePage() {
                           id="cv"
                           type="file"
                           accept=".pdf"
-                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
+                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} w-full max-w-full text-sm file:mr-2 file:py-2 file:px-3 md:file:mr-4 md:file:px-4 file:rounded-lg file:border-0 file:text-xs md:file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
                           onChange={(e) => {
                             const file = e.target.files?.[0] || null
                             setFormData((prev) => ({ ...prev, cv: file }))
@@ -988,9 +989,9 @@ export default function SumatePage() {
                           }}
                         />
                         {formData.cv && (
-                          <div className="mt-2 text-sm text-green-600 flex items-center gap-2">
+                          <div className="mt-2 text-xs md:text-sm text-green-600 flex items-center gap-2 flex-wrap break-all">
                             <span>📄</span>
-                            <span>{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
+                            <span className="break-all">{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
                           </div>
                         )}
                       </div>
@@ -1027,7 +1028,7 @@ export default function SumatePage() {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="github">GitHub</Label>
+                        <Label htmlFor="github">GitHub (opcional)</Label>
                         <Input
                           id="github"
                           type="text"

@@ -12,7 +12,7 @@ export default function CasosPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center relative">
             {/* Spiral holes decoration */}
-           <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
+            <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
 
             <div className="relative z-10">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
@@ -48,7 +48,7 @@ export default function CasosPage() {
               </p>
             </div>
 
-            <Card className="sketch-border bg-card hover">
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
               <CardHeader className="pb-4">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div>
@@ -188,7 +188,7 @@ export default function CasosPage() {
                 </div>
 
                 {/* Testimonial */}
-                <div className="bg-yellow-100 border-yellow-200 p-6">
+                <div className="bg-yellow-100 border-yellow-200 p-6 rounded-lg transform rotate-1">
                   <blockquote className="text-gray-700 handwritten text-lg mb-4">
                     &quot;El equipo de Tecwork superó nuestras expectativas. No solo entregaron una solución técnica
                     excelente, sino que también aportaron ideas innovadoras que no habíamos considerado. Ahora tenemos
@@ -219,7 +219,7 @@ export default function CasosPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1 opacity-85">
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1 opacity-75">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Globe className="h-8 w-8 text-blue-600" />
@@ -234,7 +234,7 @@ export default function CasosPage() {
               </CardContent>
             </Card>
 
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1 opacity-85">
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1 opacity-75">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-green-600" />
@@ -247,7 +247,7 @@ export default function CasosPage() {
               </CardContent>
             </Card>
 
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1 opacity-85">
+            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1 opacity-75">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BarChart3 className="h-8 w-8 text-purple-600" />

@@ -639,10 +639,10 @@ export default function SumatePage() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Información Personal */}
+                  {/* Información Personal y Portfolio */}
                   <div className="form-section-enhanced space-y-6">
                     <h3 className="text-lg form-section-title">
-                      Información Personal
+                      Información Personal y Portfolio
                     </h3>
 
                     <div className="grid md:grid-cols-2 gap-6">
@@ -823,6 +823,109 @@ export default function SumatePage() {
                           </div>
                         )}
                       </div>
+                    </div>
+
+                    {/* CV Upload */}
+                    <div className="space-y-2">
+                      <Label htmlFor="cv" className="form-label-enhanced">CV/Resume (PDF) *</Label>
+                      <div className="relative">
+                        <input
+                          id="cv"
+                          type="file"
+                          accept=".pdf"
+                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0] || null
+                            setFormData((prev) => ({ ...prev, cv: file }))
+                            if (errors.cv) {
+                              setErrors((prev) => ({ ...prev, cv: '' }))
+                            }
+                          }}
+                        />
+                        {formData.cv && (
+                          <div className="mt-2 text-sm text-green-600 flex items-center gap-2">
+                            <span>📄</span>
+                            <span>{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
+                          </div>
+                        )}
+                      </div>
+                      {errors.cv && (
+                        <div className="error-bubble">
+                          <span className="text-base">💭</span>
+                          {errors.cv}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Portfolio Web y Enlaces */}
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="portfolioWeb">Portfolio Web (opcional)</Label>
+                        <Input
+                          id="portfolioWeb"
+                          type="text"
+                          className={`form-input-enhanced ${errors.portfolioWeb ? 'input-error' : ''}`}
+                          placeholder="miportfolio.com"
+                          value={formData.portfolioWeb}
+                          onChange={(e) => {
+                            setFormData((prev) => ({ ...prev, portfolioWeb: e.target.value }))
+                            if (errors.portfolioWeb) {
+                              setErrors((prev) => ({ ...prev, portfolioWeb: '' }))
+                            }
+                          }}
+                        />
+                        {errors.portfolioWeb && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.portfolioWeb}
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="github">GitHub</Label>
+                        <Input
+                          id="github"
+                          type="text"
+                          className={`form-input-enhanced ${errors.github ? 'input-error' : ''}`}
+                          placeholder="github.com/usuario"
+                          value={formData.github}
+                          onChange={(e) => {
+                            setFormData((prev) => ({ ...prev, github: e.target.value }))
+                            if (errors.github) {
+                              setErrors((prev) => ({ ...prev, github: '' }))
+                            }
+                          }}
+                        />
+                        {errors.github && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.github}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="linkedin">LinkedIn (opcional)</Label>
+                      <Input
+                        id="linkedin"
+                        type="text"
+                        className={`form-input-enhanced ${errors.linkedin ? 'input-error' : ''}`}
+                        placeholder="linkedin.com/in/usuario"
+                        value={formData.linkedin}
+                        onChange={(e) => {
+                          setFormData((prev) => ({ ...prev, linkedin: e.target.value }))
+                          if (errors.linkedin) {
+                            setErrors((prev) => ({ ...prev, linkedin: '' }))
+                          }
+                        }}
+                      />
+                      {errors.linkedin && (
+                        <div className="error-bubble">
+                          <span className="text-base">💭</span>
+                          {errors.linkedin}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -1009,117 +1112,6 @@ export default function SumatePage() {
                         <div className="error-bubble">
                           <span className="text-base">💭</span>
                           {errors.skills}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-
-                  {/* CV y Portfolio */}
-                  <div className="form-section-enhanced space-y-6">
-                    <h3 className="text-lg form-section-title">
-                      CV y Portfolio
-                    </h3>
-
-                    {/* CV Upload */}
-                    <div className="space-y-2">
-                      <Label htmlFor="cv" className="form-label-enhanced">CV/Resume (PDF) *</Label>
-                      <div className="relative">
-                        <input
-                          id="cv"
-                          type="file"
-                          accept=".pdf"
-                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
-                          onChange={(e) => {
-                            const file = e.target.files?.[0] || null
-                            setFormData((prev) => ({ ...prev, cv: file }))
-                            if (errors.cv) {
-                              setErrors((prev) => ({ ...prev, cv: '' }))
-                            }
-                          }}
-                        />
-                        {formData.cv && (
-                          <div className="mt-2 text-sm text-green-600 flex items-center gap-2">
-                            <span>📄</span>
-                            <span>{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
-                          </div>
-                        )}
-                      </div>
-                      {errors.cv && (
-                        <div className="error-bubble">
-                          <span className="text-base">💭</span>
-                          {errors.cv}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Portfolio Web y Enlaces */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="portfolioWeb">Portfolio Web (opcional)</Label>
-                        <Input
-                          id="portfolioWeb"
-                          type="text"
-                          className={`form-input-enhanced ${errors.portfolioWeb ? 'input-error' : ''}`}
-                          placeholder="miportfolio.com"
-                          value={formData.portfolioWeb}
-                          onChange={(e) => {
-                            setFormData((prev) => ({ ...prev, portfolioWeb: e.target.value }))
-                            if (errors.portfolioWeb) {
-                              setErrors((prev) => ({ ...prev, portfolioWeb: '' }))
-                            }
-                          }}
-                        />
-                        {errors.portfolioWeb && (
-                          <div className="error-bubble">
-                            <span className="text-base">💭</span>
-                            {errors.portfolioWeb}
-                          </div>
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="github">GitHub</Label>
-                        <Input
-                          id="github"
-                          type="text"
-                          className={`form-input-enhanced ${errors.github ? 'input-error' : ''}`}
-                          placeholder="github.com/usuario"
-                          value={formData.github}
-                          onChange={(e) => {
-                            setFormData((prev) => ({ ...prev, github: e.target.value }))
-                            if (errors.github) {
-                              setErrors((prev) => ({ ...prev, github: '' }))
-                            }
-                          }}
-                        />
-                        {errors.github && (
-                          <div className="error-bubble">
-                            <span className="text-base">💭</span>
-                            {errors.github}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="linkedin">LinkedIn (opcional)</Label>
-                      <Input
-                        id="linkedin"
-                        type="text"
-                        className={`form-input-enhanced ${errors.linkedin ? 'input-error' : ''}`}
-                        placeholder="linkedin.com/in/usuario"
-                        value={formData.linkedin}
-                        onChange={(e) => {
-                          setFormData((prev) => ({ ...prev, linkedin: e.target.value }))
-                          if (errors.linkedin) {
-                            setErrors((prev) => ({ ...prev, linkedin: '' }))
-                          }
-                        }}
-                      />
-                      {errors.linkedin && (
-                        <div className="error-bubble">
-                          <span className="text-base">💭</span>
-                          {errors.linkedin}
                         </div>
                       )}
                     </div>

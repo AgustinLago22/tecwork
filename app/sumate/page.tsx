@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   Users,
@@ -26,6 +25,8 @@ import {
   GraduationCap,
   Clock,
   Globe,
+  Search,
+  X,
 } from "lucide-react"
 
 // Estilos sutiles para mejorar el formulario sin romper el minimalismo
@@ -255,6 +256,7 @@ export default function SumatePage() {
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [searchTerm, setSearchTerm] = useState("")
 
   const universidades = [
     { id: 'unne', name: 'Universidad Nacional del Nordeste (UNNE)' },
@@ -320,6 +322,14 @@ export default function SumatePage() {
     "Photoshop",
     "Illustrator",
   ]
+
+  // Filtrado de tecnologías basado en búsqueda
+  const filteredSkills = useMemo(() => {
+    if (!searchTerm.trim()) return skillsOptions
+    return skillsOptions.filter((skill) =>
+      skill.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [searchTerm])
 
   const handleSkillChange = (skill: string, checked: boolean) => {
     setFormData((prev) => {
@@ -816,12 +826,13 @@ export default function SumatePage() {
                     </div>
                   </div>
 
-                  {/* Rol y Especialización */}
+                  {/* Rol y Especialización - Sección Unificada */}
                   <div className="form-section-enhanced space-y-6">
                     <h3 className="text-lg form-section-title">
                       Rol y Especialización
                     </h3>
 
+                    {/* Selección de Rol con iconos */}
                     <div className="space-y-4">
                       <Label className="form-label-enhanced">¿En qué rol te gustaría participar? *</Label>
                       <RadioGroup
@@ -863,7 +874,6 @@ export default function SumatePage() {
                                   <span className="font-medium cursor-pointer group-hover:text-foreground">
                                     {rol.label}
                                   </span>
-                                  <p className="text-xs text-muted-foreground group-hover:text-muted-foreground">{rol.description}</p>
                                 </div>
                               </div>
                             </Label>
@@ -878,82 +888,123 @@ export default function SumatePage() {
                       )}
                     </div>
 
+                    {/* Tecnologías estudiadas con buscador */}
                     <div className="space-y-4">
-                      <Label htmlFor="nivel">Nivel de experiencia *</Label>
-                      <Select
-                        value={formData.nivel}
-                        onValueChange={(value) => {
-                          setFormData((prev) => ({ ...prev, nivel: value }))
-                          if (errors.nivel) {
-                            setErrors((prev) => ({ ...prev, nivel: '' }))
-                          }
-                        }}
-                      >
-                        <SelectTrigger className={`form-input-enhanced ${errors.nivel ? 'input-error' : ''}`}>
-                          <SelectValue placeholder="Selecciona tu nivel de experiencia" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">Entre 1 a 2 Proyectos</SelectItem>
-                          <SelectItem value="2">+3 Proyectos</SelectItem>
-                          <SelectItem value="3">+5 Proyectos</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.nivel && (
-                        <div className="error-bubble">
-                          <span className="text-base">💭</span>
-                          {errors.nivel}
+                      <Label className="form-label-enhanced">Tecnologías aprendidas *</Label>
+                      <p className="text-sm text-muted-foreground">Selecciona hasta 4 tecnologías que conoces</p>
+
+                      {/* Buscador */}
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          type="text"
+                          placeholder="Buscar tecnología..."
+                          className="form-input-enhanced pl-10 pr-10"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {searchTerm && (
+                          <button
+                            type="button"
+                            onClick={() => setSearchTerm("")}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Lista de tecnologías - Solo se muestra cuando hay búsqueda */}
+                      {searchTerm && (
+                        <div className="border rounded-lg p-3 bg-card max-h-64 overflow-y-auto">
+                          <div className="space-y-2">
+                            {filteredSkills.length > 0 ? (
+                              filteredSkills.map((skill) => {
+                                const isSelected = formData.skills.includes(skill)
+                                const isDisabled = formData.skills.length >= 4 && !isSelected
+                                return (
+                                  <button
+                                    key={skill}
+                                    type="button"
+                                    onClick={() => {
+                                      if (!isDisabled && !isSelected) {
+                                        handleSkillChange(skill, true)
+                                        setSearchTerm("") // Limpiar búsqueda al seleccionar
+                                      }
+                                    }}
+                                    disabled={isDisabled || isSelected}
+                                    className={`w-full text-left p-3 rounded-lg border transition-all duration-200 ${
+                                      isSelected
+                                        ? 'border-[#D4A574] bg-[#D4A574]/10 text-muted-foreground cursor-not-allowed'
+                                        : isDisabled
+                                        ? 'border-border bg-muted/30 opacity-50 cursor-not-allowed'
+                                        : 'border-border hover:border-[#732F17] hover:bg-[#D4A574]/5 cursor-pointer'
+                                    }`}
+                                  >
+                                    <span className="text-sm font-medium">
+                                      {skill} {isSelected && '✓'}
+                                    </span>
+                                  </button>
+                                )
+                              })
+                            ) : (
+                              <p className="text-sm text-muted-foreground text-center py-4">
+                                No se encontraron tecnologías
+                              </p>
+                            )}
+                          </div>
                         </div>
                       )}
-                    </div>
-                  </div>
 
-                  {/* Skills */}
-                  <div className="form-section-enhanced space-y-6">
-                    <h3 className="text-lg form-section-title">
-                      Habilidades Técnicas
-                    </h3>
-
-                    <div className="space-y-4">
-                      <Label className="form-label-enhanced">Selecciona tus 4 habilidades técnicas principales *</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {skillsOptions.map((skill) => {
-                          const isSelected = formData.skills.includes(skill)
-                          const isDisabled = formData.skills.length >= 4 && !isSelected
-                          return (
-                            <div
-                              key={skill}
-                              className={`flex items-center space-x-3 p-3 rounded-lg border transition-all duration-200 ${
-                                isSelected
-                                  ? 'border-primary bg-primary/5 shadow-sm transform rotate-1'
-                                  : isDisabled
-                                  ? 'border-border bg-muted/30 opacity-50'
-                                  : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm cursor-pointer'
-                              }`}
-                            >
-                              <Checkbox
-                                id={skill}
-                                checked={isSelected}
-                                onCheckedChange={(checked) => {
-                                  if (!isDisabled) {
-                                    handleSkillChange(skill, checked as boolean)
-                                  }
-                                }}
-                                disabled={isDisabled}
-                              />
-                              <Label
-                                htmlFor={skill}
-                                className={`text-sm font-medium flex-1 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                      {/* Tecnologías seleccionadas - Área marrón claro */}
+                      {formData.skills.length > 0 && (
+                        <div className="space-y-2">
+                          <p className="text-sm font-medium text-foreground">Seleccionadas ({formData.skills.length}/4):</p>
+                          <div className="flex flex-wrap gap-2 p-4 bg-[#D4A574]/20 rounded-lg border border-[#D4A574]/30">
+                            {formData.skills.map((skill) => (
+                              <button
+                                key={skill}
+                                type="button"
+                                onClick={() => handleSkillChange(skill, false)}
+                                className="group flex items-center gap-2 px-3 py-1.5 bg-[#D4A574]/30 text-[#732F17] rounded-md hover:bg-[#D4A574]/40 transition-all duration-200 border border-[#D4A574]/40"
                               >
-                                {skill}
-                              </Label>
-                            </div>
-                          )
-                        })}
+                                <span className="text-sm font-medium">{skill}</span>
+                                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Nivel de experiencia */}
+                      <div className="space-y-2">
+                        <Label htmlFor="nivel">Nivel de experiencia *</Label>
+                        <Select
+                          value={formData.nivel}
+                          onValueChange={(value) => {
+                            setFormData((prev) => ({ ...prev, nivel: value }))
+                            if (errors.nivel) {
+                              setErrors((prev) => ({ ...prev, nivel: '' }))
+                            }
+                          }}
+                        >
+                          <SelectTrigger className={`form-input-enhanced ${errors.nivel ? 'input-error' : ''}`}>
+                            <SelectValue placeholder="Selecciona tu nivel de experiencia" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">Entre 1 a 2 Proyectos</SelectItem>
+                            <SelectItem value="2">+3 Proyectos</SelectItem>
+                            <SelectItem value="3">+5 Proyectos</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        {errors.nivel && (
+                          <div className="error-bubble">
+                            <span className="text-base">💭</span>
+                            {errors.nivel}
+                          </div>
+                        )}
                       </div>
-                      <p className={`text-xs ${formData.skills.length === 4 ? 'text-green-600' : 'text-muted-foreground'}`}>
-                        Seleccionadas: {formData.skills.length}/4
-                        {formData.skills.length === 4 && ' ✓ Completado'}
-                      </p>
+
                       {errors.skills && (
                         <div className="error-bubble">
                           <span className="text-base">💭</span>

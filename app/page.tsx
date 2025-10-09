@@ -75,7 +75,7 @@ export default function TecworkLanding() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
+            <Card className="sketch-border bg-card transition-shadow duration-300 hover:shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-primary" />
@@ -87,7 +87,7 @@ export default function TecworkLanding() {
               </CardContent>
             </Card>
 
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1">
+            <Card className="sketch-border bg-card transition-shadow duration-300 hover:shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Code className="h-8 w-8 text-accent" />
@@ -99,7 +99,7 @@ export default function TecworkLanding() {
               </CardContent>
             </Card>
 
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
+            <Card className="sketch-border bg-card transition-shadow duration-300 hover:shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="h-8 w-8 text-primary" />
@@ -138,7 +138,11 @@ export default function TecworkLanding() {
         </div>
       </section>
 
-      {/* Testimonials con estilo post-it */}
+      {/*
+      TESTIMONIALS - Comentado temporalmente para uso futuro
+      Descomentar cuando tengamos testimonios reales de estudiantes
+
+      {/* Testimonials con estilo post-it *}
       <section id="casos" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -190,6 +194,36 @@ export default function TecworkLanding() {
                 </p>
                 <p className="font-semibold text-gray-800">- Ana López</p>
                 <p className="text-xs text-gray-600">Ing. Telecomunicaciones, UPC</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+      */}
+
+      {/* Nuestra Historia */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Card className="sketch-border bg-card/80 backdrop-blur transition-shadow duration-300 hover:shadow-lg">
+              <CardContent className="p-6 md:p-8 text-center">
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-6 handwritten flex items-center justify-center gap-2">
+                  <span className="text-2xl">📚</span>
+                  Nuestra Historia
+                </h3>
+                <div className="space-y-4">
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                    <span className="font-semibold text-foreground">TecWork</span> fue fundada por un grupo de estudiantes universitarios
+                    apasionados por la educación y la tecnología, que vieron una oportunidad única: crear un puente real
+                    entre el aprendizaje académico y la práctica profesional.
+                  </p>
+                  <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                    Nuestro incentivo es <span className="font-semibold text-foreground">aportar valor a los estudiantes</span> que
+                    se van capacitando, mientras fomentamos la <span className="font-semibold text-foreground">digitalización de
+                    negocios pequeños y medianos</span> que necesitan soluciones tecnológicas pero no pueden acceder a consultoras
+                    tradicionales.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>

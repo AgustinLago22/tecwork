@@ -978,7 +978,7 @@ export default function SumatePage() {
                           id="cv"
                           type="file"
                           accept=".pdf"
-                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
+                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} w-full max-w-full text-sm file:mr-2 file:py-2 file:px-3 md:file:mr-4 md:file:px-4 file:rounded-lg file:border-0 file:text-xs md:file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
                           onChange={(e) => {
                             const file = e.target.files?.[0] || null
                             setFormData((prev) => ({ ...prev, cv: file }))
@@ -988,9 +988,9 @@ export default function SumatePage() {
                           }}
                         />
                         {formData.cv && (
-                          <div className="mt-2 text-sm text-green-600 flex items-center gap-2">
+                          <div className="mt-2 text-xs md:text-sm text-green-600 flex items-center gap-2 flex-wrap break-all">
                             <span>📄</span>
-                            <span>{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
+                            <span className="break-all">{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
                           </div>
                         )}
                       </div>

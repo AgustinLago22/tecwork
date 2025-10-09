@@ -915,14 +915,14 @@ export default function SumatePage() {
 
                     <div className="space-y-4">
                       <Label className="form-label-enhanced">Selecciona tus 4 habilidades técnicas principales *</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
                         {skillsOptions.map((skill) => {
                           const isSelected = formData.skills.includes(skill)
                           const isDisabled = formData.skills.length >= 4 && !isSelected
                           return (
                             <div
                               key={skill}
-                              className={`flex items-center space-x-3 p-3 rounded-lg border transition-all duration-200 ${
+                              className={`flex items-center gap-2 p-2 md:p-3 rounded-lg border transition-all duration-200 min-w-0 ${
                                 isSelected
                                   ? 'border-primary bg-primary/5 shadow-sm transform rotate-1'
                                   : isDisabled
@@ -939,10 +939,11 @@ export default function SumatePage() {
                                   }
                                 }}
                                 disabled={isDisabled}
+                                className="shrink-0"
                               />
                               <Label
                                 htmlFor={skill}
-                                className={`text-sm font-medium flex-1 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                                className={`text-xs md:text-sm font-medium flex-1 leading-tight break-words min-w-0 ${!isDisabled ? 'cursor-pointer' : 'cursor-not-allowed'}`}
                               >
                                 {skill}
                               </Label>

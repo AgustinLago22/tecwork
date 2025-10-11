@@ -184,9 +184,9 @@ export default function RoadmapLanding() {
 
 
       {/* Hero Section - Minimalista y Profesional */}
-      <section className="relative py-32 overflow-hidden z-10">
+      <section className="relative py-32 overflow-hidden z-10 bg-gradient-to-b from-background via-primary/[0.03] to-background">
         {/* Gradient sutil de fondo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-accent/[0.02]"></div>
 
         {/* Líneas decorativas minimalistas */}
         <div className="absolute top-0 left-0 w-px h-32 bg-gradient-to-b from-primary/20 to-transparent ml-[10%]"></div>
@@ -258,7 +258,7 @@ export default function RoadmapLanding() {
       </section>
 
       {/* Journey Timeline - El Camino Profesional */}
-      <section className="py-32 relative z-10">
+      <section className="py-32 relative z-10 bg-muted/20">
         {/* SVG Path dibujado a mano - Camino zigzag smooth */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
           <svg
@@ -425,101 +425,143 @@ export default function RoadmapLanding() {
         </div>
       </section>
 
-      {/* Stats - Resultados que importan */}
-      <section className="py-32 bg-gradient-to-b from-muted/30 to-background relative z-10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-20">
-              <Badge variant="outline" className="mb-6 border-primary/20 text-primary bg-primary/5">
-                Impacto medible
-              </Badge>
-              <h2 className="text-5xl font-bold tracking-tight">
-                Resultados que <span className="gradient-text">hablan</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { value: "150+", label: "Estudiantes activos", icon: Users },
-                { value: "50+", label: "Proyectos completados", icon: TrendingUp },
-                { value: "25+", label: "Empresas colaboradoras", icon: Briefcase },
-                { value: "95%", label: "Tasa de satisfacción", icon: Award },
-              ].map((stat, index) => (
-                <div key={index} className="stat-item text-center">
-                  <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/5 border border-primary/10">
-                    <stat.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="stat-value text-5xl font-bold mb-2 text-foreground">{stat.value}</div>
-                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Historia - El Origen */}
-      <section className="py-32 relative overflow-hidden z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/[0.02]"></div>
+      {/* Por qué TecWork - Problema/Solución */}
+      <section className="py-32 relative overflow-hidden z-10 bg-gradient-to-b from-background via-accent/[0.02] to-primary/[0.03]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(115,47,23,0.05),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(217,153,98,0.05),transparent_50%)]"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
+          <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-20">
               <Badge variant="outline" className="mb-6 border-primary/20 text-primary bg-primary/5">
-                Nuestra historia
+                Por qué TecWork
               </Badge>
-              <h2 className="text-5xl font-bold mb-8 tracking-tight">
-                Construido por estudiantes, <br />
-                <span className="gradient-text">para estudiantes</span>
+              <h2 className="text-5xl font-bold tracking-tight">
+                El puente que <span className="gradient-text">faltaba</span>
               </h2>
             </div>
 
-            <Card className="border-2 bg-card/50 backdrop-blur premium-shadow">
-              <CardContent className="p-12">
-                <div className="space-y-8">
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    <span className="font-semibold text-foreground">TecWork</span> nació de la frustración compartida
-                    de estudiantes que terminaban su carrera con conocimiento teórico pero sin experiencia práctica
-                    que los empleadores buscaban.
-                  </p>
-
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Decidimos crear el puente que faltaba: una plataforma donde{" "}
-                    <span className="font-semibold text-primary">estudiantes desarrollan experiencia real</span>{" "}
-                    mientras{" "}
-                    <span className="font-semibold text-accent">negocios obtienen soluciones de calidad</span>.
-                  </p>
-
-                  <div className="grid md:grid-cols-2 gap-8 pt-8 border-t">
-                    <div>
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                        <Users className="w-6 h-6 text-primary" />
-                      </div>
-                      <h4 className="font-semibold text-lg mb-2">Para estudiantes</h4>
-                      <p className="text-muted-foreground">
-                        Experiencia práctica, mentoría profesional y portafolio real desde la universidad.
-                      </p>
-                    </div>
-                    <div>
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                        <Briefcase className="w-6 h-6 text-accent" />
-                      </div>
-                      <h4 className="font-semibold text-lg mb-2">Para empresas</h4>
-                      <p className="text-muted-foreground">
-                        Soluciones tecnológicas accesibles con supervisión profesional y resultados garantizados.
-                      </p>
-                    </div>
+            {/* Split 50/50 - Desafío vs Solución */}
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              {/* Lado izquierdo - El Desafío */}
+              <div className="border-2 border-muted/50 rounded-2xl p-10 bg-muted/10 hover:border-muted/70 hover:bg-muted/15 transition-all shadow-md">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-muted/20 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-foreground/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">El desafío</h3>
+                    <div className="h-1 w-12 bg-muted/40 rounded"></div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Estudiantes con conocimiento teórico pero sin experiencia necesaria que los empleadores buscan.
+                  Empresas que necesitan soluciones tecnológicas pero no pueden costear equipos completos.
+                </p>
+
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <CheckCircle className="w-4 h-4" />
+                  <span>Brecha entre academia y mercado</span>
+                </div>
+              </div>
+
+              {/* Lado derecho - La Solución */}
+              <div className="border-2 border-primary/20 rounded-2xl p-10 bg-primary/[0.02] hover:border-primary/30 transition-all shadow-lg">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">La solución</h3>
+                    <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent rounded"></div>
+                  </div>
+                </div>
+
+                <p className="text-foreground/90 leading-relaxed mb-6 font-medium">
+                  Una plataforma que conecta talento universitario con proyectos reales.
+                  Estudiantes ganan experiencia práctica mientras empresas obtienen soluciones de calidad a costos accesibles.
+                </p>
+
+                <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                  <CheckCircle className="w-4 h-4" />
+                  <span>Apoyo mutuo comprobado</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Separador con estadísticas con efectos */}
+            <div className="flex items-center justify-center gap-8 mb-12 py-6">
+              <div className="stat-item text-center">
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 border border-primary/10">
+                  <TrendingUp className="w-5 h-5 text-primary" />
+                </div>
+                <div className="stat-value text-4xl font-bold mb-1 text-primary">50+</div>
+                <div className="text-sm text-muted-foreground font-medium">Proyectos entregados</div>
+              </div>
+              <div className="w-px h-16 bg-primary/20"></div>
+              <div className="stat-item text-center">
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 border border-primary/10">
+                  <Users className="w-5 h-5 text-primary" />
+                </div>
+                <div className="stat-value text-4xl font-bold mb-1 text-accent">150+</div>
+                <div className="text-sm text-muted-foreground font-medium">Estudiantes activos</div>
+              </div>
+              <div className="w-px h-16 bg-primary/20"></div>
+              <div className="stat-item text-center">
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 border border-primary/10">
+                  <Award className="w-5 h-5 text-primary" />
+                </div>
+                <div className="stat-value text-4xl font-bold mb-1 text-foreground">95%</div>
+                <div className="text-sm text-muted-foreground font-medium">Satisfacción</div>
+              </div>
+            </div>
+
+            {/* Cards finales con datos concretos */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Card Estudiantes */}
+              <div className="border border-primary/10 rounded-2xl p-8 bg-card hover:border-primary/30 transition-all hover:shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-primary" />
+                  </div>
+                  <h4 className="font-bold text-lg">Para estudiantes</h4>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  Proyectos reales que impulsan el aprendizaje con practica real, construyendo un portafolio profesional desde la universidad.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-primary font-medium">
+                  <TrendingUp className="w-4 h-4" />
+                  <span>Experiencia verificable en tu CV</span>
+                </div>
+              </div>
+
+              {/* Card Empresas */}
+              <div className="border border-accent/10 rounded-2xl p-8 bg-card hover:border-accent/30 transition-all hover:shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-accent" />
+                  </div>
+                  <h4 className="font-bold text-lg">Para empresas</h4>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  Soluciones tecnológicas con supervisión profesional que impulsan el crecimiento de tu negocio.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-accent font-medium">
+                  <Award className="w-4 h-4" />
+                  <span>Calidad asegurada, costos accesibles</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Final - Llamado a la acción */}
-      <section className="py-32 relative z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-background"></div>
+      <section className="py-32 relative z-10 bg-gradient-to-b from-muted/20 via-primary/[0.03] to-background">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02]"></div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">

@@ -54,7 +54,7 @@ export default function RoadmapLanding() {
 
         @keyframes drawRoad {
           from {
-            stroke-dashoffset: 2000;
+            stroke-dashoffset: 1100;
           }
           to {
             stroke-dashoffset: 0;
@@ -66,8 +66,8 @@ export default function RoadmapLanding() {
         }
 
         .road-path-animated {
-          stroke-dashoffset: 2000;
-          animation: drawRoad 3s ease-out forwards;
+          stroke-dashoffset: 1100;
+          animation: drawRoad 2.5s ease-in-out forwards;
         }
 
         .journey-line {
@@ -259,6 +259,37 @@ export default function RoadmapLanding() {
 
       {/* Journey Timeline - El Camino Profesional */}
       <section className="py-32 relative z-10">
+        {/* SVG Path dibujado a mano - Camino zigzag smooth */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <svg
+            className="absolute w-full h-full"
+            viewBox="0 0 800 1800"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            {/* Camino sutil que guía a través de las etapas */}
+            <path
+              d="M 400 280
+                 C 350 380, 320 480, 360 580
+                 C 400 680, 460 720, 480 800
+                 C 500 880, 480 960, 440 1040
+                 C 400 1120, 340 1200, 320 1300
+                 C 300 1400, 330 1500, 380 1600
+                 C 420 1680, 440 1760, 420 1840"
+              stroke="#8B5A3C"
+              strokeWidth="3"
+              strokeDasharray="18 22"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="road-path-animated"
+              opacity="0.30"
+              style={{
+                filter: 'drop-shadow(0 2px 4px rgba(115, 47, 23, 0.1))'
+              }}
+            />
+          </svg>
+        </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -296,10 +327,10 @@ export default function RoadmapLanding() {
                         <span className="text-sm font-semibold text-primary tracking-wider uppercase">Etapa 01</span>
                         <div className="h-px w-12 bg-primary/30"></div>
                       </div>
-                      <h3 className="text-3xl font-bold mb-4 tracking-tight">Integración a la comunidad</h3>
+                      <h3 className="text-3xl font-bold mb-4 tracking-tight">Súmate al ecosistema</h3>
                       <p className="text-lg text-muted-foreground leading-relaxed">
-                        Conecta con una red de profesionales y estudiantes ambiciosos.
-                        Tu punto de partida hacia el crecimiento.
+                        ¿Eres estudiante? Inscríbete y muestra tu talento. ¿Tienes un proyecto?
+                        Solicita una solución. Aquí comienza la conexión entre talento y oportunidad.
                       </p>
                     </div>
                   </div>
@@ -344,10 +375,10 @@ export default function RoadmapLanding() {
                       <span className="text-sm font-semibold text-accent tracking-wider uppercase">Etapa 02</span>
                       <div className="h-px w-12 bg-accent/30"></div>
                     </div>
-                    <h3 className="text-3xl font-bold mb-4 tracking-tight">Desarrollo de experiencia</h3>
+                    <h3 className="text-3xl font-bold mb-4 tracking-tight">Matching perfecto</h3>
                     <p className="text-lg text-muted-foreground leading-relaxed">
-                      Trabaja en proyectos de impacto real. Aprende, desarrolla y
-                      construye un portafolio que hable por sí solo.
+                      Conectamos proyectos reales de empresas con estudiantes que tienen las skills exactas.
+                      Un match donde ambos ganan: experiencia práctica y soluciones de calidad.
                     </p>
                   </div>
                 </div>
@@ -368,10 +399,10 @@ export default function RoadmapLanding() {
                         <span className="text-sm font-semibold text-primary tracking-wider uppercase">Etapa 03</span>
                         <div className="h-px w-12 bg-primary/30"></div>
                       </div>
-                      <h3 className="text-3xl font-bold mb-4 tracking-tight">Lanzamiento profesional</h3>
+                      <h3 className="text-3xl font-bold mb-4 tracking-tight">Resultados que importan</h3>
                       <p className="text-lg text-muted-foreground leading-relaxed">
-                        Portafolio consolidado, habilidades validadas y red profesional
-                        establecida. Listo para destacar en el mercado.
+                        Los estudiantes construyen portafolio real. Las empresas obtienen
+                        soluciones funcionales. Todos crecen en el proceso.
                       </p>
                     </div>
                   </div>

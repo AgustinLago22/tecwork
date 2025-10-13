@@ -12,7 +12,8 @@
       "Bash(git merge:*)",
       "Bash(find:*)",
       "Bash(ls:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

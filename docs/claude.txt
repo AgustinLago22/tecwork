@@ -161,7 +161,95 @@ NOTAS IMPORTANTES
 - Dashboard/CRM solo admin con autenticación
 - Middleware protege rutas /dashboard y /admin
 
-ÚLTIMA ACTUALIZACIÓN: 07/10/2025
-Estado: 🔧 DEVELOP LISTO - PENDIENTE LIMPIEZA VERCEL
-Rama: develop (commit: feat: mejoras seguridad, UX y contenido)
-✅ Seguridad + Performance + Contenido real implementados
+SESIÓN 12/10/2025 - NUEVA HOMEPAGE + RESPONSIVE COMPLETO
+========================================================
+
+✅ NUEVA HOMEPAGE - ROADMAP DESIGN
+- Homepage antigua respaldada en /old-homepage
+- /roadmap → / (nueva homepage con diseño roadmap/timeline)
+- Diseño con camino SVG animado, etapas intercaladas, estadísticas
+
+✅ RESPONSIVE DESIGN - HOMEPAGE
+Múltiples iteraciones para perfeccionar el diseño móvil:
+
+1. Timeline/Etapas (sección crítica):
+   - Mantenido formato intercalado en móvil (texto/imagen, imagen/texto, texto/imagen)
+   - SVG path visible en TODOS los dispositivos (antes oculto en móvil)
+   - Nodos/dots centrales visibles en móvil (antes ocultos)
+   - Fix overlap de nodos con texto:
+     * Gap aumentado: gap-8 sm:gap-12 md:gap-16 lg:gap-20
+     * Padding aumentado: pr-6 sm:pr-8 md:pr-12 lg:pr-20 (y pl equivalente)
+     * Z-index correcto: nodos z-20, contenido z-10
+   - Grid grid-cols-2 mantenido en móvil
+
+2. Estadísticas:
+   - Cambiado de vertical a horizontal en móvil: grid-cols-3 (siempre)
+   - Tamaños responsive: text-[10px] → sm:text-xs → md:text-sm
+   - Iconos responsive: w-4 h-4 → sm:w-5 sm:h-5
+   - Padding responsive: p-2 → sm:p-3 → md:p-4
+
+3. Efectos Touch para móviles:
+   - :active pseudo-class agregada junto a :hover
+   - Stats, cards, timeline dots responden al tap
+   - cursor: pointer añadido
+   - @media (prefers-reduced-motion: reduce) para accesibilidad
+
+4. Responsive global:
+   - Hero section: text-3xl → sm:text-4xl → md:text-5xl → lg:text-6xl
+   - Badges: text-xs sm:text-sm con textos abreviados para móvil
+   - Botones: tamaños adaptativos
+   - Spacing: py-16 → md:py-24 → lg:py-32
+
+✅ AUDITORÍA RESPONSIVE - TODO EL PROYECTO
+Análisis completo y corrección de todas las páginas:
+
+1. Footer (components/footer.tsx):
+   - ANTES: grid-cols-1 md:grid-cols-4 (salto brusco)
+   - AHORA: grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+   - Mejora: Progresión suave en tablets
+
+2. /contacto (app/contacto/page.tsx):
+   - Grid principal: grid grid-cols-1 lg:grid-cols-3
+   - Gaps responsive: gap-8 md:gap-12
+
+3. /sumate (app/sumate/page.tsx):
+   - Beneficios: grid-cols-1 md:grid-cols-3
+   - Todos los grids de formulario: grid-cols-1 md:grid-cols-2
+   - Roles: grid-cols-1 md:grid-cols-2
+   - Gaps responsive en todo: gap-4 md:gap-6
+
+4. /about (app/about/page.tsx):
+   - Misión/Visión: grid-cols-1 lg:grid-cols-2
+   - Valores: grid-cols-1 md:grid-cols-2
+   - Estadísticas: grid-cols-2 md:grid-cols-2 lg:grid-cols-4
+   - Propuesta valor: grid-cols-1 md:grid-cols-2
+   - Gaps responsive en todo: gap-6 md:gap-8
+
+5. /servicios y Navigation:
+   - Ya estaban correctos ✅
+
+ARCHIVOS MODIFICADOS HOY
+-------------------------
+Nuevos:
+- app/old-homepage/page.tsx (backup homepage antigua)
+
+Modificados:
+- app/page.tsx (homepage completa - múltiples iteraciones)
+- components/footer.tsx
+- app/contacto/page.tsx
+- app/sumate/page.tsx
+- app/about/page.tsx
+
+PATRONES RESPONSIVE ESTABLECIDOS
+---------------------------------
+1. Grid layouts: Siempre especificar grid-cols-1 para móvil
+2. Breakpoints: base → sm (640px) → md (768px) → lg (1024px) → xl (1280px)
+3. Gaps: Progressive sizing (gap-4 → md:gap-6 → lg:gap-8)
+4. Texto: Progressive sizing (text-sm → md:text-base → lg:text-lg)
+5. Touch: :hover + :active para dispositivos táctiles
+6. Accesibilidad: @media (prefers-reduced-motion: reduce)
+
+ÚLTIMA ACTUALIZACIÓN: 12/10/2025
+Estado: ✅ RESPONSIVE COMPLETO - NUEVA HOMEPAGE ROADMAP
+Rama: develop (pendiente commit y push)
+✅ Nueva homepage + Responsive design en todo el proyecto implementado

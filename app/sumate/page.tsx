@@ -590,7 +590,7 @@ export default function SumatePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">¿Por qué unirte?</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto mb-16">
             <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -645,7 +645,7 @@ export default function SumatePage() {
                       Información Personal y Portfolio
                     </h3>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="nombre">Nombre *</Label>
                         <Input
@@ -688,7 +688,7 @@ export default function SumatePage() {
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="email">Email *</Label>
                         <Input
@@ -764,7 +764,7 @@ export default function SumatePage() {
                       )}
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="carrera">Carrera *</Label>
                         <Select
@@ -828,12 +828,12 @@ export default function SumatePage() {
                     {/* CV Upload */}
                     <div className="space-y-2">
                       <Label htmlFor="cv" className="form-label-enhanced">CV/Resume (PDF) *</Label>
-                      <div className="relative">
+                      <div className="relative w-full overflow-hidden">
                         <input
                           id="cv"
                           type="file"
                           accept=".pdf"
-                          className={`form-input-enhanced ${errors.cv ? 'input-error' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer`}
+                          className={`form-input-enhanced w-full ${errors.cv ? 'input-error' : ''} file:mr-2 sm:file:mr-4 file:py-1.5 file:px-2 sm:file:py-2 sm:file:px-4 file:rounded-lg file:border-0 file:text-xs sm:file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer cursor-pointer overflow-hidden text-ellipsis`}
                           onChange={(e) => {
                             const file = e.target.files?.[0] || null
                             setFormData((prev) => ({ ...prev, cv: file }))
@@ -843,9 +843,9 @@ export default function SumatePage() {
                           }}
                         />
                         {formData.cv && (
-                          <div className="mt-2 text-sm text-green-600 flex items-center gap-2">
-                            <span>📄</span>
-                            <span>{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
+                          <div className="mt-2 text-xs sm:text-sm text-green-600 flex items-center gap-2 break-all">
+                            <span className="shrink-0">📄</span>
+                            <span className="break-words">{formData.cv.name} ({(formData.cv.size / 1024 / 1024).toFixed(1)} MB)</span>
                           </div>
                         )}
                       </div>
@@ -858,7 +858,7 @@ export default function SumatePage() {
                     </div>
 
                     {/* Portfolio Web y Enlaces */}
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="portfolioWeb">Portfolio Web (opcional)</Label>
                         <Input
@@ -946,7 +946,7 @@ export default function SumatePage() {
                             setErrors((prev) => ({ ...prev, rol: '' }))
                           }
                         }}
-                        className="grid md:grid-cols-2 gap-4"
+                        className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"
                       >
                         {roles.map((rol) => {
                           const IconComponent = rol.icon

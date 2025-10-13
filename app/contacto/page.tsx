@@ -450,7 +450,7 @@ export default function ContactoPage() {
       </section>
 
       <div className="container mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
           {/* Información de Contacto */}
           <div className="lg:col-span-1 stagger-animation" style={{"--index": 1} as React.CSSProperties}>
             <Card className="enhanced-card sketch-border">

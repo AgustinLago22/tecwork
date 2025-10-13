@@ -100,7 +100,7 @@ export default function NosotrosPage() {
       {/* Misión y Visión */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
             <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
               <CardContent className="p-8">
                 <div className="flex items-center space-x-4 mb-6">
@@ -145,7 +145,7 @@ export default function NosotrosPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
             {valores.map((valor, index) => {
               const IconComponent = valor.icon
               return (
@@ -211,7 +211,7 @@ export default function NosotrosPage() {
             <p className="text-muted-foreground text-lg">Una startup con grandes ambiciones</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-primary handwritten">15+</div>
               <p className="text-muted-foreground">Estudiantes en la red</p>
@@ -269,7 +269,7 @@ export default function NosotrosPage() {
             </Card>
 
             {/* Doble propuesta de valor */}
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-8">
               <Card className="sketch-border bg-blue-50/50 border-blue-200">
                 <CardContent className="p-6 text-center">
                   <GraduationCap className="h-8 w-8 text-blue-600 mx-auto mb-3" />

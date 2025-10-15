@@ -24,7 +24,7 @@ export default function NosotrosPage() {
     {
       icon: Handshake,
       title: "Colaboración genuina",
-      description: "Fomentamos relaciones duraderas entre estudiantes, mentores y empresas basadas en confianza mutua.",
+      description: "Fomentamos relaciones duraderas entre estudiantes y empresas basadas en confianza mutua.",
       color: "bg-purple-100 border-purple-200",
       iconColor: "text-purple-600",
     },
@@ -125,7 +125,7 @@ export default function NosotrosPage() {
                   <h2 className="text-2xl font-bold text-card-foreground handwritten">Nuestra Visión</h2>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Ser la plataforma líder en Corrientes que transforma la educación tecnológica, impulsando la
+                  Ser la plataforma líder en Argentina que transforma la educación tecnológica, impulsando la
                   digitalización de negocios locales y desarrollando el profesionalismo de estudiantes a través de
                   proyectos reales.
                 </p>

@@ -219,7 +219,7 @@ export default function RoadmapLanding() {
 
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
               Un camino estructurado desde la universidad hasta el éxito profesional.
-              Experiencia real, mentoría experta, crecimiento continuo.
+              Experiencia real,crecimiento continuo.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style={{ animationDelay: '0.4s' }}>

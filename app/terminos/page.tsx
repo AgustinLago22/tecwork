@@ -98,10 +98,9 @@ export default function TerminosPage() {
                 <h3 className="font-semibold mb-2">Beneficios</h3>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                   <li>Experiencia práctica en proyectos reales</li>
-                  <li>Mentoría de profesionales experimentados</li>
                   <li>Certificados de participación y recomendaciones</li>
                   <li>Networking con la industria tecnológica</li>
-                  <li>Posibles oportunidades laborales futuras</li>
+                  <li>Mayor formacion para posibles oportunidades laborales futuras</li>
                 </ul>
               </div>
             </CardContent>
@@ -119,10 +118,9 @@ export default function TerminosPage() {
                 <h3 className="font-semibold mb-2">Servicios Incluidos</h3>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                   <li>Análisis de requisitos y planificación del proyecto</li>
-                  <li>Desarrollo supervisado por mentores experimentados</li>
+                  <li>Desarrollo supervisado </li>
                   <li>Pruebas y control de calidad</li>
-                  <li>Documentación técnica y de usuario</li>
-                  <li>Soporte post-entrega por tiempo limitado</li>
+                  <li>Documentación técnica y manual de usuario</li>
                 </ul>
               </div>
 
@@ -141,7 +139,7 @@ export default function TerminosPage() {
                 <h3 className="font-semibold mb-2">Garantías y Limitaciones</h3>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                   <li>Los proyectos son desarrollados con fines educativos</li>
-                  <li>Garantizamos supervisión profesional y control de calidad</li>
+                  <li>Garantizamos funcionalidad y calidad dentro de los estandares pautados</li>
                   <li>No garantizamos tiempos de desarrollo específicos</li>
                   <li>Las modificaciones mayores pueden requerir costos adicionales</li>
                 </ul>
@@ -168,7 +166,7 @@ export default function TerminosPage() {
               <div>
                 <h3 className="font-semibold mb-2">Confidencialidad</h3>
                 <p className="text-muted-foreground">
-                  Todos los participantes (estudiantes, mentores, staff) están obligados a mantener la confidencialidad
+                  Todos los participantes (estudiantes y staff) están obligados a mantener la confidencialidad
                   de la información del cliente. Se firman acuerdos de confidencialidad cuando es necesario.
                 </p>
               </div>

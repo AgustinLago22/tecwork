@@ -54,7 +54,7 @@ export default function RoadmapLanding() {
 
         @keyframes drawRoad {
           from {
-            stroke-dashoffset: 1100;
+            stroke-dashoffset: 1400;
           }
           to {
             stroke-dashoffset: 0;
@@ -66,7 +66,7 @@ export default function RoadmapLanding() {
         }
 
         .road-path-animated {
-          stroke-dashoffset: 1100;
+          stroke-dashoffset: 1400;
           animation: drawRoad 2.5s ease-in-out forwards;
         }
 
@@ -277,50 +277,19 @@ export default function RoadmapLanding() {
       </section>
 
       {/* Journey Timeline - El Camino Profesional */}
-      <section className="py-16 md:py-24 lg:py-32 relative z-10 bg-muted/20">
-        {/* SVG Path dibujado a mano - Camino zigzag smooth */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-          <svg
-            className="absolute w-full h-full"
-            viewBox="0 0 800 1800"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            {/* Camino sutil que guía a través de las etapas */}
-            <path
-              d="M 400 280
-                 C 350 380, 320 480, 360 580
-                 C 400 680, 460 720, 480 800
-                 C 500 880, 480 960, 440 1040
-                 C 400 1120, 340 1200, 320 1300
-                 C 300 1400, 330 1500, 380 1600
-                 C 420 1680, 440 1760, 420 1840"
-              stroke="#8B5A3C"
-              strokeWidth="3"
-              strokeDasharray="18 22"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="road-path-animated"
-              opacity="0.30"
-              style={{
-                filter: 'drop-shadow(0 2px 4px rgba(115, 47, 23, 0.1))'
-              }}
-            />
-          </svg>
-        </div>
+      <section className="py-16 md:py-24 lg:py-32 relative z-10 bg-primary/[0.03]">
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16 lg:mb-24">
-              <Badge variant="outline" className="mb-4 md:mb-6 border-primary/20 text-primary bg-primary/5 text-xs sm:text-sm">
-                El proceso
+            {/* Header mejorado */}
+            <div className="text-center mb-16 md:mb-20 lg:mb-28">
+              <Badge variant="outline" className="mb-6 md:mb-8 border-primary/30 text-primary bg-primary/[0.08] backdrop-blur-sm text-xs sm:text-sm px-4 py-2 shadow-lg">
+                <span className="font-medium">El proceso</span>
               </Badge>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 tracking-tight px-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 tracking-tight px-4 leading-tight">
                 Tres etapas hacia el <span className="gradient-text">éxito</span>
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto px-4 leading-relaxed font-light">
                 Un proceso probado que transforma estudiantes en profesionales destacados
               </p>
             </div>
@@ -329,25 +298,41 @@ export default function RoadmapLanding() {
             <div className="relative">
 
               {/* Etapas */}
-              <div className="space-y-12 sm:space-y-16 md:space-y-24 lg:space-y-32">
+              <div className="space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36 relative">
+                {/* Línea vertical única con trazos */}
+                <svg className="hidden md:block absolute left-1/2 pointer-events-none" width="4" height="1600" style={{ top: 0, transform: 'translateX(-2px)', zIndex: 0 }}>
+                  <line
+                    x1="2"
+                    y1="20"
+                    x2="2"
+                    y2="1370"
+                    stroke="#D99962"
+                    strokeWidth="4"
+                    strokeDasharray="16 24"
+                    className="road-path-animated"
+                    style={{ strokeDashoffset: 1400 }}
+                  />
+                </svg>
                 {/* Etapa 1 - Integración */}
-                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
-                  {/* Dot central */}
+                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-24 items-center">
+                  {/* Dot central mejorado */}
                   <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20" style={{ animationDelay: '0.5s' }}>
-                    <div className="timeline-dot w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-background border-2 sm:border-3 md:border-4 border-primary shadow-xl flex items-center justify-center">
-                      <Users className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" />
+                    {/* Fondo blanco para cortar la línea */}
+                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-primary shadow-2xl flex items-center justify-center ring-4 ring-primary/10">
+                      <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-primary" />
                     </div>
                   </div>
 
-                  {/* Contenido izquierdo */}
-                  <div className="flex items-center justify-end text-right pr-6 sm:pr-8 md:pr-12 lg:pr-20 relative z-10">
-                    <div className="space-y-1 sm:space-y-2 md:space-y-3 lg:space-y-4">
-                      <div className="inline-flex items-center gap-1 sm:gap-2 md:gap-3 mb-1 sm:mb-2 md:mb-3">
-                        <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-primary tracking-wider uppercase">Etapa 01</span>
-                        <div className="h-px w-4 sm:w-6 md:w-8 lg:w-12 bg-primary/30"></div>
+                  {/* Contenido izquierdo mejorado */}
+                  <div className="flex items-center justify-end text-right pr-8 sm:pr-10 md:pr-16 lg:pr-24 relative z-10">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
+                      <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4">
+                        <span className="text-xs sm:text-sm md:text-base font-bold text-primary tracking-wider uppercase">Etapa 01</span>
+                        <div className="h-0.5 w-6 sm:w-8 md:w-12 lg:w-16 bg-gradient-to-l from-primary/50 to-primary"></div>
                       </div>
-                      <h3 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold tracking-tight leading-tight">Súmate al ecosistema</h3>
-                      <p className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground leading-relaxed hidden sm:block">
+                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Súmate al ecosistema</h3>
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md ml-auto">
                         ¿Eres estudiante? Inscríbete y muestra tu talento. ¿Tienes un proyecto?
                         Solicita una solución. Aquí comienza la conexión entre talento y oportunidad.
                       </p>
@@ -357,49 +342,51 @@ export default function RoadmapLanding() {
                     </div>
                   </div>
 
-                  {/* Imagen integrada al fondo */}
-                  <div className="flex items-center pl-6 sm:pl-8 md:pl-12 lg:pl-20 relative z-10">
-                    <div className="relative w-full h-32 sm:h-48 md:h-64 lg:h-72 xl:h-80">
+                  {/* Imagen mejorada */}
+                  <div className="flex items-center pl-8 sm:pl-10 md:pl-16 lg:pl-24 relative z-10">
+                    <div className="relative w-full h-36 sm:h-52 md:h-72 lg:h-80 xl:h-96">
                       <Image
                         src="/etapa1-removebg.png"
                         alt="Integración a la comunidad - Estudiantes colaborando"
                         fill
-                        className="object-contain drop-shadow-2xl"
+                        className="object-contain drop-shadow-2xl transition-transform hover:scale-105 duration-300"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Etapa 2 - Desarrollo */}
-                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
-                  {/* Dot central */}
-                  <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20" style={{ animationDelay: '0.7s' }}>
-                    <div className="timeline-dot w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-background border-2 sm:border-3 md:border-4 border-accent shadow-xl flex items-center justify-center">
-                      <Code className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-accent" />
+                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-24 items-center">
+                  {/* Dot central mejorado */}
+                  <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20 -mt-4" style={{ animationDelay: '0.7s' }}>
+                    {/* Fondo blanco para cortar la línea */}
+                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-accent shadow-2xl flex items-center justify-center ring-4 ring-accent/10">
+                      <Code className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-accent" />
                     </div>
                   </div>
 
-                  {/* Imagen integrada al fondo - orden 1 (izquierda) */}
-                  <div className="flex items-center pr-6 sm:pr-8 md:pr-12 lg:pr-20 order-1 relative z-10">
-                    <div className="relative w-full h-32 sm:h-48 md:h-64 lg:h-72 xl:h-80">
+                  {/* Imagen mejorada - orden 1 (izquierda) */}
+                  <div className="flex items-center pr-8 sm:pr-10 md:pr-16 lg:pr-24 order-1 relative z-10">
+                    <div className="relative w-full h-36 sm:h-52 md:h-72 lg:h-80 xl:h-96">
                       <Image
                         src="/etapa2-removebg.png"
                         alt="Desarrollo de experiencia - Trabajo en proyectos reales"
                         fill
-                        className="object-contain drop-shadow-2xl"
+                        className="object-contain drop-shadow-2xl transition-transform hover:scale-105 duration-300"
                       />
                     </div>
                   </div>
 
-                  {/* Contenido derecho - orden 2 (derecha) */}
-                  <div className="flex items-center pl-6 sm:pl-8 md:pl-12 lg:pl-20 order-2 relative z-10">
-                    <div className="space-y-1 sm:space-y-2 md:space-y-3 lg:space-y-4">
-                      <div className="inline-flex items-center gap-1 sm:gap-2 md:gap-3 mb-1 sm:mb-2 md:mb-3">
-                        <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-accent tracking-wider uppercase">Etapa 02</span>
-                        <div className="h-px w-4 sm:w-6 md:w-8 lg:w-12 bg-accent/30"></div>
+                  {/* Contenido derecho mejorado - orden 2 (derecha) */}
+                  <div className="flex items-center pl-8 sm:pl-10 md:pl-16 lg:pl-24 order-2 relative z-10">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
+                      <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4">
+                        <div className="h-0.5 w-6 sm:w-8 md:w-12 lg:w-16 bg-gradient-to-r from-accent to-accent/50"></div>
+                        <span className="text-xs sm:text-sm md:text-base font-bold text-accent tracking-wider uppercase">Etapa 02</span>
                       </div>
-                      <h3 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold tracking-tight leading-tight">Matching perfecto</h3>
-                      <p className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground leading-relaxed hidden sm:block">
+                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Matching perfecto</h3>
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md">
                         Conectamos proyectos reales de empresas con estudiantes que tienen las skills exactas.
                         Un match donde ambos ganan: experiencia práctica y soluciones de calidad.
                       </p>
@@ -411,23 +398,26 @@ export default function RoadmapLanding() {
                 </div>
 
                 {/* Etapa 3 - Consolidación */}
-                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
-                  {/* Dot central */}
-                  <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20" style={{ animationDelay: '0.9s' }}>
-                    <div className="timeline-dot w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-background border-2 sm:border-3 md:border-4 border-primary shadow-xl flex items-center justify-center">
-                      <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" />
+                <div className="relative grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-24 items-center">
+                  {/* Dot central mejorado */}
+                  <div
+                    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20 -mt-8" style={{ animationDelay: '0.9s' }}>
+                    {/* Fondo blanco para cortar la línea */}
+                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-primary shadow-2xl flex items-center justify-center ring-4 ring-primary/10">
+                      <Briefcase className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-primary" />
                     </div>
                   </div>
 
-                  {/* Contenido izquierdo */}
-                  <div className="flex items-center justify-end text-right pr-6 sm:pr-8 md:pr-12 lg:pr-20 relative z-10">
-                    <div className="space-y-1 sm:space-y-2 md:space-y-3 lg:space-y-4">
-                      <div className="inline-flex items-center gap-1 sm:gap-2 md:gap-3 mb-1 sm:mb-2 md:mb-3">
-                        <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-primary tracking-wider uppercase">Etapa 03</span>
-                        <div className="h-px w-4 sm:w-6 md:w-8 lg:w-12 bg-primary/30"></div>
+                  {/* Contenido izquierdo mejorado */}
+                  <div className="flex items-center justify-end text-right pr-8 sm:pr-10 md:pr-16 lg:pr-24 relative z-10">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
+                      <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4">
+                        <span className="text-xs sm:text-sm md:text-base font-bold text-primary tracking-wider uppercase">Etapa 03</span>
+                        <div className="h-0.5 w-6 sm:w-8 md:w-12 lg:w-16 bg-gradient-to-l from-primary/50 to-primary"></div>
                       </div>
-                      <h3 className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold tracking-tight leading-tight">Resultados que importan</h3>
-                      <p className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground leading-relaxed hidden sm:block">
+                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Resultados que importan</h3>
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md ml-auto">
                         Los estudiantes construyen portafolio real. Las empresas obtienen
                         soluciones funcionales. Todos crecen en el proceso.
                       </p>
@@ -437,14 +427,14 @@ export default function RoadmapLanding() {
                     </div>
                   </div>
 
-                  {/* Imagen integrada al fondo */}
-                  <div className="flex items-center pl-6 sm:pl-8 md:pl-12 lg:pl-20 relative z-10">
-                    <div className="relative w-full h-32 sm:h-48 md:h-64 lg:h-72 xl:h-80">
+                  {/* Imagen mejorada */}
+                  <div className="flex items-center pl-8 sm:pl-10 md:pl-16 lg:pl-24 relative z-10">
+                    <div className="relative w-full h-36 sm:h-52 md:h-72 lg:h-80 xl:h-96">
                       <Image
                         src="/etapa3-removebg.png"
                         alt="Lanzamiento profesional - Éxito en tu carrera"
                         fill
-                        className="object-contain drop-shadow-2xl"
+                        className="object-contain drop-shadow-2xl transition-transform hover:scale-105 duration-300"
                       />
                     </div>
                   </div>
@@ -471,53 +461,87 @@ export default function RoadmapLanding() {
               </h2>
             </div>
 
-            {/* Split 50/50 - Desafío vs Solución */}
+            {/* Diseño con Cuadros Separados con Bordes */}
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
-              {/* Lado izquierdo - El Desafío */}
-              <div className="border-2 border-muted/50 rounded-2xl p-6 md:p-10 bg-muted/10 hover:border-muted/70 hover:bg-muted/15 transition-all shadow-md">
-                <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-muted/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 md:w-6 md:h-6 text-foreground/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+              {/* Cuadro Izquierdo - El Desafío */}
+              <div className="border-2 border-muted/30 rounded-2xl p-6 md:p-10 lg:p-12 bg-background hover:shadow-xl hover:shadow-muted/20 transition-all duration-300">
+                <div className="mb-6">
+                  <div className="inline-flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-muted/10 flex items-center justify-center">
+                      <svg className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">El desafío</h3>
                   </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">El desafío</h3>
-                    <div className="h-1 w-12 bg-muted/40 rounded"></div>
-                  </div>
+                  <div className="h-1 w-20 bg-gradient-to-r from-muted-foreground/40 to-muted-foreground/20 rounded-full mb-6"></div>
                 </div>
 
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4 md:mb-6">
-                  Estudiantes con conocimiento teórico pero sin experiencia necesaria que los empleadores buscan.
-                  Empresas que necesitan soluciones tecnológicas pero no pueden costear equipos completos.
-                </p>
+                <div className="space-y-5">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-foreground/40 mt-2.5 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-medium mb-1">Estudiantes sin experiencia</p>
+                      <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
+                        Conocimiento teórico pero sin la experiencia práctica que buscan los empleadores
+                      </p>
+                    </div>
+                  </div>
 
-                <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Brecha entre academia y mercado</span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-foreground/40 mt-2.5 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-medium mb-1">Empresas con recursos limitados</p>
+                      <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
+                        Necesitan soluciones digitales pero no pueden costear equipos de desarrollo completos
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Lado derecho - La Solución */}
-              <div className="border-2 border-primary/20 rounded-2xl p-6 md:p-10 bg-primary/[0.02] hover:border-primary/30 transition-all shadow-lg">
-                <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+              {/* Cuadro Derecho - La Solución */}
+              <div className="border-2 border-primary/30 rounded-2xl p-6 md:p-10 lg:p-12 bg-background hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+                <div className="mb-6">
+                  <div className="inline-flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">La solución</h3>
                   </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">La solución</h3>
-                    <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent rounded"></div>
-                  </div>
+                  <div className="h-1 w-20 bg-gradient-to-r from-primary to-accent rounded-full mb-6"></div>
                 </div>
 
-                <p className="text-sm md:text-base text-foreground/90 leading-relaxed mb-4 md:mb-6 font-medium">
-                  Una plataforma que conecta talento universitario con proyectos reales.
-                  Estudiantes ganan experiencia práctica mientras empresas obtienen soluciones de calidad a costos accesibles.
-                </p>
+                <div className="space-y-5">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-semibold mb-1">Conexión directa</p>
+                      <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
+                        Conectar talento universitario con pequeñas y medianas empresas.
+                      </p>
+                    </div>
+                  </div>
 
-                <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-primary">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Apoyo mutuo comprobado</span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-semibold mb-1">Aprendizaje aplicado</p>
+                      <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
+                        Los estudiantes participan en proyectos reales, adquiriendo experiencia practica.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-semibold mb-1">Desarrollo accesible</p>
+                      <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
+                        Las empresas obtienen soluciones tecnológicas de calidad a costos razonables.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

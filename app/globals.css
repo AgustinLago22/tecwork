@@ -194,4 +194,18 @@
   .subtle-rotation {
     transform: rotate(0.1deg);
   }
+
+  /* Animación para la línea vertical */
+  @keyframes drawLine {
+    from {
+      stroke-dashoffset: 1600;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-draw-line {
+    animation: drawLine 2s ease-out forwards;
+  }
 }

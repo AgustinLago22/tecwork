@@ -236,8 +236,9 @@ export default function RoadmapLanding() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed fade-in-up px-4 sm:px-0" style={{ animationDelay: '0.3s' }}>
-              Un camino estructurado desde la universidad hasta el éxito profesional.
-              Experiencia real, mentoría experta, crecimiento continuo.
+              De la universidad al mundo laboral.
+              <br />
+              Aprendé haciendo, construí tu futuro profesional.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center fade-in-up px-4 sm:px-0" style={{ animationDelay: '0.4s' }}>
@@ -325,16 +326,17 @@ export default function RoadmapLanding() {
                   </div>
 
                   {/* Contenido izquierdo mejorado */}
-                  <div className="flex items-center justify-end text-right pr-8 sm:pr-10 md:pr-16 lg:pr-24 relative z-10">
-                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
+                  <div className="flex items-center justify-end pr-8 sm:pr-10 md:pr-16 lg:pr-24 relative z-10">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5 text-right">
                       <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4">
                         <span className="text-xs sm:text-sm md:text-base font-bold text-primary tracking-wider uppercase">Etapa 01</span>
                         <div className="h-0.5 w-6 sm:w-8 md:w-12 lg:w-16 bg-gradient-to-l from-primary/50 to-primary"></div>
                       </div>
-                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Súmate al ecosistema</h3>
-                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md ml-auto">
-                        ¿Eres estudiante? Inscríbete y muestra tu talento. ¿Tienes un proyecto?
-                        Solicita una solución. Aquí comienza la conexión entre talento y oportunidad.
+                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight text-right">Súmate al ecosistema</h3>
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md mx-auto">
+                        ¿Tenés un proyecto en mente? Solicita una solución.
+                        <br />
+                        ¿Sos estudiante? Sumate y demostrá tu talento.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
                         Estudiantes muestran talento, empresas solicitan proyectos. Conectamos ambos mundos.
@@ -380,15 +382,16 @@ export default function RoadmapLanding() {
 
                   {/* Contenido derecho mejorado - orden 2 (derecha) */}
                   <div className="flex items-center pl-8 sm:pl-10 md:pl-16 lg:pl-24 order-2 relative z-10">
-                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5 text-left">
                       <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4">
                         <div className="h-0.5 w-6 sm:w-8 md:w-12 lg:w-16 bg-gradient-to-r from-accent to-accent/50"></div>
                         <span className="text-xs sm:text-sm md:text-base font-bold text-accent tracking-wider uppercase">Etapa 02</span>
                       </div>
-                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Matching perfecto</h3>
-                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md">
-                        Conectamos proyectos reales de empresas con estudiantes que tienen las skills exactas.
-                        Un match donde ambos ganan: experiencia práctica y soluciones de calidad.
+                      <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight text-left">Matching perfecto</h3>
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md mx-auto">
+                        Unimos empresas con estudiantes preparados para hacer realidad sus ideas y proyectos.
+                        <br />
+                        El punto de encuentro entre talento y oportunidad.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
                         Proyectos reales con estudiantes ideales. Experiencia práctica + soluciones de calidad.
@@ -418,8 +421,9 @@ export default function RoadmapLanding() {
                       </div>
                       <h3 className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">Resultados que importan</h3>
                       <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed hidden sm:block max-w-md ml-auto">
-                        Los estudiantes construyen portafolio real. Las empresas obtienen
-                        soluciones funcionales. Todos crecen en el proceso.
+                        Los estudiantes desarrollan experiencia real.
+                        <br/>
+                        Las empresas obtienen soluciones que funcionan.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
                         Estudiantes con portafolio real, empresas con soluciones. Todos crecen juntos.
@@ -626,8 +630,7 @@ export default function RoadmapLanding() {
                 <span className="gradient-text">hoy mismo</span>
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-12 px-4">
-                Únete a cientos de estudiantes que están transformando su futuro profesional
-                con experiencia real y mentoría experta.
+                Unite a cientos de estudiantes que están transformando su futuro profesional.
               </p>
             </div>
 

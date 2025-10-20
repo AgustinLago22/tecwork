@@ -13,7 +13,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-xl">Tecwork</span>
             </div>
-            <p className="text-sm text-muted-foreground">Experiencia real para estudiantes de tecnología</p>
+            <p className="text-sm text-muted-foreground">Experiencia real para estudiantes de sistemas</p>
           </div>
 
           {/* Navigation */}

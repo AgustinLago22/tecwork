@@ -90,7 +90,7 @@ export default function NosotrosPage() {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-                Una plataforma que fomenta el desarrollo de negocios pequeños y la educación práctica de estudiantes de tecnología, creando oportunidades reales de crecimiento para ambos.
+                Una plataforma que fomenta el desarrollo en los negocios locales y la educación práctica de estudiantes de tecnología, creando oportunidades de crecimiento para ambos.
               </p>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function NosotrosPage() {
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   Aportar valor a estudiantes de tecnología en su proceso de capacitación, mientras fomentamos la
-                  digitalización de negocios pequeños y medianos, creando un ecosistema donde ambos crecen juntos.
+                  digitalización de pequeñas y medianas empresas, creando un ecosistema donde ambos crecen juntos.
                 </p>
               </CardContent>
             </Card>
@@ -259,7 +259,7 @@ export default function NosotrosPage() {
                   <p className="text-muted-foreground text-lg leading-relaxed">
                     Nuestro incentivo es <span className="font-semibold text-foreground">aportar valor a los estudiantes</span> que
                     se van capacitando, mientras fomentamos la <span className="font-semibold text-foreground">digitalización de
-                    negocios pequeños y medianos</span> que necesitan soluciones tecnológicas pero no pueden acceder a consultoras
+                    pequeñas y medianas empresas</span> que necesitan soluciones tecnológicas pero no pueden acceder a consultoras
                     tradicionales.
                   </p>
 

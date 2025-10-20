@@ -75,8 +75,8 @@ export default function PrivacidadPage() {
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                   <li>Evaluar y procesar aplicaciones de estudiantes</li>
                   <li>Asignar estudiantes a proyectos apropiados</li>
-                  <li>Facilitar comunicación entre estudiantes, mentores y clientes</li>
-                  <li>Proporcionar mentoría y seguimiento de progreso</li>
+                  <li>Facilitar comunicación entre estudiantes y clientes</li>
+                  <li>Proporcionar material y seguimiento de progreso</li>
                 </ul>
               </div>
 
@@ -151,10 +151,7 @@ export default function PrivacidadPage() {
                 <li>Oponerte al procesamiento en ciertas circunstancias</li>
               </ul>
               <p className="text-muted-foreground mt-4">
-                Para ejercer estos derechos, contáctanos en{" "}
-                <a href="mailto:privacidad@tecwork.dev" className="text-primary hover:underline">
-                  privacidad@tecwork.dev
-                </a>
+                Para ejercer estos derechos, contactenos
               </p>
             </CardContent>
           </Card>

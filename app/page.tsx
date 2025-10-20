@@ -337,7 +337,7 @@ export default function RoadmapLanding() {
                         Solicita una solución. Aquí comienza la conexión entre talento y oportunidad.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
-                        Inscríbete y muestra tu talento o solicita una solución.
+                        Estudiantes muestran talento, empresas solicitan proyectos. Conectamos ambos mundos.
                       </p>
                     </div>
                   </div>
@@ -391,7 +391,7 @@ export default function RoadmapLanding() {
                         Un match donde ambos ganan: experiencia práctica y soluciones de calidad.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
-                        Conectamos proyectos con estudiantes ideales.
+                        Proyectos reales con estudiantes ideales. Experiencia práctica + soluciones de calidad.
                       </p>
                     </div>
                   </div>
@@ -422,7 +422,7 @@ export default function RoadmapLanding() {
                         soluciones funcionales. Todos crecen en el proceso.
                       </p>
                       <p className="text-[10px] text-muted-foreground leading-tight sm:hidden">
-                        Portafolio real y soluciones funcionales.
+                        Estudiantes con portafolio real, empresas con soluciones. Todos crecen juntos.
                       </p>
                     </div>
                   </div>

@@ -222,7 +222,7 @@ export default function RoadmapLanding() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 fade-in-up text-balance leading-tight" style={{ animationDelay: '0.2s' }}>
               Experiencia real para{" "}
               <span className="text-primary handwritten relative inline-block">
-                estudiantes de tecnología
+                estudiantes de Sistemas
                 {/* Subrayado sketch */}
                 <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3" viewBox="0 0 300 12" fill="none">
                   <path
@@ -318,7 +318,7 @@ export default function RoadmapLanding() {
                   {/* Dot central mejorado */}
                   <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20" style={{ animationDelay: '0.5s' }}>
                     {/* Fondo blanco para cortar la línea */}
-                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="absolute inset-0 bg-background rounded-full scale-130 -z-10"></div>
                     <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-primary shadow-2xl flex items-center justify-center ring-4 ring-primary/10">
                       <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-primary" />
                     </div>
@@ -360,7 +360,7 @@ export default function RoadmapLanding() {
                   {/* Dot central mejorado */}
                   <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20 -mt-4" style={{ animationDelay: '0.7s' }}>
                     {/* Fondo blanco para cortar la línea */}
-                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="absolute inset-0 bg-background rounded-full scale-130 -z-10"></div>
                     <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-accent shadow-2xl flex items-center justify-center ring-4 ring-accent/10">
                       <Code className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-accent" />
                     </div>
@@ -403,7 +403,7 @@ export default function RoadmapLanding() {
                   <div
                     className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 journey-node z-20 -mt-8" style={{ animationDelay: '0.9s' }}>
                     {/* Fondo blanco para cortar la línea */}
-                    <div className="absolute inset-0 bg-background rounded-full scale-150 -z-10"></div>
+                    <div className="absolute inset-0 bg-background rounded-full scale-130 -z-10"></div>
                     <div className="timeline-dot w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full bg-background border-3 sm:border-4 md:border-[5px] border-primary shadow-2xl flex items-center justify-center ring-4 ring-primary/10">
                       <Briefcase className="w-6 h-6 sm:w-7 sm:h-7 md:w-10 md:h-10 text-primary" />
                     </div>
@@ -481,9 +481,9 @@ export default function RoadmapLanding() {
                   <div className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-foreground/40 mt-2.5 flex-shrink-0"></div>
                     <div>
-                      <p className="text-sm md:text-base lg:text-lg text-foreground font-medium mb-1">Estudiantes sin experiencia</p>
+                      <p className="text-sm md:text-base lg:text-lg text-foreground font-medium mb-1">Estudiantes sin experiencia laboral</p>
                       <p className="text-xs md:text-sm text-foreground/70 leading-relaxed">
-                        Conocimiento teórico pero sin la experiencia práctica que buscan los empleadores
+                        Conocimiento teórico practico pero sin la experiencia que buscan los empleadores
                       </p>
                     </div>
                   </div>

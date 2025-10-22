@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase/client'
 import { isAuthenticated } from '@/lib/auth/simple'
 
+// Configuración de ruta dinámica para Next.js 15
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function PATCH(request: NextRequest) {
   try {
     // Verificar autenticación de admin

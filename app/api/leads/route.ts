@@ -4,6 +4,10 @@ import { isAuthenticated } from '@/lib/auth/simple'
 import { Lead } from '@/lib/types/database'
 import { sanitizeString, sanitizeEmail, sanitizePhone, sanitizeTextArea } from '@/lib/utils/sanitize'
 
+// Configuración de ruta dinámica para Next.js 15
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   try {
     const authenticated = await isAuthenticated()

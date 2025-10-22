@@ -22,6 +22,10 @@ import { Suspense } from 'react'
 import LeadsCRM from '@/components/dashboard/LeadsCRM'
 import StudentsCRM from '@/components/dashboard/StudentsCRM'
 
+// Configuración de ruta dinámica para Next.js 15
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 // Solo cargar estadísticas básicas - los datos completos se cargan bajo demanda
 async function getCRMStats() {
   try {

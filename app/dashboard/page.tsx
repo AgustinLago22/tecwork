@@ -17,6 +17,10 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
+// Configuración de ruta dinámica para Next.js 15
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getDashboardData() {
   try {
     // Obtener leads desde la tabla principal

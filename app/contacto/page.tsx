@@ -2,8 +2,9 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -249,6 +250,7 @@ const enhancedStyles = `
 
 export default function ContactoPage() {
   const { toast } = useToast()
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -263,6 +265,14 @@ export default function ContactoPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+
+  // Pre-seleccionar el servicio si viene desde la página de servicios
+  useEffect(() => {
+    const servicioParam = searchParams.get('servicio')
+    if (servicioParam) {
+      setFormData(prev => ({ ...prev, tipoNecesidad: servicioParam }))
+    }
+  }, [searchParams])
 
   const tiposNecesidad = [
     {

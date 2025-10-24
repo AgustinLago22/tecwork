@@ -9,9 +9,16 @@ import Image from "next/image"
 
 export default function RoadmapLanding() {
   return (
-    <div className="bg-background relative">
+    <div className="bg-background relative main-wrapper">
       {/* Estilos minimalistas profesionales */}
       <style jsx>{`
+        /* Escala 90% solo en desktop */
+        @media (min-width: 768px) {
+          .main-wrapper {
+            zoom: 0.9;
+          }
+        }
+
         @keyframes fadeInUp {
           from {
             opacity: 0;

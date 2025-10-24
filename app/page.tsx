@@ -300,7 +300,21 @@ export default function RoadmapLanding() {
 
               {/* Etapas */}
               <div className="space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36 relative">
-                {/* Línea vertical única con trazos */}
+                {/* Línea vertical para móvil - más pequeña */}
+                <svg className="md:hidden absolute left-1/2 pointer-events-none" width="2" height="800" style={{ top: 0, transform: 'translateX(-1px)', zIndex: 0 }}>
+                  <line
+                    x1="1"
+                    y1="20"
+                    x2="1"
+                    y2="750"
+                    stroke="#D99962"
+                    strokeWidth="2"
+                    strokeDasharray="12 18"
+                    className="road-path-animated"
+                    style={{ strokeDashoffset: 800 }}
+                  />
+                </svg>
+                {/* Línea vertical para desktop - tamaño completo */}
                 <svg className="hidden md:block absolute left-1/2 pointer-events-none" width="4" height="1600" style={{ top: 0, transform: 'translateX(-2px)', zIndex: 0 }}>
                   <line
                     x1="2"

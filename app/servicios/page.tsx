@@ -318,8 +318,8 @@ export default function ServiciosPage() {
                       </ul>
                     </div>
 
-                    {/* Botón "Ver más" al hacer hover */}
-                    <div className="mt-6 pt-6 border-t border-border/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Botón siempre visible */}
+                    <div className="mt-6 pt-6 border-t border-border/30">
                       <Link
                         href={`/contacto?servicio=${service.contactId}`}
                         className={`inline-flex items-center gap-2 text-sm font-medium text-${service.color} hover:gap-3 transition-all`}

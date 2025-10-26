@@ -403,7 +403,7 @@ export default function ContactoPage() {
     return (
       <div className="bg-background paper-texture min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4">
-          <Card className="sketch-border bg-green-50 border-green-200 max-w-2xl mx-auto transform rotate-1">
+          <Card className="sketch-border bg-green-50 border-green-200 max-w-2xl mx-auto">
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="h-8 w-8 text-green-600" />

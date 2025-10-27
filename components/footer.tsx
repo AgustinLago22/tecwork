@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Mail } from "lucide-react"
 
 export function Footer() {
   return (
@@ -14,6 +15,12 @@ export function Footer() {
               <span className="font-bold text-xl">Tecwork</span>
             </div>
             <p className="text-sm text-muted-foreground">Experiencia real para estudiantes de sistemas</p>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Mail className="h-4 w-4" />
+              <a href="mailto:contacto@tecwork.ar" className="hover:text-foreground transition-colors">
+                contacto@tecwork.ar
+              </a>
+            </div>
           </div>
 
           {/* Navigation */}

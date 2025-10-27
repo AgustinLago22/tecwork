@@ -29,164 +29,277 @@ import {
   X,
 } from "lucide-react"
 
-// Estilos sutiles para mejorar el formulario sin romper el minimalismo
-const formEnhancementStyles = `
-  :root {
-    /* Variables minimalistas para el formulario */
-    --neutral-50: 0 0% 98%;
-    --neutral-100: 210 40% 96%;
-    --neutral-200: 214 32% 91%;
-    --neutral-300: 213 27% 84%;
-    --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.05);
-    --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+// Estilos premium modernos al estilo de las otras páginas
+const premiumFormStyles = `
+  /* Escala 90% solo en desktop */
+  @media (min-width: 768px) {
+    .main-wrapper {
+      zoom: 0.9;
+    }
   }
 
-  /* Mejoras sutiles para el fondo del formulario */
-  .form-background {
-    background:
-      radial-gradient(600px circle at 50% 200px, hsl(var(--neutral-50)), transparent),
-      linear-gradient(to bottom, hsl(0 0% 100%), hsl(var(--neutral-50)));
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Card principal del formulario con más presencia */
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes bubbleIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #732F17 0%, #D99962 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Premium shadow */
+  .premium-shadow {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 4px 12px rgba(115, 47, 23, 0.08),
+      0 16px 32px rgba(115, 47, 23, 0.06);
+  }
+
+  /* Card principal del formulario con efectos premium */
   .form-card-enhanced {
-    background: hsl(210 40% 99%); /* Off-white sutil */
-    border: 1px solid hsl(214 20% 80%); /* Borde más definido */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1); /* Sombra más fuerte */
-    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    border: 1px solid rgba(115, 47, 23, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .form-card-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(115, 47, 23, 0.03),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .form-card-enhanced:hover::before {
+    left: 100%;
   }
 
   .form-card-enhanced:hover {
-    box-shadow: 0 12px 35px rgba(0,0,0,0.18), 0 6px 15px rgba(0,0,0,0.12);
-    transform: translateY(-2px);
-    border-color: rgba(115, 47, 23, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(115, 47, 23, 0.12);
+    border-color: rgba(115, 47, 23, 0.2);
   }
 
-  /* Inputs con mejor contraste */
+  /* Inputs con estilo premium y optimizados para touch */
   .form-input-enhanced {
-    background: hsl(0 0% 100%); /* Blanco puro para inputs */
-    border: 1px solid hsl(214 18% 82%); /* Borde más definido */
-    transition: all 0.3s var(--ease);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Sombra sutil base */
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(214 18% 85%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    min-height: 2.75rem; /* ~44px - tamaño mínimo para touch en móvil */
+    font-size: 16px; /* Previene zoom en iOS */
+  }
+
+  @media (min-width: 768px) {
+    .form-input-enhanced {
+      min-height: 2.5rem;
+      font-size: 0.875rem;
+    }
   }
 
   .form-input-enhanced:hover {
-    border-color: rgba(115, 47, 23, 0.5);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    background: hsl(210 40% 99%); /* Ligeramente off-white en hover */
+    border-color: rgba(115, 47, 23, 0.3);
+    box-shadow: 0 2px 8px rgba(115, 47, 23, 0.08);
   }
 
   .form-input-enhanced:focus {
-    background: hsl(0 0% 100%); /* Vuelve a blanco en focus */
+    background: hsl(0 0% 100%);
     border-color: #732F17;
-    box-shadow: 0 0 0 3px rgba(115, 47, 23, 0.1), 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 3px rgba(115, 47, 23, 0.1), 0 4px 12px rgba(115, 47, 23, 0.15);
     transform: translateY(-1px);
   }
 
-  /* Botón del formulario mejorado */
+  /* Botón del formulario premium y optimizado para touch */
   .form-button-enhanced {
-    background: #D99962;
-    box-shadow: var(--shadow-sm), inset 0 1px 0 hsl(0 0% 100% / 0.2);
-    transition: all 0.3s var(--ease);
+    background: linear-gradient(135deg, #D99962 0%, #E5A977 100%);
+    box-shadow: 0 4px 12px rgba(217, 153, 98, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 0;
+    min-height: 3rem; /* ~48px - tamaño óptimo para touch */
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
   }
 
-  .form-button-enhanced:hover {
-    background: rgba(217, 153, 98, 0.9);
-    box-shadow: var(--shadow-md), inset 0 1px 0 hsl(0 0% 100% / 0.3);
-    transform: translateY(-2px);
+  @media (min-width: 768px) {
+    .form-button-enhanced {
+      min-height: 2.75rem;
+      font-size: 0.875rem;
+      padding: 0.625rem 1.25rem;
+    }
   }
 
-  /* Hover sutil para elementos interactivos del formulario */
-  .form-hover-subtle:hover {
-    background: hsl(var(--neutral-50)) !important;
-    transition: all 0.3s var(--ease);
+  .form-button-enhanced:hover,
+  .form-button-enhanced:active {
+    background: linear-gradient(135deg, #E5A977 0%, #D99962 100%);
+    box-shadow: 0 8px 20px rgba(217, 153, 98, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.02);
   }
 
-  /* Secciones del formulario con mejor separación visual */
+  /* Secciones del formulario con diseño premium y responsive */
   .form-section-enhanced {
-    background: hsl(210 33% 97%); /* Ligeramente gris para contraste */
-    border: 1px solid hsl(214 18% 82%); /* Borde más marcado */
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06); /* Sombra más visible */
-    transition: all 0.3s var(--ease);
+    background: linear-gradient(135deg, rgba(250, 250, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+    border: 1px solid rgba(115, 47, 23, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(115, 47, 23, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    overflow: hidden;
   }
 
-  .form-section-enhanced:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
-    border-color: rgba(115, 47, 23, 0.3);
-    background: hsl(210 35% 96%); /* Ligeramente más oscuro en hover */
+  @media (min-width: 640px) {
+    .form-section-enhanced {
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
   }
 
-  /* Efecto papel sutil para simular textura */
+  @media (min-width: 768px) {
+    .form-section-enhanced {
+      padding: 2rem;
+    }
+  }
+
   .form-section-enhanced::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
-    bottom: 0;
-    background-image:
-      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.015) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 199, 119, 0.015) 0%, transparent 50%);
-    border-radius: inherit;
-    pointer-events: none;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(115, 47, 23, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
-  /* Títulos del formulario con color accent correcto */
+  .form-section-enhanced:hover::before {
+    opacity: 1;
+  }
+
+  .form-section-enhanced:hover {
+    box-shadow: 0 8px 24px rgba(115, 47, 23, 0.12);
+    border-color: rgba(115, 47, 23, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Títulos del formulario premium y responsive */
   .form-section-title {
     color: #732F17 !important;
-    font-weight: 600;
-    border-bottom: 2px solid rgba(115, 47, 23, 0.2) !important;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(115, 47, 23, 0.15);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     position: relative;
+    letter-spacing: -0.025em;
+    font-size: 1rem;
   }
 
-  /* Efecto decorativo sutil en títulos */
+  @media (min-width: 640px) {
+    .form-section-title {
+      font-size: 1.125rem;
+      padding-bottom: 0.625rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .form-section-title {
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
   .form-section-title::after {
     content: '';
     position: absolute;
     bottom: -2px;
     left: 0;
-    width: 60px;
+    width: 80px;
     height: 2px;
-    background: #732F17;
-    border-radius: 1px;
+    background: linear-gradient(90deg, #732F17 0%, #D99962 100%);
+    border-radius: 2px;
   }
 
-  /* Título principal del formulario también con accent */
   .form-main-title {
-    color: #732F17 !important;
+    background: linear-gradient(135deg, #732F17 0%, #D99962 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Labels también con un toque de color */
-  .form-label-enhanced {
-    color: hsl(25 20% 25%) !important;
-    font-weight: 500;
-  }
-
-  /* Iconos en los roles con el color accent cuando seleccionado */
-  .role-selected .lucide {
-    color: #732F17 !important;
-  }
-
-  /* Burbujas de conversación para errores */
+  /* Burbujas de error mejoradas */
   .error-bubble {
     position: relative;
     background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     border: 1px solid #fecaca;
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 10px 14px;
     margin-top: 8px;
     font-size: 0.875rem;
     color: #dc2626;
     animation: bubbleIn 0.3s ease-out;
-    box-shadow: 0 3px 12px rgba(220, 38, 38, 0.15);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -216,21 +329,108 @@ const formEnhancementStyles = `
     border-bottom: 5px solid #fef2f2;
   }
 
-  @keyframes bubbleIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.9);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Input con error - borde más sutil para las burbujas */
   .input-error {
     border-color: #fca5a5 !important;
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+  }
+
+  /* Card de beneficios premium */
+  .benefit-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(115, 47, 23, 0.05),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .benefit-card:hover::before,
+  .benefit-card:active::before {
+    left: 100%;
+  }
+
+  .benefit-card:hover,
+  .benefit-card:active {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(115, 47, 23, 0.15);
+  }
+
+  /* Labels optimizados para móvil */
+  label {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    label {
+      font-size: 0.875rem; /* 14px */
+    }
+  }
+
+  /* Mejora de áreas de tap en radio buttons y checkboxes */
+  [type="radio"],
+  [type="checkbox"] {
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+  }
+
+  /* Espaciado optimizado para campos en móvil */
+  .space-y-6 > * + * {
+    margin-top: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+  }
+
+  /* Tamaño de fuente para select en móvil (previene zoom en iOS) */
+  select {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    select {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Textarea optimizado para móvil */
+  textarea {
+    min-height: 6rem;
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    textarea {
+      min-height: 5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up,
+    .scale-in,
+    .form-card-enhanced,
+    .benefit-card {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 `;
 
@@ -551,94 +751,140 @@ export default function SumatePage() {
   }
 
   return (
-    <div className="bg-background paper-texture">
-      {/* Hero Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center relative">
-            {/* Spiral holes decoration */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
+    <div className="bg-background main-wrapper">
+      {/* Inyectar estilos CSS */}
+      <style jsx>{premiumFormStyles}</style>
 
-            <div className="relative z-10">
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm">
-                ✨ Únete a nuestra comunidad
+      {/* Hero Section Premium - Optimizado para móvil */}
+      <section className="relative py-12 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-background via-primary/[0.03] to-background">
+        {/* Gradient sutil de fondo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-accent/[0.02]"></div>
+
+        {/* Líneas decorativas minimalistas */}
+        <div className="absolute top-0 left-0 w-px h-32 bg-gradient-to-b from-primary/20 to-transparent ml-[10%] hidden md:block"></div>
+        <div className="absolute top-0 right-0 w-px h-32 bg-gradient-to-b from-accent/20 to-transparent mr-[10%] hidden md:block"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <Badge variant="outline" className="mb-4 md:mb-8 border-primary/20 text-primary bg-primary/5 backdrop-blur text-xs sm:text-sm px-3 py-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mr-1.5 animate-pulse"></div>
+                Únete a nuestra comunidad
               </Badge>
+            </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
-                Súmate a{" "}
-                <span className="text-primary handwritten relative">
-                  Tecwork
-                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none">
-                    <path d="M5 8c30-3 60-3 90 0s60 3 85-2" stroke="#f97316" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 text-balance leading-tight fade-in-up px-2" style={{ animationDelay: '0.2s' }}>
+              Súmate a{" "}
+              <span className="gradient-text relative inline-block">
+                Tecwork
+                {/* Subrayado sketch */}
+                <svg className="absolute -bottom-0.5 sm:-bottom-1 md:-bottom-2 left-0 w-full h-1.5 sm:h-2 md:h-3" viewBox="0 0 200 12" fill="none">
+                  <path
+                    d="M5 8c30-3 60-3 90 0s60 3 85-2"
+                    stroke="#D99962"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-                Forma parte de una comunidad de estudiantes que trabajan en proyectos reales mientras construyen su
-                futuro profesional.
-              </p>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up px-4" style={{ animationDelay: '0.3s' }}>
+              Forma parte de una comunidad de estudiantes que trabajan en proyectos reales mientras construyen su
+              futuro profesional.
+            </p>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/40 to-transparent"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Beneficios Premium - Optimizado para móvil */}
+      <section className="py-12 md:py-24 bg-gradient-to-b from-background via-primary/[0.02] to-accent/[0.03] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(115,47,23,0.05),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(217,153,98,0.05),transparent_50%)]"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-8 md:mb-16">
+            <Badge variant="outline" className="mb-3 md:mb-6 border-primary/20 text-primary bg-primary/5 text-xs sm:text-sm px-3 py-1">
+              Los beneficios
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4 tracking-tight px-2">
+              ¿Por qué <span className="gradient-text">unirte?</span>
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+              Desarrolla tu carrera con proyectos reales y mentoría experta
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+            <div className="scale-in" style={{ animationDelay: '0.1s' }}>
+              <Card className="benefit-card border-primary/10 hover:border-primary/30 bg-card premium-shadow h-full">
+                <CardContent className="p-5 sm:p-6 md:p-8 text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-primary/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-primary/20">
+                    <Code className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Experiencia real</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Trabaja en proyectos de empresas reales con impacto medible</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="scale-in" style={{ animationDelay: '0.2s' }}>
+              <Card className="benefit-card border-accent/10 hover:border-accent/30 bg-card premium-shadow h-full">
+                <CardContent className="p-5 sm:p-6 md:p-8 text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-accent/20">
+                    <Users className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Mentoría experta</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Aprende de profesionales senior que te guían en cada proyecto</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="scale-in" style={{ animationDelay: '0.3s' }}>
+              <Card className="benefit-card border-primary/10 hover:border-primary/30 bg-card premium-shadow h-full">
+                <CardContent className="p-5 sm:p-6 md:p-8 text-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-primary/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-primary/20">
+                    <GraduationCap className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Construye tu CV</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Desarrolla un portafolio sólido con proyectos documentados</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Beneficios */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 handwritten">¿Por qué unirte?</h2>
-          </div>
+      {/* Formulario - Optimizado para móvil */}
+      <section className="py-12 md:py-24 lg:py-32 relative bg-gradient-to-b from-muted/20 via-primary/[0.03] to-background">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02]"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto mb-16">
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Code className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Experiencia real</h3>
-                <p className="text-muted-foreground">Trabaja en proyectos de empresas reales con impacto medible</p>
-              </CardContent>
-            </Card>
-
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:rotate-1">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-accent" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Mentoría experta</h3>
-                <p className="text-muted-foreground">Aprende de profesionales senior en cada proyecto</p>
-              </CardContent>
-            </Card>
-
-            <Card className="sketch-border bg-card hover:shadow-lg transition-all duration-300 transform hover:-rotate-1">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Construye tu CV</h3>
-                <p className="text-muted-foreground">Desarrolla un portafolio sólido con proyectos documentados</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Formulario */}
-      <section className="py-20 notepad-lines">
-        {/* Inyectar estilos CSS */}
-        <style jsx>{formEnhancementStyles}</style>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <Card className="form-card-enhanced sketch-border">
-              <CardHeader>
-                <CardTitle className="text-2xl text-center handwritten form-main-title">Formulario de Postulación</CardTitle>
-                <p className="text-muted-foreground text-center">
-                  Cuéntanos sobre ti y tus intereses para encontrar el proyecto perfecto
-                </p>
+            <div className="text-center mb-6 md:mb-12 scale-in">
+              <Badge variant="outline" className="mb-3 md:mb-6 border-primary/20 text-primary bg-primary/5 text-xs sm:text-sm px-3 py-1">
+                Formulario de inscripción
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4 tracking-tight px-2">
+                Comienza tu <span className="gradient-text">recorrido</span>
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground px-4">
+                Cuéntanos sobre ti y tus intereses para encontrar el proyecto perfecto
+              </p>
+            </div>
+
+            <Card className="form-card-enhanced border-primary/10 premium-shadow scale-in" style={{ animationDelay: '0.2s' }}>
+              <CardHeader className="text-center pb-4 sm:pb-6 px-4 sm:px-6">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold form-main-title">Formulario de Postulación</CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-8">
+              <CardContent className="px-4 sm:px-6">
+                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                   {/* Información Personal y Portfolio */}
                   <div className="form-section-enhanced space-y-6">
                     <h3 className="text-lg form-section-title">
@@ -954,7 +1200,7 @@ export default function SumatePage() {
                             <Label
                               key={rol.id}
                               htmlFor={rol.id}
-                              className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-all duration-200 group ${
+                              className={`flex items-center space-x-3 p-3 sm:p-4 border rounded-lg cursor-pointer transition-all duration-200 group min-h-[3rem] ${
                                 formData.rol === rol.id
                                   ? 'border-primary bg-primary/5 shadow-md transform rotate-1 role-selected'
                                   : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm hover:scale-[1.02]'
@@ -1182,21 +1428,21 @@ export default function SumatePage() {
                     </div>
                   </div>
 
-                  <div className="flex justify-center pt-6">
+                  <div className="flex justify-center pt-4 sm:pt-6">
                     <Button
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="form-button-enhanced text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-200 group"
+                      className="form-button-enhanced text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-200 group w-full sm:w-auto"
                     >
                       {isSubmitting ? (
                         <>
-                          <Clock className="mr-2 h-5 w-5 animate-spin" />
-                          Enviando postulación...
+                          <Clock className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                          <span className="text-sm sm:text-base">Enviando postulación...</span>
                         </>
                       ) : (
                         <>
-                          Enviar postulación
+                          <span className="text-sm sm:text-base">Enviar postulación</span>
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                         </>
                       )}

@@ -29,26 +29,16 @@ import {
   Building,
 } from "lucide-react"
 
-// Estilos minimalistas con sutiles mejoras de contraste
-const enhancedStyles = `
-  :root {
-    /* Solo variables esenciales */
-    --color-primary: 24 95% 53%;
-    --neutral-50: 0 0% 98%;
-    --neutral-100: 210 40% 96%;
-    --neutral-200: 214 32% 91%;
-    --neutral-300: 213 27% 84%;
-
-    /* Sombras sutiles */
-    --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.05);
-    --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-
-    /* Transición suave */
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+// Estilos premium modernos al estilo de las otras páginas
+const premiumContactStyles = `
+  /* Escala 90% solo en desktop */
+  @media (min-width: 768px) {
+    .main-wrapper {
+      zoom: 0.9;
+    }
   }
 
-  @keyframes slideInUp {
+  @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(30px);
@@ -59,148 +49,231 @@ const enhancedStyles = `
     }
   }
 
-  /* Fondo minimalista con muy sutil textura */
-  .enhanced-background {
-    background:
-      radial-gradient(600px circle at 50% 200px, hsl(var(--neutral-50)), transparent),
-      linear-gradient(to bottom, hsl(0 0% 100%), hsl(var(--neutral-50)));
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
-  /* Cards con sombras más definidas y hover con color accent */
-  .enhanced-card {
+  @keyframes bubbleIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #732F17 0%, #D99962 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Premium shadow */
+  .premium-shadow {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 4px 12px rgba(115, 47, 23, 0.08),
+      0 16px 32px rgba(115, 47, 23, 0.06);
+  }
+
+  /* Cards premium con efectos */
+  .premium-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    border: 1px solid rgba(115, 47, 23, 0.1);
+  }
+
+  .premium-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(115, 47, 23, 0.03),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .premium-card:hover::before {
+    left: 100%;
+  }
+
+  .premium-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(115, 47, 23, 0.12);
+    border-color: rgba(115, 47, 23, 0.2);
+  }
+
+  /* Inputs premium optimizados para touch */
+  .form-input-enhanced {
     background: hsl(0 0% 100%);
-    border: 1px solid hsl(var(--neutral-200));
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s var(--ease);
+    border: 1px solid hsl(214 18% 85%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    min-height: 2.75rem;
+    font-size: 16px;
   }
 
-  .enhanced-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+  @media (min-width: 768px) {
+    .form-input-enhanced {
+      min-height: 2.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .form-input-enhanced:hover {
     border-color: rgba(115, 47, 23, 0.3);
+    box-shadow: 0 2px 8px rgba(115, 47, 23, 0.08);
   }
 
-  /* Inputs con hover y focus usando color accent */
-  .enhanced-input {
+  .form-input-enhanced:focus {
     background: hsl(0 0% 100%);
-    border: 1px solid hsl(var(--neutral-200));
-    transition: all 0.3s var(--ease);
-  }
-
-  .enhanced-input:hover {
-    border-color: rgba(115, 47, 23, 0.4);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .enhanced-input:focus {
     border-color: #732F17;
-    box-shadow: 0 0 0 3px rgba(115, 47, 23, 0.1);
+    box-shadow: 0 0 0 3px rgba(115, 47, 23, 0.1), 0 4px 12px rgba(115, 47, 23, 0.15);
     transform: translateY(-1px);
   }
 
-  /* Botón con mejor presencia */
-  .enhanced-button {
-    background: #D99962;
-    box-shadow: var(--shadow-sm), inset 0 1px 0 hsl(0 0% 100% / 0.2);
-    transition: all 0.3s var(--ease);
+  /* Botón premium con gradiente */
+  .form-button-enhanced {
+    background: linear-gradient(135deg, #D99962 0%, #E5A977 100%);
+    box-shadow: 0 4px 12px rgba(217, 153, 98, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 0;
+    min-height: 3rem;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
   }
 
-  .enhanced-button:hover {
-    background: rgba(217, 153, 98, 0.9);
-    box-shadow: var(--shadow-md), inset 0 1px 0 hsl(0 0% 100% / 0.3);
-    transform: translateY(-2px);
+  @media (min-width: 768px) {
+    .form-button-enhanced {
+      min-height: 2.75rem;
+      font-size: 0.875rem;
+      padding: 0.625rem 1.25rem;
+    }
   }
 
-  /* Animaciones suaves */
-  .stagger-animation {
-    animation: slideInUp 0.6s var(--ease) forwards;
-    animation-delay: calc(var(--index) * 0.15s);
-    opacity: 0;
+  .form-button-enhanced:hover,
+  .form-button-enhanced:active {
+    background: linear-gradient(135deg, #E5A977 0%, #D99962 100%);
+    box-shadow: 0 8px 20px rgba(217, 153, 98, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.02);
   }
 
-  /* Tipografía */
-  .refined-typography-heading {
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
-  }
-
-  .refined-typography-body {
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
-  }
-
-  /* Hover muy sutil */
-  .hover-subtle:hover {
-    background: hsl(var(--neutral-50)) !important;
-    transition: all 0.3s var(--ease);
-  }
-
-  /* Radio cards con color accent */
-  .enhanced-radio-card {
-    background: hsl(0 0% 100%);
-    border: 1px solid hsl(var(--neutral-200));
-    transition: all 0.3s var(--ease);
-  }
-
-  .enhanced-radio-card:hover {
-    border-color: rgba(115, 47, 23, 0.4);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .enhanced-radio-card.selected {
-    background: rgba(115, 47, 23, 0.03);
-    border-color: #732F17;
-    box-shadow: var(--shadow-sm);
-  }
-
-  /* Títulos del formulario con color accent */
+  /* Títulos del formulario premium */
   .form-section-title {
     color: #732F17 !important;
-    font-weight: 600;
-    border-bottom: 2px solid rgba(115, 47, 23, 0.2) !important;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(115, 47, 23, 0.15);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
     position: relative;
+    letter-spacing: -0.025em;
+    font-size: 1rem;
   }
 
-  /* Efecto decorativo sutil en títulos */
+  @media (min-width: 640px) {
+    .form-section-title {
+      font-size: 1.125rem;
+      padding-bottom: 0.625rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .form-section-title {
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
   .form-section-title::after {
     content: '';
     position: absolute;
     bottom: -2px;
     left: 0;
-    width: 60px;
+    width: 80px;
     height: 2px;
-    background: #732F17;
-    border-radius: 1px;
+    background: linear-gradient(90deg, #732F17 0%, #D99962 100%);
+    border-radius: 2px;
   }
 
-  /* Título principal del formulario */
   .form-main-title {
-    color: #732F17 !important;
+    background: linear-gradient(135deg, #732F17 0%, #D99962 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Labels importantes */
-  .form-label-enhanced {
-    color: hsl(25 20% 25%) !important;
-    font-weight: 500;
+  /* Radio cards premium */
+  .enhanced-radio-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+    border: 1px solid rgba(115, 47, 23, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 3rem;
   }
 
-  /* Burbujas de conversación para errores */
+  .enhanced-radio-card:hover {
+    border-color: rgba(115, 47, 23, 0.3);
+    box-shadow: 0 2px 8px rgba(115, 47, 23, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .enhanced-radio-card.selected {
+    background: linear-gradient(135deg, rgba(115, 47, 23, 0.05) 0%, rgba(217, 153, 98, 0.05) 100%);
+    border-color: #732F17;
+    box-shadow: 0 4px 12px rgba(115, 47, 23, 0.15);
+    transform: rotate(1deg);
+  }
+
+  /* Info card items hover */
+  .info-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0.75rem;
+  }
+
+  .info-item:hover {
+    background: linear-gradient(135deg, rgba(115, 47, 23, 0.03) 0%, rgba(217, 153, 98, 0.03) 100%);
+    transform: translateX(4px);
+  }
+
+  /* Burbujas de error mejoradas */
   .error-bubble {
     position: relative;
     background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     border: 1px solid #fecaca;
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 10px 14px;
     margin-top: 8px;
     font-size: 0.875rem;
     color: #dc2626;
     animation: bubbleIn 0.3s ease-out;
-    box-shadow: 0 3px 12px rgba(220, 38, 38, 0.15);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -230,21 +303,51 @@ const enhancedStyles = `
     border-bottom: 5px solid #fef2f2;
   }
 
-  @keyframes bubbleIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.9);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Input con error - borde más sutil para las burbujas */
   .input-error {
     border-color: #fca5a5 !important;
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+  }
+
+  /* Labels y select optimizados para móvil */
+  label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    label {
+      font-size: 0.875rem;
+    }
+  }
+
+  select, textarea {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    select, textarea {
+      font-size: 0.875rem;
+    }
+  }
+
+  textarea {
+    min-height: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    textarea {
+      min-height: 5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up,
+    .scale-in,
+    .premium-card {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 `;
 
@@ -401,21 +504,25 @@ export default function ContactoPage() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-background paper-texture min-h-screen flex items-center justify-center">
-        <div className="container mx-auto px-4">
-          <Card className="sketch-border bg-green-50 border-green-200 max-w-2xl mx-auto">
-            <CardContent className="p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-8 w-8 text-green-600" />
+      <div className="bg-background main-wrapper min-h-screen flex items-center justify-center">
+        <style jsx>{premiumContactStyles}</style>
+        <div className="container mx-auto px-4 sm:px-6">
+          <Card className="premium-card premium-shadow bg-gradient-to-br from-green-50 to-green-100/50 border-green-200 max-w-2xl mx-auto scale-in">
+            <CardContent className="p-6 sm:p-8 md:p-10 text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-green-800 mb-4 handwritten">¡Mensaje enviado!</h2>
-              <p className="text-green-700 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-green-800 mb-4 gradient-text">¡Mensaje enviado!</h2>
+              <p className="text-green-700 mb-6 text-base sm:text-lg leading-relaxed">
                 Gracias por contactarnos. Hemos recibido tu consulta y nuestro equipo la revisará para ofrecerte la
                 mejor solución.
               </p>
-              <p className="text-green-600 text-sm mb-6">Te responderemos en un plazo máximo de 24 horas.</p>
-              <Button asChild className="bg-primary hover:bg-primary/90">
-                <Link href="/">Volver al inicio</Link>
+              <p className="text-green-600 text-sm sm:text-base mb-6">Te responderemos en un plazo máximo de 24 horas.</p>
+              <Button asChild className="form-button-enhanced text-primary-foreground w-full sm:w-auto">
+                <Link href="/">
+                  Volver al inicio
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </CardContent>
           </Card>
@@ -425,127 +532,154 @@ export default function ContactoPage() {
   }
 
   return (
-    <div className="enhanced-background paper-texture">
+    <div className="bg-background main-wrapper">
       {/* Inyectamos los estilos CSS */}
-      <style jsx>{enhancedStyles}</style>
-      {/* Hero Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center relative">
-            {/* Spiral holes decoration */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 spiral-holes opacity-30"></div>
+      <style jsx>{premiumContactStyles}</style>
 
-            <div className="relative z-10 stagger-animation" style={{"--index": 0} as React.CSSProperties}>
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 handwritten text-sm enhanced-card">
-                 Hablemos de tu proyecto
+      {/* Hero Section Premium */}
+      <section className="relative py-12 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-background via-primary/[0.03] to-background">
+        {/* Gradient sutil de fondo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-accent/[0.02]"></div>
+
+        {/* Líneas decorativas minimalistas */}
+        <div className="absolute top-0 left-0 w-px h-32 bg-gradient-to-b from-primary/20 to-transparent ml-[10%] hidden md:block"></div>
+        <div className="absolute top-0 right-0 w-px h-32 bg-gradient-to-b from-accent/20 to-transparent mr-[10%] hidden md:block"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <Badge variant="outline" className="mb-4 md:mb-8 border-primary/20 text-primary bg-primary/5 backdrop-blur text-xs sm:text-sm px-3 py-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mr-1.5 animate-pulse"></div>
+                Hablemos de tu proyecto
               </Badge>
-
-              <h1 className="text-4xl md:text-6xl refined-typography-heading text-foreground mb-6 text-balance">
-                Contacta con{" "}
-                <span className="text-primary handwritten relative">
-                  nosotros
-                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 220 12" fill="none">
-                    <path d="M5 8c35-3 70-3 105 0s70 3 95-2" stroke="#f97316" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </h1>
-
-              <p className="text-lg md:text-xl refined-typography-body text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-                Cuéntanos tu idea y te ayudaremos a hacerla realidad con nuestro equipo de estudiantes y mentores
-                expertos.
-              </p>
             </div>
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 text-balance leading-tight fade-in-up px-2" style={{ animationDelay: '0.2s' }}>
+              Contacta con{" "}
+              <span className="gradient-text relative inline-block">
+                nosotros
+                {/* Subrayado sketch */}
+                <svg className="absolute -bottom-0.5 sm:-bottom-1 md:-bottom-2 left-0 w-full h-1.5 sm:h-2 md:h-3" viewBox="0 0 200 12" fill="none">
+                  <path
+                    d="M5 8c30-3 60-3 90 0s60 3 85-2"
+                    stroke="#D99962"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up px-4" style={{ animationDelay: '0.3s' }}>
+              Cuéntanos tu idea y te ayudaremos a hacerla realidad con nuestro equipo de estudiantes y mentores
+              expertos.
+            </p>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/40 to-transparent"></div>
           </div>
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-12 max-w-6xl mx-auto">
           {/* Información de Contacto */}
-          <div className="lg:col-span-1 stagger-animation" style={{"--index": 1} as React.CSSProperties}>
-            <Card className="enhanced-card sketch-border">
+          <div className="lg:col-span-1 scale-in" style={{ animationDelay: '0.4s' }}>
+            <Card className="premium-card premium-shadow border-primary/10">
               <CardHeader>
-                <CardTitle className="handwritten text-xl refined-typography-heading">Información de Contacto</CardTitle>
+                <CardTitle className="text-lg sm:text-xl font-bold gradient-text">Información de Contacto</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
-                  <Mail className="h-5 w-5 text-primary mt-1" />
+              <CardContent className="space-y-4">
+                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-5 w-5 text-primary" />
+                  </div>
                   <div>
-                    <p className="font-medium refined-typography-body">Email</p>
-                    <p className="text-muted-foreground text-sm">hola@tecwork.es</p>
+                    <p className="font-semibold text-sm sm:text-base">Email</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">hola@tecwork.es</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
-                  <Phone className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+                  <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="h-5 w-5 text-accent" />
+                  </div>
                   <div>
-                    <p className="font-medium refined-typography-body">Teléfono</p>
-                    <p className="text-muted-foreground text-sm">+34 600 123 456</p>
+                    <p className="font-semibold text-sm sm:text-base">Teléfono</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">+34 600 123 456</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
-                  <MapPin className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="h-5 w-5 text-primary" />
+                  </div>
                   <div>
-                    <p className="font-medium refined-typography-body">Ubicación</p>
-                    <p className="text-muted-foreground text-sm">Corrientes, Argentina</p>
+                    <p className="font-semibold text-sm sm:text-base">Ubicación</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Corrientes, Argentina</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 p-3 rounded-lg hover-subtle transition-all duration-300">
-                  <Clock className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+                  <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="h-5 w-5 text-accent" />
+                  </div>
                   <div>
-                    <p className="font-medium refined-typography-body">Horario</p>
-                    <p className="text-muted-foreground text-sm">Lun - Vie: 9:00 - 18:00</p>
+                    <p className="font-semibold text-sm sm:text-base">Horario</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Lun - Vie: 9:00 - 18:00</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Proceso */}
-            <Card className="enhanced-card sketch-border mt-8 stagger-animation" style={{"--index": 2} as React.CSSProperties}>
+            <Card className="premium-card premium-shadow border-accent/10 mt-6 md:mt-8 scale-in" style={{ animationDelay: '0.5s' }}>
               <CardHeader>
-                <CardTitle className="handwritten text-xl refined-typography-heading">¿Cómo funciona?</CardTitle>
+                <CardTitle className="text-lg sm:text-xl font-bold gradient-text">¿Cómo funciona?</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                       <span className="text-primary-foreground text-xs font-bold">1</span>
                     </div>
                     <div>
-                      <p className="font-medium text-sm">Envías tu consulta</p>
-                      <p className="text-muted-foreground text-xs">Nos cuentas tu proyecto</p>
+                      <p className="font-semibold text-sm sm:text-base">Envías tu consulta</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">Nos cuentas tu proyecto</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                       <span className="text-accent-foreground text-xs font-bold">2</span>
                     </div>
                     <div>
-                      <p className="font-medium text-sm">Análisis inicial</p>
-                      <p className="text-muted-foreground text-xs">Evaluamos tu necesidad</p>
+                      <p className="font-semibold text-sm sm:text-base">Análisis inicial</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">Evaluamos tu necesidad</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                       <span className="text-primary-foreground text-xs font-bold">3</span>
                     </div>
                     <div>
-                      <p className="font-medium text-sm">Propuesta personalizada</p>
-                      <p className="text-muted-foreground text-xs">Te enviamos una solución</p>
+                      <p className="font-semibold text-sm sm:text-base">Propuesta personalizada</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">Te enviamos una solución</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                       <span className="text-accent-foreground text-xs font-bold">4</span>
                     </div>
                     <div>
-                      <p className="font-medium text-sm">¡Empezamos!</p>
-                      <p className="text-muted-foreground text-xs">Asignamos el equipo ideal</p>
+                      <p className="font-semibold text-sm sm:text-base">¡Empezamos!</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm">Asignamos el equipo ideal</p>
                     </div>
                   </div>
                 </div>
@@ -554,26 +688,26 @@ export default function ContactoPage() {
           </div>
 
           {/* Formulario */}
-          <div className="lg:col-span-2 stagger-animation" style={{"--index": 3} as React.CSSProperties}>
-            <Card className="enhanced-card sketch-border">
-              <CardHeader>
-                <CardTitle className="text-2xl handwritten form-main-title">Cuéntanos tu proyecto</CardTitle>
-                <p className="refined-typography-body text-muted-foreground">Completa el formulario y te contactaremos en menos de 24 horas</p>
+          <div className="lg:col-span-2 scale-in" style={{ animationDelay: '0.6s' }}>
+            <Card className="premium-card premium-shadow border-primary/10">
+              <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
+                <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold form-main-title">Cuéntanos tu proyecto</CardTitle>
+                <p className="text-sm sm:text-base text-muted-foreground mt-2">Completa el formulario y te contactaremos en menos de 24 horas</p>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <CardContent className="px-4 sm:px-6">
+                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8" noValidate>
                   {/* Información de Contacto */}
                   <div className="space-y-4">
                     <h3 className="text-lg form-section-title">
                       Información de Contacto
                     </h3>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="nombre" className="refined-typography-body font-medium">Nombre completo *</Label>
+                        <Label htmlFor="nombre" className="font-medium">Nombre completo *</Label>
                         <Input
                           id="nombre"
-                          className={`enhanced-input ${errors.nombre ? 'input-error' : ''}`}
+                          className={`form-input-enhanced ${errors.nombre ? 'input-error' : ''}`}
                           value={formData.nombre}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, nombre: e.target.value }))
@@ -590,13 +724,13 @@ export default function ContactoPage() {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="refined-typography-body font-medium">Email *</Label>
+                        <Label htmlFor="email" className="font-medium">Email *</Label>
                         <Input
                           id="email"
                           type="text"
                           inputMode="email"
                           autoComplete="email"
-                          className={`enhanced-input ${errors.email ? 'input-error' : ''}`}
+                          className={`form-input-enhanced ${errors.email ? 'input-error' : ''}`}
                           value={formData.email}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, email: e.target.value }))
@@ -614,12 +748,12 @@ export default function ContactoPage() {
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="telefono" className="refined-typography-body font-medium">Teléfono</Label>
+                        <Label htmlFor="telefono" className="font-medium">Teléfono</Label>
                         <Input
                           id="telefono"
-                          className={`enhanced-input ${errors.telefono ? 'input-error' : ''}`}
+                          className={`form-input-enhanced ${errors.telefono ? 'input-error' : ''}`}
                           value={formData.telefono}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, telefono: e.target.value }))
@@ -636,10 +770,10 @@ export default function ContactoPage() {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="empresa" className="refined-typography-body font-medium">Empresa</Label>
+                        <Label htmlFor="empresa" className="font-medium">Empresa</Label>
                         <Input
                           id="empresa"
-                          className="enhanced-input"
+                          className="form-input-enhanced"
                           value={formData.empresa}
                           onChange={(e) => setFormData((prev) => ({ ...prev, empresa: e.target.value }))}
                         />
@@ -655,7 +789,7 @@ export default function ContactoPage() {
                     </h3>
 
                     <div className="space-y-3">
-                      <Label className="refined-typography-body font-medium">¿Qué tipo de solución necesitas? *</Label>
+                      <Label className="font-medium">¿Qué tipo de solución necesitas? *</Label>
                       <RadioGroup
                         value={formData.tipoNecesidad}
                         onValueChange={(value) => {
@@ -664,7 +798,7 @@ export default function ContactoPage() {
                             setErrors((prev) => ({ ...prev, tipoNecesidad: '' }))
                           }
                         }}
-                        className="grid md:grid-cols-2 gap-3"
+                        className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"
                       >
                         {tiposNecesidad.map((tipo) => {
                           const IconComponent = tipo.icon
@@ -672,9 +806,9 @@ export default function ContactoPage() {
                             <Label
                               key={tipo.id}
                               htmlFor={tipo.id}
-                              className={`enhanced-radio-card flex items-center space-x-3 p-4 rounded-lg cursor-pointer group ${
+                              className={`enhanced-radio-card flex items-center space-x-3 p-3 sm:p-4 rounded-lg cursor-pointer group ${
                                 formData.tipoNecesidad === tipo.id
-                                  ? 'selected transform -rotate-1'
+                                  ? 'selected'
                                   : ''
                               }`}
                             >
@@ -718,12 +852,12 @@ export default function ContactoPage() {
                     </h3>
 
                     <div className="space-y-2">
-                      <Label htmlFor="timeline" className="refined-typography-body font-medium">¿Cuándo lo necesitas?</Label>
+                      <Label htmlFor="timeline" className="font-medium">¿Cuándo lo necesitas?</Label>
                       <Select
                         value={formData.timeline}
                         onValueChange={(value) => setFormData((prev) => ({ ...prev, timeline: value }))}
                       >
-                        <SelectTrigger className="enhanced-input">
+                        <SelectTrigger className="form-input-enhanced">
                           <SelectValue placeholder="Selecciona un plazo" />
                         </SelectTrigger>
                         <SelectContent>
@@ -736,10 +870,10 @@ export default function ContactoPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="mensaje" className="refined-typography-body font-medium">Describe tu proyecto *</Label>
+                      <Label htmlFor="mensaje" className="font-medium">Describe tu proyecto *</Label>
                       <Textarea
                         id="mensaje"
-                        className={`enhanced-input ${errors.mensaje ? 'input-error' : ''}`}
+                        className={`form-input-enhanced ${errors.mensaje ? 'input-error' : ''}`}
                         placeholder="Cuéntanos más detalles sobre tu proyecto, objetivos, funcionalidades específicas, etc."
                         value={formData.mensaje}
                         onChange={(e) => {
@@ -759,12 +893,12 @@ export default function ContactoPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="comoConociste" className="refined-typography-body font-medium">¿Cómo nos conociste?</Label>
+                      <Label htmlFor="comoConociste" className="font-medium">¿Cómo nos conociste?</Label>
                       <Select
                         value={formData.comoConociste}
                         onValueChange={(value) => setFormData((prev) => ({ ...prev, comoConociste: value }))}
                       >
-                        <SelectTrigger className="enhanced-input">
+                        <SelectTrigger className="form-input-enhanced">
                           <SelectValue placeholder="Selecciona la fuente" />
                         </SelectTrigger>
                         <SelectContent>
@@ -780,21 +914,21 @@ export default function ContactoPage() {
                     </div>
                   </div>
 
-                  <div className="flex justify-center pt-4">
+                  <div className="flex justify-center pt-4 sm:pt-6">
                     <Button
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="enhanced-button text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed refined-typography-body font-medium group border-0"
+                      className="form-button-enhanced text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed font-medium group w-full sm:w-auto"
                     >
                       {isSubmitting ? (
                         <>
-                          <Clock className="mr-2 h-5 w-5 animate-spin" />
-                          Enviando mensaje...
+                          <Clock className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                          <span className="text-sm sm:text-base">Enviando mensaje...</span>
                         </>
                       ) : (
                         <>
-                          Enviar consulta
+                          <span className="text-sm sm:text-base">Enviar consulta</span>
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                         </>
                       )}

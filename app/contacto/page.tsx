@@ -571,8 +571,7 @@ export default function ContactoPage() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up px-4" style={{ animationDelay: '0.3s' }}>
-              Cuéntanos tu idea y te ayudaremos a hacerla realidad con nuestro equipo de estudiantes y mentores
-              expertos.
+              Contanos tu idea y trabajemos juntos para hacerla realidad con el talento de nuestra comunidad.
             </p>
           </div>
         </div>
@@ -600,11 +599,11 @@ export default function ContactoPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-sm sm:text-base">Email</p>
-                    <p className="text-muted-foreground text-xs sm:text-sm">hola@tecwork.es</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">contacto@tecwork.ar</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+               {/* <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
                   <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Phone className="h-5 w-5 text-accent" />
                   </div>
@@ -614,15 +613,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm sm:text-base">Ubicación</p>
-                    <p className="text-muted-foreground text-xs sm:text-sm">Corrientes, Argentina</p>
-                  </div>
-                </div>
+                */}
 
                 <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
                   <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -633,6 +624,17 @@ export default function ContactoPage() {
                     <p className="text-muted-foreground text-xs sm:text-sm">Lun - Vie: 9:00 - 18:00</p>
                   </div>
                 </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-lg info-item">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm sm:text-base">Ubicación</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm">Corrientes, Argentina</p>
+                  </div>
+                </div>
+
               </CardContent>
             </Card>
 

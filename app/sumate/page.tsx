@@ -790,8 +790,7 @@ export default function SumatePage() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up px-4" style={{ animationDelay: '0.3s' }}>
-              Forma parte de una comunidad de estudiantes que trabajan en proyectos reales mientras construyen su
-              futuro profesional.
+              Formá parte de una comunidad que aprende haciendo, colabora en proyectos reales y crece profesionalmente.
             </p>
           </div>
         </div>
@@ -816,9 +815,9 @@ export default function SumatePage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4 tracking-tight px-2">
               ¿Por qué <span className="gradient-text">unirte?</span>
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-              Desarrolla tu carrera con proyectos reales y mentoría experta
-            </p>
+            {/* <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+              Desarrollá tu carrera junto a una comunidad que aprende haciendo.
+            </p> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
@@ -828,8 +827,8 @@ export default function SumatePage() {
                   <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-primary/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-primary/20">
                     <Code className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Experiencia real</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Trabaja en proyectos de empresas reales con impacto medible</p>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Generá valor real</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Contribuí con soluciones que mejoran procesos y generan valor en empresas reales.</p>
                 </CardContent>
               </Card>
             </div>
@@ -840,8 +839,8 @@ export default function SumatePage() {
                   <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-accent to-accent/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-accent/20">
                     <Users className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Mentoría experta</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Aprende de profesionales senior que te guían en cada proyecto</p>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Crecé en comunidad</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Formá parte de una red que aprende, colabora y se potencia.</p>
                 </CardContent>
               </Card>
             </div>
@@ -852,8 +851,8 @@ export default function SumatePage() {
                   <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-primary/80 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg border-2 border-primary/20">
                     <GraduationCap className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Construye tu CV</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Desarrolla un portafolio sólido con proyectos documentados</p>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-foreground">Proyectá tu futuro</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">Cada proyecto fortalece tu perfil y te acerca a tus objetivos laborales.</p>
                 </CardContent>
               </Card>
             </div>

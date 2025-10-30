@@ -44,13 +44,6 @@ export function Navigation() {
             href="/"
             className="flex items-center space-x-2 group transition-transform duration-300 hover:scale-105"
           >
-            <div className={`hidden md:flex bg-gradient-to-br from-primary to-primary/80 rounded-full items-center justify-center shadow-md transition-all duration-300 ${
-              isScrolled ? 'w-9 h-9' : 'w-10 h-10'
-            }`}>
-              <span className={`text-primary-foreground font-bold transition-all duration-300 ${
-                isScrolled ? 'text-sm' : 'text-base'
-              }`}>T</span>
-            </div>
             <span className={`font-bold text-primary transition-all duration-300 ${
               isScrolled ? 'text-2xl' : 'text-3xl'
             }`}>Tecwork</span>
@@ -81,7 +74,7 @@ export function Navigation() {
               <Button
                 asChild
                 size="sm"
-                className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 transform"
+                className="bg-primary hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 transform"
               >
                 <Link href="/sumate">Súmate</Link>
               </Button>

@@ -3,6 +3,7 @@ import { supabase, supabaseAdmin } from '@/lib/supabase/client'
 import { isAuthenticated } from '@/lib/auth/simple'
 import { Lead } from '@/lib/types/database'
 import { sanitizeString, sanitizeEmail, sanitizePhone, sanitizeTextArea } from '@/lib/utils/sanitize'
+import { enviarNotificacionLeadAlEquipo, enviarConfirmacionAlCliente } from '@/lib/email/sender'
 
 // Configuración de ruta dinámica para Next.js 15
 export const dynamic = 'force-dynamic'
@@ -123,6 +124,31 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+
+    // Enviar emails en background (no bloqueante)
+    Promise.all([
+      enviarNotificacionLeadAlEquipo({
+        nombre: leadData.nombre,
+        email: leadData.email,
+        telefono: leadData.telefono,
+        empresa: leadData.empresa,
+        tipoNecesidad: body.tipoNecesidad,
+        mensaje: leadData.mensaje || '',
+        timeline: body.urgencia
+      }),
+      enviarConfirmacionAlCliente({
+        nombre: leadData.nombre,
+        email: leadData.email,
+        telefono: leadData.telefono,
+        empresa: leadData.empresa,
+        tipoNecesidad: body.tipoNecesidad,
+        mensaje: leadData.mensaje || '',
+        timeline: body.urgencia
+      })
+    ]).catch(error => {
+      // Log del error pero no bloquear la respuesta
+      console.error('Error enviando emails:', error)
+    })
 
     return NextResponse.json({
       success: true,

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase/client'
 import { isAuthenticated } from '@/lib/auth/simple'
+import { enviarNotificacionCambioEstado } from '@/lib/email/sender'
 
 // Configuración de ruta dinámica para Next.js 15
 export const dynamic = 'force-dynamic'
@@ -56,6 +57,33 @@ export async function PATCH(request: NextRequest) {
       'Inactivo Temporal': 7
     }
 
+    // Obtener el estado anterior del aplicante para el email
+    const { data: aplicanteAnterior, error: errorObtener } = await supabaseAdmin
+      .from('aplicantes')
+      .select('nombre, apellido, email, estado_id')
+      .eq('id', id)
+      .single()
+
+    if (errorObtener || !aplicanteAnterior) {
+      return NextResponse.json(
+        { error: 'Aplicante no encontrado' },
+        { status: 404 }
+      )
+    }
+
+    // Mapear ID a nombre de estado
+    const stateIdMap: { [key: number]: string } = {
+      1: 'Aplicacion Recibida',
+      2: 'En Revision',
+      3: 'Entrevista Pendiente',
+      4: 'Aprobado - Disponible',
+      5: 'En Proyecto Activo',
+      6: 'No Califica',
+      7: 'Inactivo Temporal'
+    }
+
+    const estadoAnterior = stateIdMap[aplicanteAnterior.estado_id] || 'Desconocido'
+
     // Actualizar aplicante en la base de datos
     const { data, error } = await supabaseAdmin
       .from('aplicantes')
@@ -74,6 +102,17 @@ export async function PATCH(request: NextRequest) {
         { status: 500 }
       )
     }
+
+    // Enviar email de notificación al aplicante
+    enviarNotificacionCambioEstado({
+      nombre: `${aplicanteAnterior.nombre} ${aplicanteAnterior.apellido}`,
+      email: aplicanteAnterior.email,
+      estadoAnterior: estadoAnterior,
+      estadoNuevo: status,
+      tipo: 'applicant'
+    }).catch(error => {
+      console.error('Error enviando email de notificación:', error)
+    })
 
     return NextResponse.json({
       success: true,

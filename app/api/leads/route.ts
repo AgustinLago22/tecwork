@@ -125,30 +125,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Enviar emails en background (no bloqueante)
-    Promise.all([
-      enviarNotificacionLeadAlEquipo({
-        nombre: leadData.nombre,
-        email: leadData.email,
-        telefono: leadData.telefono,
-        empresa: leadData.empresa,
-        tipoNecesidad: body.tipoNecesidad,
-        mensaje: leadData.mensaje || '',
-        timeline: body.urgencia
-      }),
-      enviarConfirmacionAlCliente({
-        nombre: leadData.nombre,
-        email: leadData.email,
-        telefono: leadData.telefono,
-        empresa: leadData.empresa,
-        tipoNecesidad: body.tipoNecesidad,
-        mensaje: leadData.mensaje || '',
-        timeline: body.urgencia
-      })
-    ]).catch(error => {
-      // Log del error pero no bloquear la respuesta
-      console.error('Error enviando emails:', error)
-    })
+    // Enviar emails (esperamos a que se completen)
+    try {
+      await Promise.all([
+        enviarNotificacionLeadAlEquipo({
+          nombre: leadData.nombre,
+          email: leadData.email,
+          telefono: leadData.telefono,
+          empresa: leadData.empresa,
+          tipoNecesidad: body.tipoNecesidad,
+          mensaje: leadData.mensaje || '',
+          timeline: body.urgencia
+        }),
+        enviarConfirmacionAlCliente({
+          nombre: leadData.nombre,
+          email: leadData.email,
+          telefono: leadData.telefono,
+          empresa: leadData.empresa,
+          tipoNecesidad: body.tipoNecesidad,
+          mensaje: leadData.mensaje || '',
+          timeline: body.urgencia
+        })
+      ])
+      console.log('Emails de lead enviados correctamente')
+    } catch (error) {
+      console.error('Error enviando emails de lead:', error)
+    }
 
     return NextResponse.json({
       success: true,

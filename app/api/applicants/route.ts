@@ -164,30 +164,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Enviar emails en background (no bloqueante)
-    Promise.all([
-      enviarNotificacionAplicanteAlEquipo({
-        nombre: aplicanteData.nombre,
-        apellido: aplicanteData.apellido,
-        email: aplicanteData.email,
-        telefono: aplicanteData.telefono,
-        universidad: body.universidad,
-        carrera: body.carrera,
-        nivel: body.nivel
-      }),
-      enviarConfirmacionAlAplicante({
-        nombre: aplicanteData.nombre,
-        apellido: aplicanteData.apellido,
-        email: aplicanteData.email,
-        telefono: aplicanteData.telefono,
-        universidad: body.universidad,
-        carrera: body.carrera,
-        nivel: body.nivel
-      })
-    ]).catch(error => {
-      // Log del error pero no bloquear la respuesta
-      console.error('Error enviando emails:', error)
-    })
+    // Enviar emails (esperamos a que se completen)
+    try {
+      await Promise.all([
+        enviarNotificacionAplicanteAlEquipo({
+          nombre: aplicanteData.nombre,
+          apellido: aplicanteData.apellido,
+          email: aplicanteData.email,
+          telefono: aplicanteData.telefono,
+          universidad: body.universidad,
+          carrera: body.carrera,
+          nivel: body.nivel
+        }),
+        enviarConfirmacionAlAplicante({
+          nombre: aplicanteData.nombre,
+          apellido: aplicanteData.apellido,
+          email: aplicanteData.email,
+          telefono: aplicanteData.telefono,
+          universidad: body.universidad,
+          carrera: body.carrera,
+          nivel: body.nivel
+        })
+      ])
+      console.log('Emails de aplicante enviados correctamente')
+    } catch (error) {
+      console.error('Error enviando emails de aplicante:', error)
+    }
 
     return NextResponse.json({
       success: true,

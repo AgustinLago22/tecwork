@@ -290,8 +290,14 @@ export async function enviarConfirmacionAlCliente(data: DatosEmailLead) {
 export async function enviarConfirmacionAlAplicante(data: DatosEmailAplicante) {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://tecwork.ar'
 
+  console.log('Intentando enviar confirmación al aplicante:', {
+    to: data.email,
+    from: emailConfig.from,
+    nombre: data.nombre
+  })
+
   try {
-    const { error } = await resend.emails.send({
+    const { error, data: responseData } = await resend.emails.send({
       from: emailConfig.from,
       to: data.email,
       subject: '🎓 Bienvenido a Tecwork - Tu aplicación ha sido recibida',
@@ -451,12 +457,15 @@ export async function enviarConfirmacionAlAplicante(data: DatosEmailAplicante) {
 
     if (error) {
       console.error('Error enviando confirmación al aplicante:', error)
+      console.error('Detalles del error:', JSON.stringify(error, null, 2))
       return { success: false, error }
     }
 
+    console.log('Email enviado exitosamente al aplicante:', responseData)
     return { success: true }
   } catch (error) {
     console.error('Error en sendApplicantConfirmation:', error)
+    console.error('Error completo:', JSON.stringify(error, null, 2))
     return { success: false, error }
   }
 }

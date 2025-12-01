@@ -1201,7 +1201,7 @@ export default function SumatePage() {
                               htmlFor={rol.id}
                               className={`flex items-center space-x-3 p-3 sm:p-4 border rounded-lg cursor-pointer transition-all duration-200 group min-h-[3rem] ${
                                 formData.rol === rol.id
-                                  ? 'border-primary bg-primary/5 shadow-md transform rotate-1 role-selected'
+                                  ? 'border-primary bg-primary/5 shadow-md'
                                   : 'border-border hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm hover:scale-[1.02]'
                               }`}
                             >

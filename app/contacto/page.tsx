@@ -248,7 +248,6 @@ const premiumContactStyles = `
     background: linear-gradient(135deg, rgba(115, 47, 23, 0.05) 0%, rgba(217, 153, 98, 0.05) 100%);
     border-color: #732F17;
     box-shadow: 0 4px 12px rgba(115, 47, 23, 0.15);
-    transform: rotate(1deg);
   }
 
   /* Info card items hover */

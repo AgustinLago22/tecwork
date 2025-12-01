@@ -106,9 +106,7 @@ export async function enviarConfirmacionAlCliente(data: DatosEmailLead) {
                   <!-- Header con gradiente y logo -->
                   <tr>
                     <td style="background: linear-gradient(135deg, #732F17 0%, #D99962 100%); padding: 48px 32px; text-align: center;">
-                      <img src="${baseUrl}/emails/logo-completo.png" alt="Tecwork" style="max-width: 180px; height: auto; margin-bottom: 24px;" />
-                      <h1 style="color: #ffffff; font-size: 28px; font-weight: 700; margin: 0; line-height: 1.3;">¡Gracias por contactarnos!</h1>
-                      <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin: 12px 0 0 0;">Tu consulta ha sido recibida exitosamente</p>
+                      <img src="${baseUrl}/logo_tecwork.png" alt="Tecwork" style="max-width: 180px; height: auto;" />
                     </td>
                   </tr>
 
@@ -118,48 +116,15 @@ export async function enviarConfirmacionAlCliente(data: DatosEmailLead) {
 
                       <!-- Saludo personalizado -->
                       <p style="font-size: 18px; color: #2c3e50; margin: 0 0 24px 0; line-height: 1.6;">
-                        Hola <strong style="color: #732F17;">${data.nombre}</strong> 👋
+                        Hola <strong style="color: #732F17;">${data.nombre}</strong>
                       </p>
 
                       <p style="font-size: 16px; color: #555; margin: 0 0 32px 0; line-height: 1.6;">
-                        Hemos recibido tu consulta sobre <strong style="color: #732F17;">${data.tipoNecesidad}</strong> y estamos emocionados de poder ayudarte a hacer realidad tu proyecto.
+                        Hemos recibido tu consulta y estamos emocionados de poder ayudarte a hacer realidad tu proyecto.
                       </p>
 
-                      <!-- Card de resumen -->
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%); border-radius: 12px; margin: 0 0 32px 0; border-left: 4px solid #D99962;">
-                        <tr>
-                          <td style="padding: 24px;">
-                            <h3 style="color: #732F17; font-size: 18px; margin: 0 0 16px 0; font-weight: 600;">📋 Resumen de tu consulta</h3>
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                              <tr>
-                                <td style="padding: 8px 0; color: #666; font-size: 14px;">
-                                  <strong style="color: #732F17;">Tipo de proyecto:</strong><br/>
-                                  <span style="color: #444;">${data.tipoNecesidad}</span>
-                                </td>
-                              </tr>
-                              ${data.timeline ? `
-                              <tr>
-                                <td style="padding: 8px 0; color: #666; font-size: 14px;">
-                                  <strong style="color: #732F17;">Timeline:</strong><br/>
-                                  <span style="color: #444;">${data.timeline}</span>
-                                </td>
-                              </tr>
-                              ` : ''}
-                              ${data.empresa ? `
-                              <tr>
-                                <td style="padding: 8px 0; color: #666; font-size: 14px;">
-                                  <strong style="color: #732F17;">Empresa:</strong><br/>
-                                  <span style="color: #444;">${data.empresa}</span>
-                                </td>
-                              </tr>
-                              ` : ''}
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-
                       <!-- Timeline de proceso -->
-                      <h3 style="color: #732F17; font-size: 20px; margin: 0 0 24px 0; font-weight: 600;">🎯 ¿Qué sigue ahora?</h3>
+                      <h3 style="color: #732F17; font-size: 20px; margin: 0 0 24px 0; font-weight: 600;">¿Qué sigue ahora?</h3>
 
                       <!-- Paso 1 -->
                       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 16px 0; background: linear-gradient(135deg, #fef8f3 0%, #fff9f5 100%); border-radius: 8px; border: 2px solid #D99962;">
@@ -242,7 +207,7 @@ export async function enviarConfirmacionAlCliente(data: DatosEmailLead) {
                         <tr>
                           <td style="padding: 20px; text-align: center;">
                             <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.6;">
-                              💬 Si tienes alguna pregunta urgente, puedes responder directamente a este email.
+                              Si tienes alguna pregunta, puedes responder directamente a este email.
                             </p>
                           </td>
                         </tr>
